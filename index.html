@@ -158,7 +158,7 @@ summary::-webkit-details-marker{display:none;}
 }
 
 .price-card-open .title{
-  cursor:기본;
+  cursor:default;
 }
 
 .slot{
@@ -348,8 +348,14 @@ details.option-box[open] .option-guide{
   border-radius:16px;
   display:block;
   background:#fff;
-  transition: opacity 0.18s ease;
+  transition: opacity 0.35s ease;
   opacity:1;
+}
+
+.viewer img.fading,
+#faceGallery.fading,
+#styleGallery.fading{
+  opacity:0;
 }
 
 .thumb-grid{
@@ -434,6 +440,7 @@ details.option-box[open] .option-guide{
   width:100%;
   max-height:420px;
   object-fit:contain;
+  transition: opacity 0.35s ease;
 }
 
 .desc-box{
@@ -575,8 +582,19 @@ textarea{
   box-shadow:0 10px 24px rgba(0,0,0,0.25);
 }
 
-.addon-item{
-  display:flex;
+.addon-item.inquiry-item{
+  border-top:1px dashed var(--line);
+  margin-top:6px;
+  padding-top:6px;
+  opacity:0.75;
+}
+.addon-item.inquiry-item .addon-label{
+  font-style:italic;
+}
+.addon-item.inquiry-item.active{
+  opacity:1;
+}
+
   align-items:center;
   justify-content:space-between;
   gap:10px;
@@ -1168,8 +1186,177 @@ details.option-box summary{
   font-size:22px;
 }
 
-textarea{
-  min-height:520px !important;
+/* ===== 상단 네비게이션 ===== */
+.top-nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1.5px solid var(--line);
+  padding:0 14px;
+  margin:0 -14px 18px;
+}
+
+.top-nav-inner{
+  max-width:760px;
+  margin:auto;
+  display:flex;
+  gap:2px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  padding:8px 0;
+}
+
+.top-nav-inner::-webkit-scrollbar{ display:none; }
+
+.nav-btn{
+  flex:0 0 auto;
+  padding:6px 13px;
+  border-radius:20px;
+  border:1.5px solid var(--line);
+  background:white;
+  color:var(--text);
+  font-family:'Paperozi',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:var(--pink);
+  color:white;
+  border-color:var(--pink-deep);
+}
+
+/* ===== 워크플로우 카드 ===== */
+.workflow-card{
+  background:linear-gradient(135deg, #fff4f8 0%, #fff8fb 100%);
+  border:1.5px solid var(--line);
+  border-radius:22px;
+  padding:22px 20px 24px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+}
+
+.workflow-label{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  color:var(--pink-deep);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.workflow-title{
+  font-size:22px;
+  font-weight:700;
+  color:#3d3340;
+  margin:0 0 18px;
+}
+
+.workflow-steps{
+  display:flex;
+  align-items:center;
+  gap:0;
+  flex-wrap:wrap;
+  row-gap:10px;
+}
+
+.wf-step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  min-width:52px;
+}
+
+.wf-icon{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1.5px solid var(--line);
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  color:var(--pink);
+  box-shadow:0 2px 8px rgba(235,131,159,0.10);
+  transition:background 0.18s, color 0.18s;
+}
+
+.wf-icon.highlight{
+  background:var(--pink-soft);
+  border-color:var(--pink);
+  color:var(--pink-deep);
+}
+
+.wf-label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--text);
+  text-align:center;
+  white-space:nowrap;
+}
+
+.wf-arrow{
+  font-size:16px;
+  color:var(--pink);
+  padding:0 4px;
+  margin-bottom:18px;
+  flex-shrink:0;
+}
+
+.workflow-flow{
+  margin-top:14px;
+  font-size:13.5px;
+  color:#7a6070;
+  line-height:1.7;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px 14px;
+}
+
+.workflow-flow .flow-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:4px 2px;
+}
+
+.flow-step-pill{
+  display:inline-block;
+  background:var(--pink-soft);
+  border:1px solid var(--line);
+  color:var(--pink-deep);
+  border-radius:20px;
+  padding:2px 10px;
+  font-size:12.5px;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.flow-arrow{
+  color:var(--pink);
+  font-size:13px;
+  padding:0 2px;
+}
+
+.workflow-note{
+  margin-top:10px;
+  font-size:12px;
+  color:#ab8fa0;
+  text-align:center;
+}
+
+
   height:520px;
   overflow:hidden;
   resize:none;
@@ -1181,6 +1368,18 @@ textarea{
 <body>
 
 <div class="container">
+
+  <nav class="top-nav" id="topNav">
+    <div class="top-nav-inner">
+      <button class="nav-btn" onclick="scrollToSection('sec-slot')">📅 슬롯현황</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-notice')">⚠️ 주의사항</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-price')">💰 가격표</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-sample')">🖌️ 샘플보기</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-collab')">🤝 협업작가</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-style')">🎨 그림체 참고</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-form')">📄 신청서 작성</button>
+    </div>
+  </nav>
 
   <div class="hero">
     <div class="hero-badge">Live2D Model Illustration Commission</div>
@@ -1196,7 +1395,7 @@ textarea{
 </p>
   </div>
 
-  <div class="card">
+  <div class="card" id="sec-slot">
     <div class="title">📅 작업 슬롯 현황</div>
     <div class="section-sub">예약 가능한 슬롯은 <span class="available">♥</span>, 작업 펑크로 인해 생긴 빈 슬롯은 <span class="empty-slot">♥</span>로 표기합니다.</div>
     <div class="slot">
@@ -1219,7 +1418,7 @@ textarea{
     </div>
   </div>
 
-  <details class="card">
+  <details class="card" id="sec-notice">
     <summary>⚠️ 주의사항</summary>
     <div class="notice-box">
       ❥ 일러스트 출처 표기는 필수입니다.<br>
@@ -1263,7 +1462,7 @@ textarea{
     </div>
   </details>
 
-  <div class="card price-card-open">
+  <div class="card price-card-open" id="sec-price">
     <div class="title">💰 가격표</div>
     <div class="section-sub">기본 패키지 및 추가 옵션 안내</div>
 
@@ -1305,17 +1504,25 @@ textarea{
               <div class="price-item addon-item" data-addon-name="기본 표정 추가" onclick="toggleAddonOption(this, '기본 표정 추가', 5000)">
                 <span class="addon-label">기본 표정 추가 +5,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('기본 표정 추가', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('기본 표정 추가', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="기본 표정 추가">1</span>
-                  <button 입력="button" onclick="changeAddonQty('기본 표정 추가', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('기본 표정 추가', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="맞춤형 표정" onclick="toggleAddonOption(this, '맞춤형 표정', 10000)">
                 <span class="addon-label">맞춤형 표정 +10,000원~</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('맞춤형 표정', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('맞춤형 표정', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="맞춤형 표정">1</span>
-                  <button 입력="button" onclick="changeAddonQty('맞춤형 표정', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('맞춤형 표정', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item inquiry-item" data-addon-name="표정 별도문의" onclick="toggleAddonOption(this, '표정 별도문의', 0)">
+                <span class="addon-label">⯎ 별도 문의 ⯎</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button type="button" onclick="changeAddonQty('표정 별도문의', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="표정 별도문의">1</span>
+                  <button type="button" onclick="changeAddonQty('표정 별도문의', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
             </div>
@@ -1327,17 +1534,25 @@ textarea{
               <div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)">
                 <span class="addon-label">추가 팔 파츠 +20,000</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="추가 팔 파츠">1</span>
-                  <button 입력="button" onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="추가 소매 파츠" onclick="toggleAddonOption(this, '추가 소매 파츠', 10000)">
                 <span class="addon-label">추가 소매 파츠 +10,000</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="추가 소매 파츠">1</span>
-                  <button 입력="button" onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item inquiry-item" data-addon-name="팔포즈 별도문의" onclick="toggleAddonOption(this, '팔포즈 별도문의', 0)">
+                <span class="addon-label">⯎ 별도 문의 ⯎</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button type="button" onclick="changeAddonQty('팔포즈 별도문의', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="팔포즈 별도문의">1</span>
+                  <button type="button" onclick="changeAddonQty('팔포즈 별도문의', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
             </div>
@@ -1349,26 +1564,34 @@ textarea{
               <div class="price-item addon-item" data-addon-name="마이크" onclick="toggleAddonOption(this, '마이크', 35000)">
                 <span class="addon-label">마이크 +35,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('마이크', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('마이크', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="마이크">1</span>
-                  <button 입력="button" onclick="changeAddonQty('마이크', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('마이크', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="게임기" onclick="toggleAddonOption(this, '게임기', 35000)">
                 <span class="addon-label">게임기 +35,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('게임기', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('게임기', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="게임기">1</span>
-                  <button 입력="button" onclick="changeAddonQty('게임기', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('게임기', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
 
               <div class="price-item addon-item" data-addon-name="끌어안는 인형" onclick="toggleAddonOption(this, '끌어안는 인형', 30000)">
                 <span class="addon-label">끌어안는 인형 +30,000</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="끌어안는 인형">1</span>
-                  <button 입력="button" onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item inquiry-item" data-addon-name="소품 별도문의" onclick="toggleAddonOption(this, '소품 별도문의', 0)">
+                <span class="addon-label">⯎ 별도 문의 ⯎</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button type="button" onclick="changeAddonQty('소품 별도문의', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="소품 별도문의">1</span>
+                  <button type="button" onclick="changeAddonQty('소품 별도문의', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
             </div>
@@ -1380,33 +1603,41 @@ textarea{
               <div class="price-item addon-item" data-addon-name="신의상" onclick="toggleAddonOption(this, '신의상', 100000)">
                 <span class="addon-label">신의상 +100,000원~</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('신의상', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('신의상', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="신의상">1</span>
-                  <button 입력="button" onclick="changeAddonQty('신의상', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('신의상', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="겉옷" onclick="toggleAddonOption(this, '겉옷', 80000)">
                 <span class="addon-label">겉옷 (on/off) +80,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('겉옷', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('겉옷', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="겉옷">1</span>
-                  <button 입력="button" onclick="changeAddonQty('겉옷', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('겉옷', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="후드 모자" onclick="toggleAddonOption(this, '후드 모자', 40000)">
                 <span class="addon-label">후드 모자 +40,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="후드 모자">1</span>
-                  <button 입력="button" onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="헤어 바리에이션" onclick="toggleAddonOption(this, '헤어 바리에이션', 50000)">
                 <span class="addon-label">헤어 바리에이션 +50,000원~</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="헤어 바리에이션">1</span>
-                  <button 입력="button" onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item inquiry-item" data-addon-name="의상헤어 별도문의" onclick="toggleAddonOption(this, '의상헤어 별도문의', 0)">
+                <span class="addon-label">⯎ 별도 문의 ⯎</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button type="button" onclick="changeAddonQty('의상헤어 별도문의', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="의상헤어 별도문의">1</span>
+                  <button type="button" onclick="changeAddonQty('의상헤어 별도문의', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
             </div>
@@ -1418,41 +1649,49 @@ textarea{
               <div class="price-item addon-item" data-addon-name="간단 펫" onclick="toggleAddonOption(this, '간단 펫', 35000)">
                 <span class="addon-label">간단 펫 +35,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="간단 펫">1</span>
-                  <button 입력="button" onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="고가동 파츠분리" onclick="toggleAddonOption(this, '고가동 파츠분리', 100000)">
                 <span class="addon-label">고가동 파츠 분리 +100,000원~</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="고가동 파츠분리">1</span>
-                  <button 입력="button" onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="삼면도" onclick="toggleAddonOption(this, '삼면도', 110000)">
                 <span class="addon-label">캐릭터 시트(삼면도) +110,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('삼면도', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('삼면도', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="삼면도">1</span>
-                  <button 입력="button" onclick="changeAddonQty('삼면도', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('삼면도', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="작업과정 비공개" onclick="toggleAddonOption(this, '작업과정 비공개', 40000)">
                 <span class="addon-label">작업과정 비공개 +40,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="작업과정 비공개">1</span>
-                  <button 입력="button" onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item" data-addon-name="작업물 비공개 1개월" onclick="toggleAddonOption(this, '작업물 비공개 1개월', 20000)">
                 <span class="addon-label">작업물 비공개 (1개월) +20,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button 입력="button" onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();">−</button>
+                  <button type="button" onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();">−</button>
                   <span class="qty-value" data-qty-for="작업물 비공개 1개월">1</span>
-                  <button 입력="button" onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item inquiry-item" data-addon-name="기타 별도문의" onclick="toggleAddonOption(this, '기타 별도문의', 0)">
+                <span class="addon-label">⯎ 별도 문의 ⯎</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button type="button" onclick="changeAddonQty('기타 별도문의', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="기타 별도문의">1</span>
+                  <button type="button" onclick="changeAddonQty('기타 별도문의', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
             </div>
@@ -1464,7 +1703,7 @@ textarea{
     </div>
   </div>
 
-  <div class="card static-card">
+  <div class="card static-card" id="sec-sample">
     <div class="title">🖌️ 실제 커미션 샘플</div>
     <div class="sample-intro">
       <span class="highlight">공장식으로 일러스트를 뽑아내는 작업방식 NO!!</span><br>
@@ -1485,36 +1724,135 @@ textarea{
           <div class="thumb-label">93</div>
         </div>
         <div class="thumb-item">
-          <img src="sina_sample_collage.png" alt="시나" loading="eager" decoding="async" onclick="selectSample(1)">
+          <img src="sina_sample_collage.png" alt="시나" loading="lazy" decoding="async" onclick="selectSample(1)">
           <div class="thumb-label">시나</div>
         </div>
         <div class="thumb-item">
-          <img src="rararu_sample_collage.png" alt="라라루" loading="eager" decoding="async" onclick="selectSample(2)">
+          <img src="rararu_sample_collage.png" alt="라라루" loading="lazy" decoding="async" onclick="selectSample(2)">
           <div class="thumb-label">라라루</div>
         </div>
         <div class="thumb-item">
-          <img src="koya_sample_collage.png" alt="네무키 코야" loading="eager" decoding="async" onclick="selectSample(3)">
+          <img src="koya_sample_collage.png" alt="네무키 코야" loading="lazy" decoding="async" onclick="selectSample(3)">
           <div class="thumb-label">네무키 코야</div>
         </div>
         <div class="thumb-item">
-          <img src="raruka_sample_collage.png" alt="라루카" loading="eager" decoding="async" onclick="selectSample(4)">
+          <img src="raruka_sample_collage.png" alt="라루카" loading="lazy" decoding="async" onclick="selectSample(4)">
           <div class="thumb-label">라루카</div>
         </div>
         <div class="thumb-item">
-          <img src="B_sample_collage.png" alt="양 수인" loading="eager" decoding="async" onclick="selectSample(5)">
+          <img src="B_sample_collage.png" alt="양 수인" loading="lazy" decoding="async" onclick="selectSample(5)">
           <div class="thumb-label">양 수인</div>
         </div>
       </div>
     </div>
   </div>
     
+  <!-- 디자인 과정 -->
+  <div class="workflow-card">
+    <div class="workflow-label">진행 과정</div>
+    <div class="workflow-title">✏️ 디자인 과정</div>
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="wf-icon">💬</div>
+        <div class="wf-label">상담</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon">🖼️</div>
+        <div class="wf-label">시안 3장</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon highlight">✔️</div>
+        <div class="wf-label">컨펌</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon">🖼️</div>
+        <div class="wf-label">시안 3장</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon highlight">✔️</div>
+        <div class="wf-label">마지막 컨펌</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon">🌟</div>
+        <div class="wf-label">최종 결정</div>
+      </div>
+    </div>
+    <div class="workflow-flow">
+      <div class="flow-row">
+        <span class="flow-step-pill">상담</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">시안 3장</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">컨펌</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">시안 3장</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">마지막 컨펌</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">최종 디자인 결정</span>
+      </div>
+    </div>
+    <div class="workflow-note">※ 상황에 따라 상의 후 컨펌 일정이 조정될 수 있습니다.</div>
+  </div>
+
+  <!-- 본작업 과정 -->
+  <div class="workflow-card">
+    <div class="workflow-label">진행 과정</div>
+    <div class="workflow-title">🎨 본작업 과정</div>
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="wf-icon">✂️</div>
+        <div class="wf-label">파츠분리<br>일러 제작</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon highlight">✔️</div>
+        <div class="wf-label">50% 완성<br>1차 컨펌</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon highlight">✔️</div>
+        <div class="wf-label">90% 완성<br>2차 컨펌</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon highlight">✔️</div>
+        <div class="wf-label">마지막<br>3차 컨펌</div>
+      </div>
+      <div class="wf-arrow">➟</div>
+      <div class="wf-step">
+        <div class="wf-icon">🎁</div>
+        <div class="wf-label">완성</div>
+      </div>
+    </div>
+    <div class="workflow-flow">
+      <div class="flow-row">
+        <span class="flow-step-pill">파츠분리 및 일러스트 제작</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">50% 완성 1차 컨펌</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">90% 완성 2차 컨펌</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">마지막 3차 컨펌</span>
+        <span class="flow-arrow">➟</span>
+        <span class="flow-step-pill">완성</span>
+      </div>
+    </div>
+    <div class="workflow-note">💗 웬만하면 컨펌은 더 자주 자주 드리고 있습니다!</div>
+  </div>
+
   <div class="card static-card">
     <div class="title">💖 표정 샘플</div>
     <div style="margin-top:10px;">
       <div class="style-viewer">
         <img id="faceGallery" src="raruka_face_types.png" alt="표정 샘플" loading="eager" decoding="async">
-        <button 입력="button" class="circle-nav left" onclick="prevFace()">❮</button>
-        <button 입력="button" class="circle-nav right" onclick="nextFace()">❯</button>
+        <button type="button" class="circle-nav left" onclick="prevFace()">❮</button>
+        <button type="button" class="circle-nav right" onclick="nextFace()">❯</button>
       </div>
 
       <div id="faceDesc" class="desc-box">라루카님 표정 샘플</div>
@@ -1523,7 +1861,7 @@ textarea{
   </div>
 
 
-  <div class="card static-card">
+  <div class="card static-card" id="sec-collab">
     <div class="title">🤝 협업 작가</div>
     <div class="collab-grid">
       <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">다중 작가님</span><br>일러 5만원 + 리깅 5만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
@@ -1539,22 +1877,22 @@ textarea{
     </div>
   </div>
 
-  <div class="card static-card">
+  <div class="card static-card" id="sec-style">
     <div class="title">🎨 그림체 참고</div>
     <div style="margin-top:10px;">
       <div class="info-text">좌우 버튼으로 그림체 참고 이미지를 넘길 수 있습니다.</div>
 
       <div class="style-viewer">
         <img id="styleGallery" src="style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='style_1.png';}">
-        <button 입력="button" class="circle-nav left" onclick="prevStyle()">❮</button>
-        <button 입력="button" class="circle-nav right" onclick="nextStyle()">❯</button>
+        <button type="button" class="circle-nav left" onclick="prevStyle()">❮</button>
+        <button type="button" class="circle-nav right" onclick="nextStyle()">❯</button>
       </div>
 
       <div id="styleDots" class="dots">● ○ ○ ○</div>
     </div>
   </div>
 
-  <div class="card static-card">
+  <div class="card static-card" id="sec-form">
     <div class="title">📄 신청서</div>
     <div class="form-top-note">
       해당하는 부분만 적어주시면 됩니다. 괄호 안의 글씨는 삭제하고 작성해 주세요!
@@ -1608,7 +1946,40 @@ textarea{
 
 
 <script>
-function preloadImages(list){
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  // details 요소면 열기
+  if(el.tagName === 'DETAILS') el.open = true;
+  const navH = document.getElementById('topNav')?.offsetHeight || 0;
+  const top = el.getBoundingClientRect().top + window.scrollY - navH - 8;
+  window.scrollTo({ top, behavior:'smooth' });
+}
+
+function updateActiveNav(){
+  const navH = document.getElementById('topNav')?.offsetHeight || 0;
+  const sections = [
+    { id:'sec-slot',    btn:0 },
+    { id:'sec-notice',  btn:1 },
+    { id:'sec-price',   btn:2 },
+    { id:'sec-sample',  btn:3 },
+    { id:'sec-collab',  btn:4 },
+    { id:'sec-style',   btn:5 },
+    { id:'sec-form',    btn:6 },
+  ];
+  const btns = document.querySelectorAll('.nav-btn');
+  let active = 0;
+  sections.forEach(({ id }, i) => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(el.getBoundingClientRect().top - navH - 24 <= 0) active = i;
+  });
+  btns.forEach((b, i) => b.classList.toggle('active', i === active));
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive:true });
+
+
   list.forEach(src => {
     const img = new Image();
     img.src = src;
@@ -1703,15 +2074,16 @@ function updateSelectionSummary(){
     const subtotal = option.price * option.qty;
     addonTotal += subtotal;
 
+    const isInquiry = option.price === 0;
     const item = document.createElement('div');
     item.className = 'selection-summary-item';
     item.innerHTML = `
       <div class="left">
-        <div class="name">${option.name}</div>
-        <div class="sub">${option.qty}개 (+${formatPrice(option.price)}원)</div>
+        <div class="name">${isInquiry ? option.name.replace(' 별도문의','') : option.name}</div>
+        <div class="sub">${isInquiry ? '별도 문의' : `${option.qty}개 (+${formatPrice(option.price)}원)`}</div>
       </div>
       <div class="right">
-        <strong>${formatPrice(subtotal)}원</strong>
+        <strong>${isInquiry ? '문의' : formatPrice(subtotal)+'원'}</strong>
         <button type="button" class="remove-btn" data-remove="${option.name}" aria-label="${option.name} 제거">×</button>
       </div>
     `;
@@ -1738,7 +2110,7 @@ function updateFormText(){
     : '7. 버츄얼 패키지 : ';
 
   const addonText = selectedAddonOptions.length
-    ? `8. 추가 옵션 : ${selectedAddonOptions.map(o => `${o.name} x${o.qty} (+${formatPrice(o.price * o.qty)}원)`).join(', ')}`
+    ? `8. 추가 옵션 : ${selectedAddonOptions.map(o => o.price === 0 ? `${o.name.replace(' 별도문의', '')} (별도 문의)` : `${o.name} x${o.qty} (+${formatPrice(o.price * o.qty)}원)`).join(', ')}`
     : '8. 추가 옵션 : ';
 
   replaceLineByPrefix(lines, '7. 버츄얼 패키지', baseText);
@@ -1866,43 +2238,23 @@ const images = [
   'B_sample_collage.png'
 ];
 
-function showGallery(index){
-  current = index;
-  const img = document.getElementById('galleryImg');
-  img.src = images[current];
-  updateSampleThumbBorder();
+function fadeSwap(imgEl, newSrc, callback){
+  imgEl.classList.add('fading');
+  setTimeout(() => {
+    imgEl.src = newSrc;
+    imgEl.onload = () => {
+      imgEl.classList.remove('fading');
+      if(callback) callback();
+    };
+    // fallback: remove fading even if onload fires late
+    setTimeout(() => imgEl.classList.remove('fading'), 500);
+  }, 260);
 }
-
-function selectSample(index){
-  showGallery(index);
-}
-
-function updateSampleThumbBorder(){
-  const thumbs = document.querySelectorAll('#sampleThumbGrid img');
-  thumbs.forEach((thumb, index) => {
-    thumb.style.border = index === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
-  });
-}
-
-let faceCurrent = 0;
-<!-- 기존에 끊겨 있던 스크립트 블록을 지우고, 아래 완성된 코드를 넣으세요 -->
-<script>
-// ... (앞부분 생략) ...
-
-let current = 0;
-const images = [
-  '93_sample_collage.png',
-  'sina_sample_collage.png',
-  'rararu_sample_collage.png',
-  'koya_sample_collage.png',
-  'raruka_sample_collage.png',
-  'B_sample_collage.png'
-];
 
 function showGallery(index){
   current = index;
   const img = document.getElementById('galleryImg');
-  img.src = images[current];
+  fadeSwap(img, images[current], updateSampleThumbBorder);
   updateSampleThumbBorder();
 }
 
@@ -1931,8 +2283,12 @@ const faceDescriptions = [
 
 function showFace(index){
   faceCurrent = index;
-  document.getElementById('faceGallery').src = faceImages[faceCurrent];
-  document.getElementById('faceDesc').innerHTML = faceDescriptions[faceCurrent];
+  const img = document.getElementById('faceGallery');
+  const desc = document.getElementById('faceDesc');
+  fadeSwap(img, faceImages[faceCurrent], () => {
+    desc.innerHTML = faceDescriptions[faceCurrent];
+    updateFaceDots();
+  });
   updateFaceDots();
 }
 
@@ -1945,7 +2301,10 @@ function prevFace(){
 }
 
 function updateFaceDots(){
-  document.getElementById('faceDots').innerText = faceImages.map((_, i) => i === faceCurrent ? '●' : '○').join(' ');
+  const dotsEl = document.getElementById('faceDots');
+  if(dotsEl) {
+    dotsEl.innerText = faceImages.map((_, i) => i === faceCurrent ? '●' : '○').join(' ');
+  }
 }
 
 let styleCurrent = 0;
@@ -1958,7 +2317,8 @@ const styleImages = [
 
 function showStyle(index){
   styleCurrent = index;
-  document.getElementById('styleGallery').src = styleImages[styleCurrent];
+  const img = document.getElementById('styleGallery');
+  fadeSwap(img, styleImages[styleCurrent], updateStyleDots);
   updateStyleDots();
 }
 
@@ -1971,33 +2331,43 @@ function prevStyle(){
 }
 
 function updateStyleDots(){
-  document.getElementById('styleDots').innerText = styleImages.map((_, i) => i === styleCurrent ? '●' : '○').join(' ');
+  const dotsEl = document.getElementById('styleDots');
+  if(dotsEl) {
+    dotsEl.innerText = styleImages.map((_, i) => i === styleCurrent ? '●' : '○').join(' ');
+  }
 }
 
-preloadImages(images);
-preloadImages(faceImages);
-preloadImages(styleImages);
+// 💡 안전한 실행을 위해 모든 함수가 준비된 후 이미지 프리로드 및 초기화 실행
+if(typeof preloadImages === 'function'){
+  preloadImages(images);
+  preloadImages(faceImages);
+  preloadImages(styleImages);
+}
 
 document.addEventListener('click', (event) => {
   const btn = event.target.closest('.remove-btn');
-  if(btn){
+  if(btn && typeof removeAddon === 'function'){
     removeAddon(btn.dataset.remove);
   }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  showGallery(0);
-  showFace(0);
-  showStyle(0);
-  updateUI();
+  if(document.getElementById('galleryImg')) showGallery(0);
+  if(document.getElementById('faceGallery')) showFace(0);
+  if(document.getElementById('styleGallery')) showStyle(0);
+  
+  if(typeof updateUI === 'function'){
+    updateUI();
+  }
 
   const textarea = document.getElementById('inputText');
-  if(textarea){
+  if(textarea && typeof autoResizeTextarea === 'function'){
     autoResizeTextarea();
     textarea.addEventListener('input', autoResizeTextarea);
   }
 });
 </script>
+
 
 </body>
 </html>
