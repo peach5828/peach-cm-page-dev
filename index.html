@@ -1,0 +1,2003 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+:root{
+  --pink:#eb839f;
+  --pink-deep:#d86c89;
+  --pink-soft:#fff3f6;
+  --pink-bg:#fff7fa;
+  --text:#55474d;
+  --line:#f1d8e0;
+  --shadow:0 10px 25px rgba(235, 131, 159, 0.16);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Paperozi',sans-serif;
+  background:white;
+  color:var(--text);
+}
+
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:18px 14px 32px;
+}
+
+.hero{
+  background:linear-gradient(180deg, #ffffff 0%, #fff8fb 100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:14px 16px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-30px;
+  top:-30px;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle, rgba(235,131,159,0.22) 0%, rgba(235,131,159,0) 70%);
+  border-radius:999px;
+}
+
+.hero-badge{
+  display:inline-block;
+  font-size:13px;
+  font-weight:700;
+  color:white;
+  background:linear-gradient(180deg, #eb839f 0%, #d86c89 100%);
+  border-radius:999px;
+  padding:10px 18px;
+  margin-bottom:18px;
+}
+
+.hero-title{
+  font-size:28px;
+  font-weight:700;
+  color:#eb839f;
+  margin:0 0 16px;
+  line-height:1.2;
+  letter-spacing:-0.02em;
+}
+
+.hero-desc{
+  line-height:1.95;
+  font-size:17px;
+  margin:0;
+  color:#4f4450;
+}
+
+.hero-main-copy .em{
+  color:#eb839f;
+  font-weight:700;
+}
+
+.hero-main-copy.small,
+.small {
+  font-size: 0.75em;  /* 기존 글자 크기(0.85em)보다 약 1.5배 더 작게 조절 */
+  opacity: 0.5;       /* 투명도를 50%로 설정 (0이 투명, 1이 불투명) */
+}
+    
+.hero-desc .soft{
+  color:#8f7d83;
+  font-size:13px;
+}
+
+.hero-desc .em{
+  color:var(--pink);
+  font-weight:700;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+}
+
+.title,
+summary{
+  font-weight:700;
+  color:var(--pink);
+  font-size:18px;
+  cursor:pointer;
+  list-style:none;
+}
+
+summary::-webkit-details-marker{display:none;}
+
+.section-sub{
+  margin-top:6px;
+  font-size:12px;
+  color:#9a848c;
+}
+
+.sample-intro{
+  margin-top:12px;
+  background:linear-gradient(180deg, #fffafd 0%, #fff4f8 100%);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  font-size:14px;
+  line-height:1.9;
+  color:#7e6972;
+}
+
+.price-card-open .title{
+  cursor:기본;
+}
+
+.slot{
+  margin-top:12px;
+  background:var(--pink-bg);
+  border:1px solid var(--line);
+  padding:12px;
+  border-radius:16px;
+  line-height:1.95;
+  font-size:14px;
+}
+
+/* 기존 채워진 핑크 하트 */
+.available {
+  color: var(--pink-deep);
+  font-weight: 700;
+}
+
+/* 페이퍼로지체 버그 해결용 빈 하트 */
+.empty-slot {
+  font-weight: 700;
+  color: transparent; /* 하트 안쪽 색상을 투명하게 비웁니다 */
+  -webkit-text-stroke: 1px var(--pink-deep); /* 하트 테두리에만 핑크색 선을 긋습니다 */
+}
+
+
+.closed{
+  color:#c9b9bf;
+  text-decoration:line-through;
+}
+
+.slot-notice{
+  margin-top:12px;
+  background:linear-gradient(180deg, #fffafd 0%, #fff3f7 100%);
+  border:1px dashed var(--pink);
+  border-radius:16px;
+  padding:12px;
+  font-size:13px;
+  line-height:1.85;
+}
+
+.slot-notice strong{
+  color:var(--pink);
+  font-size:14px;
+}
+
+.slot-notice .start-em{
+  color:var(--pink);
+  font-weight:700;
+}
+
+.slot-note-soft{
+  margin-top:8px;
+  font-size:11px;
+  color:#baa7ae;
+  line-height:1.6;
+}
+
+.price-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.price-group{
+  background:var(--pink-soft);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:12px;
+}
+
+.price-box{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+}
+
+.price-group .price-box + .price-box{
+  margin-top:10px;
+}
+
+.price-head{
+  color:var(--pink);
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.price-list{
+  font-size:14px;
+  line-height:1.9;
+}
+
+.price-item{
+  cursor:pointer;
+  padding:6px 8px;
+  border-radius:10px;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+  user-select:none;
+}
+.price-item:hover{
+  transform:translateY(-1px);
+  background:#ffe3ec;
+}
+.price-item.active{
+  background:var(--pink);
+  color:#fff;
+  font-weight:700;
+}
+
+.basic-included{
+  margin-top:12px;
+  padding:12px;
+  border-radius:14px;
+  background:#fffdfd;
+  border:1px solid #f4e8ec;
+}
+.basic-included-title{
+  color:#b899a4;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.basic-included-text{
+  color:#8b7c81;
+  font-size:13px;
+  line-height:1.85;
+}
+
+details.option-box{
+  background:var(--pink-bg);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+}
+
+details.option-box summary{
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:6px;
+}
+
+.summary-caret{
+  font-size:20px;
+  line-height:1;
+  color:var(--pink-deep);
+  font-weight:700;
+}
+
+.option-guide{
+  display:none;
+  margin-top:10px;
+  background:#fff;
+  border:1px dashed var(--line);
+  color:#8b7c81;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:12px;
+  line-height:1.7;
+}
+
+details.option-box[open] .option-guide{
+  display:block;
+}
+
+.info-text{
+  font-size:13px;
+  color:#9e8d94;
+  margin-bottom:8px;
+  text-align:center;
+  line-height:1.65;
+}
+
+.viewer{
+  position:relative;
+  margin-top:10px;
+}
+
+.viewer img{
+  width:100%;
+  max-height:560px;
+  object-fit:contain;
+  border-radius:16px;
+  display:block;
+  background:#fff;
+  transition: opacity 0.18s ease;
+  opacity:1;
+}
+
+.thumb-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:8px;
+  margin-top:12px;
+}
+
+.thumb-item{
+  text-align:center;
+}
+
+.thumb-item img{
+  width:100%;
+  height:80px;
+  object-fit:contain;
+  border-radius:12px;
+  background:#fff;
+  cursor:pointer;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.thumb-item img:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(235,131,159,0.25);
+}
+
+.thumb-label{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--pink);
+  background:var(--pink-soft);
+  border-radius:999px;
+  padding:5px 7px;
+  line-height:1.3;
+  word-break:keep-all;
+}
+
+.style-viewer{
+  position:relative;
+  margin-top:10px;
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.circle-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:none;
+  background:rgba(235,131,159,0.95);
+  color:white;
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(235,131,159,0.28);
+  padding:0;
+  z-index:2;
+}
+
+.circle-nav.left{left:10px;}
+.circle-nav.right{right:10px;}
+
+.dots{
+  margin-top:8px;
+  font-size:15px;
+  color:var(--pink-deep);
+  text-align:center;
+  letter-spacing:1px;
+}
+
+#faceGallery,
+#styleGallery{
+  width:100%;
+  max-height:420px;
+  object-fit:contain;
+}
+
+.desc-box{
+  display:block;
+  margin-top:10px;
+  background:var(--pink-bg);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  font-size:14px;
+  line-height:1.8;
+  color:var(--pink);
+  font-weight:600;
+  text-align:center;
+}
+
+.notice{
+  margin-top:10px;
+  font-size:13px;
+  color:#88767d;
+  line-height:1.7;
+  background:var(--pink-bg);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px;
+}
+
+.notice-box{
+  margin-top:10px;
+  background:linear-gradient(180deg, #fffafb 0%, #fff3f7 100%);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:14px 14px 12px;
+  font-size:14px;
+  line-height:1.9;
+  color:var(--text);
+}
+
+.notice-box .highlight{
+  font-weight:700;
+}
+
+.form-top-note{
+  margin-top:10px;
+  font-size:13px;
+  color:#8b7c81;
+  line-height:1.7;
+}
+
+textarea{
+  width:100%;
+  min-height:390px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:#fffafb;
+  font-family:'Paperozi',sans-serif;
+  font-size:14px;
+  line-height:1.75;
+  color:var(--text);
+  margin-top:10px;
+  resize:none;
+  overflow:hidden;
+}
+
+.copy-btn{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%);
+  color:white;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+  font-family:'Paperozi',sans-serif;
+}
+
+.highlight{
+  color:var(--pink);
+  font-weight:700;
+}
+
+.collab-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.collab-link{
+  text-decoration:none;
+  color:inherit;
+}
+
+.collab-item{
+  background:var(--pink-bg);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  line-height:1.75;
+  font-size:14px;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.collab-link:hover .collab-item{
+  transform:translateY(-2px);
+  box-shadow:0 8px 16px rgba(235,131,159,0.18);
+  border-color:var(--pink);
+}
+
+.collab-name{
+  color:var(--pink);
+  font-weight:700;
+}
+
+.collab-arrow{
+  font-size:12px;
+  color:#b68a9d;
+}
+
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.82);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+  padding:20px;
+}
+
+#modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:16px;
+  box-shadow:0 10px 24px rgba(0,0,0,0.25);
+}
+
+.addon-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.addon-label{
+  flex:1;
+  min-width:0;
+}
+.qty-controls{
+  display:none;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+}
+.addon-item.active .qty-controls{
+  display:flex;
+}
+.qty-controls button{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.45);
+  background:rgba(255,255,255,0.22);
+  color:inherit;
+  font-weight:700;
+  cursor:pointer;
+  line-height:1;
+}
+.price-item.active .qty-controls button{
+  border-color:rgba(255,255,255,0.75);
+}
+.qty-value{
+  min-width:22px;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+}
+
+.selection-summary{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:16px;
+  background:linear-gradient(180deg, #fffef9 0%, #fffaf4 100%);
+  border:1px solid #dedbc6;
+  border-radius:28px;
+  padding:22px 20px 18px;
+  box-shadow:0 10px 25px rgba(131, 118, 86, 0.10);
+}
+.selection-summary-title{
+  font-size:26px;
+  font-weight:700;
+  color:#5b634a;
+  letter-spacing:-0.03em;
+  margin-bottom:18px;
+}
+.selection-summary-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.selection-summary-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:16px;
+  line-height:1.5;
+  color:#69705b;
+}
+.selection-summary-item .left{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  min-width:0;
+}
+.selection-summary-item .name{
+  font-size:17px;
+  font-weight:700;
+  color:#667053;
+}
+.selection-summary-item .sub{
+  font-size:14px;
+  color:#908d78;
+}
+.selection-summary-item .right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+  font-size:16px;
+  color:#7f846d;
+}
+.selection-summary-item .remove-btn{
+  width:48px;
+  height:48px;
+  border-radius:999px;
+  border:1px solid #d7d4be;
+  background:#fff;
+  color:#8b8f7a;
+  font-size:28px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+.selection-summary-divider{
+  height:2px;
+  background:#d5d2bd;
+  margin:18px 0 14px;
+}
+.selection-summary-totals{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.selection-summary-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:18px;
+  color:#5c624d;
+}
+.selection-summary-row span{
+  font-size:20px;
+}
+.selection-summary-row strong{
+  font-size:20px;
+  font-weight:700;
+}
+.selection-summary-row.total span,
+.selection-summary-row.total strong{
+  font-size:24px;
+  font-weight:700;
+}
+.copy-btn-large{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:16px;
+  height:84px;
+  border-radius:999px;
+  background:#fff;
+  color:#5b634a;
+  border:2px solid #d6d3bc;
+  box-shadow:0 8px 18px rgba(131, 118, 86, 0.10);
+  font-size:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.copy-btn-large:hover{
+  background:#fffdfa;
+}
+.plain-note{
+  font-weight:400;
+  color:#8f7d83;
+  font-size:13px;
+}
+.copy-emoji{
+  font-size:28px;
+}
+
+@media (max-width:640px){
+  .collab-grid{grid-template-columns:1fr;}
+  .hero{padding:24px 18px 26px;border-radius:28px;}
+  .hero-title{font-size:28px;margin-bottom:14px;}
+  .hero-desc{font-size:15px;line-height:1.85;}
+  .hero-badge{font-size:11px;padding:8px 14px;margin-bottom:14px;}
+  .thumb-grid{grid-template-columns:repeat(2,1fr);}
+  .circle-nav{width:34px;height:34px;font-size:16px;}
+  .container{padding:12px 10px 24px;}
+  .style-viewer{max-width:100%;}
+  .selection-summary-title{font-size:22px;}
+  .copy-btn-large{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;height:74px;font-size:20px;}
+  .copy-emoji{font-size:24px;}
+}
+
+.selection-summary{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:16px;
+  background:linear-gradient(180deg, #fff4f8 0%, #fffafc 100%);
+  border:1px solid #f1c9d7;
+  border-radius:28px;
+  padding:22px 20px 18px;
+  box-shadow:0 10px 25px rgba(235, 131, 159, 0.11);
+}
+.selection-summary-title{
+  font-size:26px;
+  font-weight:700;
+  color:#5f4f57;
+  letter-spacing:-0.03em;
+  margin-bottom:18px;
+}
+.selection-summary-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.selection-summary-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:16px;
+  line-height:1.5;
+  color:#6e5c64;
+}
+.selection-summary-item .left{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  min-width:0;
+}
+.selection-summary-item .name{
+  font-size:17px;
+  font-weight:700;
+  color:#665059;
+}
+.selection-summary-item .sub{
+  font-size:14px;
+  color:#947482;
+}
+.selection-summary-item .right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+  font-size:16px;
+  color:#8a6d79;
+}
+.selection-summary-item .remove-btn{
+  width:48px;
+  height:48px;
+  border-radius:999px;
+  border:1px solid #e5c7d2;
+  background:#fff;
+  color:#c67a96;
+  font-size:28px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.selection-summary-divider{
+  height:2px;
+  background:#ebd1db;
+  margin:18px 0 14px;
+}
+.selection-summary-totals{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.selection-summary-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:18px;
+  color:#735c66;
+}
+.selection-summary-row span{
+  font-size:20px;
+}
+.selection-summary-row strong{
+  font-size:20px;
+  font-weight:700;
+}
+.selection-summary-row.total span,
+.selection-summary-row.total strong{
+  font-size:24px;
+  font-weight:700;
+  color:var(--pink);
+}
+details.option-box summary{
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+}
+.summary-caret{
+  font-size:24px;
+  line-height:1;
+  color:var(--pink-deep);
+  font-weight:700;
+}
+.option-guide{
+  display:none;
+  margin-top:10px;
+  background:#fff;
+  border:1px dashed var(--line);
+  color:#8b7c81;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:12px;
+  line-height:1.7;
+}
+details.option-box[open] .option-guide{
+  display:block;
+}
+.option-stack{
+  display:grid;
+  gap:10px;
+  margin-top:10px;
+}
+details.option-box .price-box + .price-box{
+  margin-top:0;
+}
+.basic-included{
+  margin-top:12px;
+  padding:12px;
+  border-radius:14px;
+  background:#fffdfd;
+  border:1px solid #f4e8ec;
+}
+.basic-included-title{
+  color:#b899a4;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.basic-included-text{
+  color:#8b7c81;
+  font-size:13px;
+  line-height:1.85;
+}
+
+
+/* ===== Stability overrides ===== */
+details.option-box > summary{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.summary-caret{
+  font-size:22px;
+  line-height:1;
+  margin-left:2px;
+}
+.selection-summary{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:16px !important;
+  background:linear-gradient(180deg, #fff4f8 0%, #fffafd 100%) !important;
+  border:1px solid #f1c9d7 !important;
+  border-radius:28px !important;
+  padding:22px 20px 18px !important;
+  box-shadow:0 10px 25px rgba(235, 131, 159, 0.11) !important;
+}
+.selection-summary-title{
+  text-align:center !important;
+  font-size:26px !important;
+  font-weight:700 !important;
+  color:var(--pink) !important;
+  letter-spacing:-0.03em;
+  margin-bottom:18px !important;
+}
+.selection-summary-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.selection-summary-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:16px;
+  line-height:1.5;
+  color:#6e5c64 !important;
+}
+.selection-summary-item .name{
+  font-size:17px;
+  font-weight:700;
+  color:#665059 !important;
+}
+.selection-summary-item .sub{
+  font-size:14px;
+  color:#947482 !important;
+}
+.selection-summary-item .right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+  font-size:16px;
+  color:#8a6d79 !important;
+}
+.selection-summary-item .remove-btn{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid #f0c6d5 !important;
+  background:#fff5f8 !important;
+  color:var(--pink) !important;
+  font-size:26px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.selection-summary-divider{
+  height:2px;
+  background:#f0d3dd !important;
+  margin:18px 0 14px !important;
+}
+.selection-summary-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:18px;
+  color:#6d5961 !important;
+}
+.selection-summary-row span{
+  font-size:18px !important;
+  color:#6d5961 !important;
+}
+.selection-summary-row strong{
+  font-size:18px !important;
+  font-weight:700;
+  color:#5c4b53 !important;
+}
+.selection-summary-row.total span,
+.selection-summary-row.total strong{
+  font-size:24px !important;
+  font-weight:700;
+  color:var(--pink-deep) !important;
+}
+.copy-btn-large{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:16px !important;
+  height:84px;
+  border-radius:999px;
+  background:linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%) !important;
+  color:white !important;
+  border:2px solid rgba(255,255,255,0.22) !important;
+  box-shadow:0 10px 22px rgba(235, 131, 159, 0.20) !important;
+  font-size:24px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.copy-btn-large:hover{
+  filter:brightness(0.99);
+}
+.copy-emoji{
+  font-size:28px;
+}
+
+
+/* === v5 overrides === */
+details:not([open]) > *:not(summary){
+  display:none !important;
+}
+
+details.option-box:not([open]){
+  padding-bottom:0 !important;
+}
+
+details.option-box summary{
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+}
+
+.summary-caret{
+  font-size:28px;
+  line-height:1;
+  color:var(--pink-deep);
+  font-weight:700;
+}
+
+.selection-summary{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:14px;
+  background:linear-gradient(180deg, #fff4f8 0%, #fffafd 100%);
+  border:1px solid #f1c9d7;
+  border-radius:22px;
+  padding:14px 14px 12px;
+  box-shadow:0 8px 16px rgba(235, 131, 159, 0.10);
+}
+
+.selection-summary-title{
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+  color:var(--pink);
+  letter-spacing:-0.03em;
+  margin-bottom:12px;
+}
+
+.selection-summary-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.selection-summary-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-size:14px;
+  line-height:1.45;
+  color:#6e5c64;
+}
+
+.selection-summary-item .name{
+  font-size:15px;
+}
+
+.selection-summary-item .sub{
+  font-size:12px;
+}
+
+.selection-summary-item .right{
+  font-size:14px;
+}
+
+.selection-summary-item .remove-btn{
+  width:36px;
+  height:36px;
+  font-size:22px;
+}
+
+.selection-summary-divider{
+  margin:12px 0 10px;
+  height:1px;
+  background:#ebd1db;
+}
+
+.selection-summary-row{
+  font-size:15px;
+}
+
+.selection-summary-row span,
+.selection-summary-row strong{
+  font-size:15px;
+}
+
+.selection-summary-row.total span,
+.selection-summary-row.total strong{
+  font-size:18px;
+  color:var(--pink);
+}
+
+.copy-btn-large{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:12px;
+  height:60px;
+  border-radius:20px;
+  background:linear-gradient(180deg, #eb839f 0%, #d86c89 100%);
+  color:white;
+  border:1px solid #d86c89;
+  box-shadow:0 8px 18px rgba(235, 131, 159, 0.16);
+  font-size:18px;
+  gap:10px;
+}
+
+.copy-btn-large:hover{
+  background:linear-gradient(180deg, #f08ba7 0%, #d86c89 100%);
+}
+
+.copy-emoji{
+  font-size:22px;
+}
+
+textarea{
+  min-height:520px !important;
+  height:520px;
+  overflow:hidden;
+  resize:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-badge">Live2D Model Illustration Commission</div>
+    <h1 class="hero-title">💗 Live2D 버츄얼 모델 일러스트 커미션</h1>
+<!-- 첫 번째 문단 (크게) -->
+<p class="hero-desc hero-main-copy">
+  말랑하고 부드러운 그림체가 특기입니다! 자연스러운 구동을 고려해 꼼꼼하게 작업합니다.
+</p>
+
+<!-- 두 번째 문단 (작게) -->
+<p class="hero-main-copy small">
+리깅 작업은 포함되어 있지 않습니다. 리깅이 필요하신 경우 협업 리깅 작가님께 별도로 의뢰해 주세요.
+</p>
+  </div>
+
+  <div class="card">
+    <div class="title">📅 작업 슬롯 현황</div>
+    <div class="section-sub">예약 가능한 슬롯은 <span class="available">♥</span>, 작업 펑크로 인해 생긴 빈 슬롯은 <span class="empty-slot">♥</span>로 표기합니다.</div>
+    <div class="slot">
+<p>4월 : 중간고사 ( 작업 x )</p>
+<p>5월 : <span class="closed">마감</span> / <span class="closed">마감</span></p>
+<p>6월 : 기말고사 ( 작업 x )</p>
+<p>7월 : <span class="closed">마감</span> / <span class="closed">마감</span>
+<p>8월 : <span class="closed">마감</span> / <span class="closed">마감</span>
+<p>9월 : <span class="available">♥</span> / <span class="available">♥</span></p>
+<!-- <span class="empty-slot">♥</span></p> --> 
+<!-- <span class="closed">마감</span> --> 
+<!-- <span class="available">♥</span></p> --> 
+    </div>
+    <div class="slot-notice">
+      <strong>2026년 상반기 예약이 마감되었습니다.</strong><br>
+      9월 첫번째 슬롯부터 예약 가능합니다.<br><br>
+      하반기에는 패키지 구성이나 가격 및 퀄리티에 변동이 있을 수 있어,<br>
+      <span class="start-em">7월 1일부터</span> 하반기 (9월 첫번째 슬롯~12월 두번째 슬롯) 예약을 받습니다!
+      <div class="slot-note-soft">※ 작업 펑크가 발생할 경우 빈 슬롯이 생길 수 있습니다. 빈 슬롯 예약은 언제든지 문의 주세요!</div>
+    </div>
+  </div>
+
+  <details class="card">
+    <summary>⚠️ 주의사항</summary>
+    <div class="notice-box">
+      ❥ 일러스트 출처 표기는 필수입니다.<br>
+      (작가의 SNS 계정 아이디로, 완성 후 전달드립니다.)<br><br>
+
+      ❥ 캐릭터 디자인이 포함된 가격입니다.<br>
+      기존 캐릭터 리뉴얼부터 새로운 캐릭터 디자인까지 가능합니다.<br><br>
+
+      ❥ 디자인은 아래 과정을 따라 진행되며, 상황에 따라 상의 후 컨펌 일정이 조정될 수 있습니다.<br>
+      <span class="highlight">상담 ➟ 시안 3장 ➟ 컨펌 ➟ 시안 3장 ➟ 마지막 컨펌 ➟ 최종 디자인 결정</span><br><br>
+
+
+      ❥ 본작업은 아래 과정을 따라 진행됩니다. (웬만하면 컨펌은 더 자주 자주 드리고 있습니다!)<br>
+      <span class="highlight">파츠분리 및 일러스트 제작 ➟ 50% 완성 1차 컨펌 ➟ 90% 완성 2차 컨펌 ➟ 마지막 3차 컨펌 ➟ 완성</span><br><br>
+      
+
+      ❥ 캐릭터마다의 귀여움을 살리기 위해 <span class="highlight">바디 파츠는 새로 제작</span>하고 있습니다!<br>
+     다만, 맨발이나 손가락 마디 등 추가 디테일 작업은 기본 제공되지 않으니 별도 문의 부탁드립니다! <br><br>
+        
+      ❥ 원하시는 바디파츠 포즈가 있을 경우 미리 말씀해 주세요. (예: 주먹 쥔 손 / 펼친 손, 다리 쉐입 등)<br><br>
+
+      ❥ 판매용 굿즈 제작 및 상업적 이용을 위해서는 <span class="highlight">저작권 구매</span>가 필요합니다.<br>
+      나눔용 굿즈 제작과 방송 스트리밍(후원을 통한 수익 창출 가능)은 상업적 이용에 해당되지 않습니다.<br><br>
+
+      ❥ 작업물 및 작업 과정은 작가의 개인 SNS 등에 <span class="highlight">포트폴리오로 업로드</span>될 수 있습니다.<br>
+      추가금 지불 시 업로드 날짜 조정이 가능합니다.<br><br>
+
+      ❥ <span class="highlight">러프 스케치를 합의 없이 공개적인 곳에 게시하는 것을 금지합니다.</span><br><br>
+
+      ❥ 기재된 가격은 <span class="highlight">겉옷을 제외한 상의 / 하의 조합 가격</span>입니다.<br>
+      겉옷이 있는 디자인의 경우 추가금이 발생합니다.<br><br>
+
+      ❥ 화려한 장신구나 구조가 복잡한 디자인은 추가금이 발생할 수 있습니다.<br><br>
+
+      ❥ 파츠분리 관련 문제는 문의 주시면 수정해 드립니다.<br>
+      다만 <span class="highlight">고가동으로 주문하지 않으신 경우 과도한 파츠분리 요청은 거절</span>될 수 있습니다.<br><br>
+
+      ❥ 작업 기한은 <span class="highlight">작업 시작일로부터 최대 31일</span>입니다.<br><br>
+
+      ❥ 기업세 작업의 경우 <span class="highlight">별도 문의</span> 부탁드립니다.
+    </div>
+  </details>
+
+  <div class="card price-card-open">
+    <div class="title">💰 가격표</div>
+    <div class="section-sub">기본 패키지 및 추가 옵션 안내</div>
+
+    <div class="price-grid">
+
+      <div class="price-group">
+        <div class="price-box">
+          <div class="price-head">기본 모델</div>
+          <div class="price-list">
+            <div class="price-item base-option-item" onclick="toggleBaseOption(this, '전신 패키지', 600000)">
+              Live2D 전신 패키지 +600,000원
+            </div>
+            <div class="price-item base-option-item" onclick="toggleBaseOption(this, '반신 패키지', 500000)">
+              Live2D 반신 패키지 +500,000원
+            </div>
+          </div>
+
+          <div class="basic-included">
+            <div class="basic-included-title">포함 사항</div>
+            <div class="basic-included-text">
+              - 기본 파츠분리 일러스트<br>
+              - 캐릭터 디자인 시안<br>
+              - 기본 표정 (전신 5종, 반신 3종)<br>
+              - PSD 파일 제공
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <details class="option-box">
+        <summary><span>추가옵션</span><span class="summary-caret">▼</span></summary>
+        <div class="option-guide">옵션 구성이 어려운 경우 선택 전 문의 주세요!! 상세히 안내 드립니다.</div>
+
+        <div class="option-stack">
+
+          <div class="price-box">
+            <div class="price-head">✨ 표정 <span class="plain-note">(맞춤형 표정은 의뢰자님만을 위한 주문제작 파츠입니다!)</span></div>
+            <div class="price-list">
+              <div class="price-item addon-item" data-addon-name="기본 표정 추가" onclick="toggleAddonOption(this, '기본 표정 추가', 5000)">
+                <span class="addon-label">기본 표정 추가 +5,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('기본 표정 추가', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="기본 표정 추가">1</span>
+                  <button 입력="button" onclick="changeAddonQty('기본 표정 추가', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="맞춤형 표정" onclick="toggleAddonOption(this, '맞춤형 표정', 10000)">
+                <span class="addon-label">맞춤형 표정 +10,000원~</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('맞춤형 표정', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="맞춤형 표정">1</span>
+                  <button 입력="button" onclick="changeAddonQty('맞춤형 표정', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-box">
+            <div class="price-head">✨ 팔 / 포즈</div>
+            <div class="price-list">
+              <div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)">
+                <span class="addon-label">추가 팔 파츠 +20,000</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="추가 팔 파츠">1</span>
+                  <button 입력="button" onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="추가 소매 파츠" onclick="toggleAddonOption(this, '추가 소매 파츠', 10000)">
+                <span class="addon-label">추가 소매 파츠 +10,000</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="추가 소매 파츠">1</span>
+                  <button 입력="button" onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-box">
+            <div class="price-head">✨ 소품</div>
+            <div class="price-list">
+              <div class="price-item addon-item" data-addon-name="마이크" onclick="toggleAddonOption(this, '마이크', 35000)">
+                <span class="addon-label">마이크 +35,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('마이크', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="마이크">1</span>
+                  <button 입력="button" onclick="changeAddonQty('마이크', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="게임기" onclick="toggleAddonOption(this, '게임기', 35000)">
+                <span class="addon-label">게임기 +35,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('게임기', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="게임기">1</span>
+                  <button 입력="button" onclick="changeAddonQty('게임기', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+
+              <div class="price-item addon-item" data-addon-name="끌어안는 인형" onclick="toggleAddonOption(this, '끌어안는 인형', 30000)">
+                <span class="addon-label">끌어안는 인형 +30,000</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="끌어안는 인형">1</span>
+                  <button 입력="button" onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-box">
+            <div class="price-head">✨ 의상 / 헤어</div>
+            <div class="price-list">
+              <div class="price-item addon-item" data-addon-name="신의상" onclick="toggleAddonOption(this, '신의상', 100000)">
+                <span class="addon-label">신의상 +100,000원~</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('신의상', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="신의상">1</span>
+                  <button 입력="button" onclick="changeAddonQty('신의상', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="겉옷" onclick="toggleAddonOption(this, '겉옷', 80000)">
+                <span class="addon-label">겉옷 (on/off) +80,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('겉옷', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="겉옷">1</span>
+                  <button 입력="button" onclick="changeAddonQty('겉옷', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="후드 모자" onclick="toggleAddonOption(this, '후드 모자', 40000)">
+                <span class="addon-label">후드 모자 +40,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="후드 모자">1</span>
+                  <button 입력="button" onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="헤어 바리에이션" onclick="toggleAddonOption(this, '헤어 바리에이션', 50000)">
+                <span class="addon-label">헤어 바리에이션 +50,000원~</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="헤어 바리에이션">1</span>
+                  <button 입력="button" onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-box">
+            <div class="price-head">✨ 기타</div>
+            <div class="price-list">
+              <div class="price-item addon-item" data-addon-name="간단 펫" onclick="toggleAddonOption(this, '간단 펫', 35000)">
+                <span class="addon-label">간단 펫 +35,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="간단 펫">1</span>
+                  <button 입력="button" onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="고가동 파츠분리" onclick="toggleAddonOption(this, '고가동 파츠분리', 100000)">
+                <span class="addon-label">고가동 파츠 분리 +100,000원~</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="고가동 파츠분리">1</span>
+                  <button 입력="button" onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="삼면도" onclick="toggleAddonOption(this, '삼면도', 110000)">
+                <span class="addon-label">캐릭터 시트(삼면도) +110,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('삼면도', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="삼면도">1</span>
+                  <button 입력="button" onclick="changeAddonQty('삼면도', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="작업과정 비공개" onclick="toggleAddonOption(this, '작업과정 비공개', 40000)">
+                <span class="addon-label">작업과정 비공개 +40,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="작업과정 비공개">1</span>
+                  <button 입력="button" onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+              <div class="price-item addon-item" data-addon-name="작업물 비공개 1개월" onclick="toggleAddonOption(this, '작업물 비공개 1개월', 20000)">
+                <span class="addon-label">작업물 비공개 (1개월) +20,000원</span>
+                <span class="qty-controls" onclick="event.stopPropagation()">
+                  <button 입력="button" onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="작업물 비공개 1개월">1</span>
+                  <button 입력="button" onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();">+</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="card static-card">
+    <div class="title">🖌️ 실제 커미션 샘플</div>
+    <div class="sample-intro">
+      <span class="highlight">공장식으로 일러스트를 뽑아내는 작업방식 NO!!</span><br>
+      마마로서의 책임감으로 하나하나 애정을 담아 섬세하게 작업합니다 ♡
+    </div>
+
+    <div style="margin-top:10px;">
+      <div class="info-text">
+        뒤로 갈수록 예전 작업물입니다.
+      </div>
+
+      <div class="viewer">
+        <img id="galleryImg" src="93_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
+      </div>
+      <div class="thumb-grid" id="sampleThumbGrid">
+        <div class="thumb-item">
+          <img src="93_sample_collage.png" alt="93" loading="eager" decoding="async" onclick="selectSample(0)">
+          <div class="thumb-label">93</div>
+        </div>
+        <div class="thumb-item">
+          <img src="sina_sample_collage.png" alt="시나" loading="eager" decoding="async" onclick="selectSample(1)">
+          <div class="thumb-label">시나</div>
+        </div>
+        <div class="thumb-item">
+          <img src="rararu_sample_collage.png" alt="라라루" loading="eager" decoding="async" onclick="selectSample(2)">
+          <div class="thumb-label">라라루</div>
+        </div>
+        <div class="thumb-item">
+          <img src="koya_sample_collage.png" alt="네무키 코야" loading="eager" decoding="async" onclick="selectSample(3)">
+          <div class="thumb-label">네무키 코야</div>
+        </div>
+        <div class="thumb-item">
+          <img src="raruka_sample_collage.png" alt="라루카" loading="eager" decoding="async" onclick="selectSample(4)">
+          <div class="thumb-label">라루카</div>
+        </div>
+        <div class="thumb-item">
+          <img src="B_sample_collage.png" alt="양 수인" loading="eager" decoding="async" onclick="selectSample(5)">
+          <div class="thumb-label">양 수인</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="card static-card">
+    <div class="title">💖 표정 샘플</div>
+    <div style="margin-top:10px;">
+      <div class="style-viewer">
+        <img id="faceGallery" src="raruka_face_types.png" alt="표정 샘플" loading="eager" decoding="async">
+        <button 입력="button" class="circle-nav left" onclick="prevFace()">❮</button>
+        <button 입력="button" class="circle-nav right" onclick="nextFace()">❯</button>
+      </div>
+
+      <div id="faceDesc" class="desc-box">라루카님 표정 샘플</div>
+      <div id="faceDots" class="dots">● ○ ○</div>
+    </div>
+  </div>
+
+
+  <div class="card static-card">
+    <div class="title">🤝 협업 작가</div>
+    <div class="collab-grid">
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=42826" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">다중 작가님</span><br>일러 5만원 + 리깅 5만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=26980" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">ROPON 작가님</span><br>리깅 5만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=42853" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">마가린 작가님</span><br>일러 3만원 + 리깅 3만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=26603" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">하예나 작가님</span><br>리깅 10만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=25829" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">세르팡 작가님</span><br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=31127" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">꽃무 작가님</span><br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=51824" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">네코노바 작가님</span><br>일러 5만원 + 리깅 10
+          만원 할인 + 표정 3종 리깅 무료<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=49415" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">감자야 작가님</span><br>일러 5만원 + 리깅 10만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=51881" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">Eryn 작가님</span><br>일러 5만원 + 리깅 5만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+    </div>
+  </div>
+
+  <div class="card static-card">
+    <div class="title">🎨 그림체 참고</div>
+    <div style="margin-top:10px;">
+      <div class="info-text">좌우 버튼으로 그림체 참고 이미지를 넘길 수 있습니다.</div>
+
+      <div class="style-viewer">
+        <img id="styleGallery" src="style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='style_1.png';}">
+        <button 입력="button" class="circle-nav left" onclick="prevStyle()">❮</button>
+        <button 입력="button" class="circle-nav right" onclick="nextStyle()">❯</button>
+      </div>
+
+      <div id="styleDots" class="dots">● ○ ○ ○</div>
+    </div>
+  </div>
+
+  <div class="card static-card">
+    <div class="title">📄 신청서</div>
+    <div class="form-top-note">
+      해당하는 부분만 적어주시면 됩니다. 괄호 안의 글씨는 삭제하고 작성해 주세요!
+    </div>
+
+    <textarea id="inputText">1. 신청자명 / 활동명 : 
+
+2. 채널 / 방송국 : 
+
+3. 사용 목적 : 
+
+4. 가장 마음에 드는 샘플 : 
+
+5. 캐릭터 자료 : (키워드, 메인 컬러, 키, 체형, 분위기, 성격, 특징, 레퍼런스 이미지)
+(+구체적이지 않아도 괜찮습니다! 같이 상담하며 조율해서 의뢰자님께 가장 어울리는 모델을 만들어 드립니다 ♡)
+
+6. 협업 리깅 작가 : (선택사항입니다! 다른 리깅작가가 있다면 작가명을 기재해 주세요.)
+
+7. 버츄얼 패키지 : 
+
+8. 추가 옵션 : 
+
+9. 작가에게 전할 말 : (기타 문의 및 요청)</textarea>
+
+    <div class="selection-summary" id="selectionSummary">
+      <div class="selection-summary-title">. ₊‧˳⁺ ꒰ঌ 선택 내역 ໒꒱ ⁺˳‧₊ </div>
+      <div class="selection-summary-list" id="selectionSummaryList"></div>
+      <div class="selection-summary-divider"></div>
+      <div class="selection-summary-totals">
+        <div class="selection-summary-row">
+          <span>기본 패키지</span>
+          <strong id="summaryBasePrice">미선택</strong>
+        </div>
+        <div class="selection-summary-row">
+          <span>추가옵션</span>
+          <strong id="summaryAddonPrice">0원</strong>
+        </div>
+        <div class="selection-summary-row total">
+          <span>예상 합계</span>
+          <strong id="summaryTotalPrice">0원</strong>
+        </div>
+      </div>
+    </div>
+
+    <button class="copy-btn copy-btn-large" onclick="copyText()"><span class="copy-emoji">📋</span><span>작성한 양식 복사하기</span></button>
+  </div>
+
+</div>
+
+
+
+
+<script>
+function preloadImages(list){
+  list.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+function formatPrice(price){
+  return Number(price).toLocaleString('ko-KR');
+}
+
+function replaceLineByPrefix(lines, prefix, newLine){
+  const idx = lines.findIndex(line => line.trimStart().startsWith(prefix));
+  if(idx !== -1){
+    lines[idx] = newLine;
+  }
+  return lines;
+}
+
+let selectedBaseOption = null;
+let selectedAddonOptions = [];
+
+function getBaseOptionItems(){
+  return Array.from(document.querySelectorAll('.base-option-item'));
+}
+
+function findAddonElement(name){
+  return Array.from(document.querySelectorAll('.addon-item')).find(el => el.dataset.addonName === name) || null;
+}
+
+function setQtyValue(name, qty){
+  const el = Array.from(document.querySelectorAll('[data-qty-for]')).find(el => el.dataset.qtyFor === name);
+  if(el) el.textContent = String(qty);
+}
+
+function hasFoldedArmSelected(){
+  return selectedAddonOptions.some(o => o.name === '추가 팔 파츠');
+}
+
+function requiresFoldedArm(name){
+  return name === '끌어안는 인형' || name === '마이크' || name === '게임기';
+}
+
+function enforceAddonRules(){
+  if(hasFoldedArmSelected()) return false;
+
+  const blocked = ['끌어안는 인형', '마이크', '게임기'];
+  let changed = false;
+
+  blocked.forEach(name => {
+    const idx = selectedAddonOptions.findIndex(o => o.name === name);
+    if(idx > -1){
+      selectedAddonOptions.splice(idx, 1);
+      const el = findAddonElement(name);
+      if(el) el.classList.remove('active');
+      changed = true;
+    }
+  });
+
+  return changed;
+}
+
+function updateSelectionSummary(){
+  const list = document.getElementById('selectionSummaryList');
+  const basePriceEl = document.getElementById('summaryBasePrice');
+  const addonPriceEl = document.getElementById('summaryAddonPrice');
+  const totalPriceEl = document.getElementById('summaryTotalPrice');
+
+  list.innerHTML = '';
+
+  const baseTotal = selectedBaseOption ? selectedBaseOption.price : 0;
+  let addonTotal = 0;
+
+  if(selectedBaseOption){
+    const item = document.createElement('div');
+    item.className = 'selection-summary-item';
+    item.innerHTML = `
+      <div class="left">
+        <div class="name">패키지</div>
+        <div class="sub">${selectedBaseOption.name}</div>
+      </div>
+      <div class="right">
+        <strong>${formatPrice(selectedBaseOption.price)}원</strong>
+      </div>
+    `;
+    list.appendChild(item);
+    basePriceEl.textContent = `${formatPrice(selectedBaseOption.price)}원`;
+  }else{
+    basePriceEl.textContent = '미선택';
+  }
+
+  selectedAddonOptions.forEach(option => {
+    const subtotal = option.price * option.qty;
+    addonTotal += subtotal;
+
+    const item = document.createElement('div');
+    item.className = 'selection-summary-item';
+    item.innerHTML = `
+      <div class="left">
+        <div class="name">${option.name}</div>
+        <div class="sub">${option.qty}개 (+${formatPrice(option.price)}원)</div>
+      </div>
+      <div class="right">
+        <strong>${formatPrice(subtotal)}원</strong>
+        <button type="button" class="remove-btn" data-remove="${option.name}" aria-label="${option.name} 제거">×</button>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+
+  addonPriceEl.textContent = `${formatPrice(addonTotal)}원`;
+  totalPriceEl.textContent = `${formatPrice(baseTotal + addonTotal)}원`;
+}
+
+function autoResizeTextarea(){
+  const textarea = document.getElementById('inputText');
+  if(!textarea) return;
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+}
+
+function updateFormText(){
+  const textarea = document.getElementById('inputText');
+  const lines = textarea.value.split('\n');
+
+  const baseText = selectedBaseOption
+    ? `7. 버츄얼 패키지 : ${selectedBaseOption.name} (+${formatPrice(selectedBaseOption.price)}원)`
+    : '7. 버츄얼 패키지 : ';
+
+  const addonText = selectedAddonOptions.length
+    ? `8. 추가 옵션 : ${selectedAddonOptions.map(o => `${o.name} x${o.qty} (+${formatPrice(o.price * o.qty)}원)`).join(', ')}`
+    : '8. 추가 옵션 : ';
+
+  replaceLineByPrefix(lines, '7. 버츄얼 패키지', baseText);
+  replaceLineByPrefix(lines, '8. 추가 옵션', addonText);
+  textarea.value = lines.join('\n');
+  autoResizeTextarea();
+}
+
+function updateUI(){
+  if(enforceAddonRules()){
+    // dependent add-ons removed; proceed with refreshed state
+  }
+  updateSelectionSummary();
+  updateFormText();
+}
+
+function toggleBaseOption(el, name, price){
+  const isSame = selectedBaseOption && selectedBaseOption.name === name;
+
+  getBaseOptionItems().forEach(item => item.classList.remove('active'));
+
+  if(isSame){
+    selectedBaseOption = null;
+    el.classList.remove('active');
+  }else{
+    selectedBaseOption = { name, price };
+    el.classList.add('active');
+  }
+
+  updateUI();
+}
+
+function toggleAddonOption(el, name, price){
+  const idx = selectedAddonOptions.findIndex(o => o.name === name);
+
+  if(idx > -1){
+    selectedAddonOptions.splice(idx, 1);
+    el.classList.remove('active');
+    updateUI();
+    return;
+  }
+
+  if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
+    alert("추가 팔 파츠’를 먼저 체크해야 선택 가능한 옵션이에요!,,⁃ ⩊ ⁃,,");
+    return;
+  }
+
+  selectedAddonOptions.push({ name, price, qty: 1 });
+  el.classList.add('active');
+  setQtyValue(name, 1);
+  updateUI();
+}
+
+function changeAddonQty(name, delta){
+  const option = selectedAddonOptions.find(o => o.name === name);
+  if(!option) return;
+
+  option.qty += delta;
+
+  if(option.qty <= 0){
+    selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
+    const item = findAddonElement(name);
+    if(item) item.classList.remove('active');
+  }else{
+    option.qty = Math.max(1, option.qty);
+    setQtyValue(name, option.qty);
+    const item = findAddonElement(name);
+    if(item) item.classList.add('active');
+  }
+
+  updateUI();
+}
+
+function removeAddon(name){
+  selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
+  const item = findAddonElement(name);
+  if(item) item.classList.remove('active');
+  updateUI();
+}
+
+function copyText() {
+  const textarea = document.getElementById('inputText');
+  const text = textarea.value;
+
+  function finishCopy(){
+    alert('복사 완료! 문의란에 붙여넣어 주세요 ( ◜ᴗ◝ )♡');
+  }
+
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(finishCopy).catch(() => fallbackCopy(text));
+  }else{
+    fallbackCopy(text);
+  }
+
+  function fallbackCopy(value){
+    const temp = document.createElement('textarea');
+    temp.value = value;
+    temp.setAttribute('readonly', '');
+    temp.style.position = 'fixed';
+    temp.style.left = '-9999px';
+    temp.style.top = '0';
+    document.body.appendChild(temp);
+    temp.focus();
+    temp.select();
+    temp.setSelectionRange(0, temp.value.length);
+
+    try{
+      document.execCommand('copy');
+      finishCopy();
+    }catch(err){
+      alert('복사가 안 될 경우, 텍스트를 꾹 눌러 복사해 주세요 💗');
+    }finally{
+      temp.remove();
+    }
+  }
+}
+
+let current = 0;
+const images = [
+  '93_sample_collage.png',
+  'sina_sample_collage.png',
+  'rararu_sample_collage.png',
+  'koya_sample_collage.png',
+  'raruka_sample_collage.png',
+  'B_sample_collage.png'
+];
+
+function showGallery(index){
+  current = index;
+  const img = document.getElementById('galleryImg');
+  img.src = images[current];
+  updateSampleThumbBorder();
+}
+
+function selectSample(index){
+  showGallery(index);
+}
+
+function updateSampleThumbBorder(){
+  const thumbs = document.querySelectorAll('#sampleThumbGrid img');
+  thumbs.forEach((thumb, index) => {
+    thumb.style.border = index === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
+  });
+}
+
+let faceCurrent = 0;
+<!-- 기존에 끊겨 있던 스크립트 블록을 지우고, 아래 완성된 코드를 넣으세요 -->
+<script>
+// ... (앞부분 생략) ...
+
+let current = 0;
+const images = [
+  '93_sample_collage.png',
+  'sina_sample_collage.png',
+  'rararu_sample_collage.png',
+  'koya_sample_collage.png',
+  'raruka_sample_collage.png',
+  'B_sample_collage.png'
+];
+
+function showGallery(index){
+  current = index;
+  const img = document.getElementById('galleryImg');
+  img.src = images[current];
+  updateSampleThumbBorder();
+}
+
+function selectSample(index){
+  showGallery(index);
+}
+
+function updateSampleThumbBorder(){
+  const thumbs = document.querySelectorAll('#sampleThumbGrid img');
+  thumbs.forEach((thumb, index) => {
+    thumb.style.border = index === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
+  });
+}
+
+let faceCurrent = 0;
+const faceImages = [
+  'raruka_face_types.png',
+  'koya_face_9types.png',
+  'sia_face_types.png'
+];
+const faceDescriptions = [
+  '라루카님 표정 샘플',
+  '네무키 코야님 표정 샘플',
+  '시로유키 시아님 1.0 표정 샘플'
+];
+
+function showFace(index){
+  faceCurrent = index;
+  document.getElementById('faceGallery').src = faceImages[faceCurrent];
+  document.getElementById('faceDesc').innerHTML = faceDescriptions[faceCurrent];
+  updateFaceDots();
+}
+
+function nextFace(){
+  showFace((faceCurrent + 1) % faceImages.length);
+}
+
+function prevFace(){
+  showFace((faceCurrent - 1 + faceImages.length) % faceImages.length);
+}
+
+function updateFaceDots(){
+  document.getElementById('faceDots').innerText = faceImages.map((_, i) => i === faceCurrent ? '●' : '○').join(' ');
+}
+
+let styleCurrent = 0;
+const styleImages = [
+  'style_01.png',
+  'style_02.png',
+  'style_03.png',
+  'style_04.png'
+];
+
+function showStyle(index){
+  styleCurrent = index;
+  document.getElementById('styleGallery').src = styleImages[styleCurrent];
+  updateStyleDots();
+}
+
+function nextStyle(){
+  showStyle((styleCurrent + 1) % styleImages.length);
+}
+
+function prevStyle(){
+  showStyle((styleCurrent - 1 + styleImages.length) % styleImages.length);
+}
+
+function updateStyleDots(){
+  document.getElementById('styleDots').innerText = styleImages.map((_, i) => i === styleCurrent ? '●' : '○').join(' ');
+}
+
+preloadImages(images);
+preloadImages(faceImages);
+preloadImages(styleImages);
+
+document.addEventListener('click', (event) => {
+  const btn = event.target.closest('.remove-btn');
+  if(btn){
+    removeAddon(btn.dataset.remove);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  showGallery(0);
+  showFace(0);
+  showStyle(0);
+  updateUI();
+
+  const textarea = document.getElementById('inputText');
+  if(textarea){
+    autoResizeTextarea();
+    textarea.addEventListener('input', autoResizeTextarea);
+  }
+});
+</script>
+
+</body>
+</html>
