@@ -1187,66 +1187,6 @@ details.option-box summary{
 }
 
 /* ===== 상단 네비게이션 ===== */
-.top-nav{
-  position:fixed;
-  top:50%;
-  right:16px;
-  transform:translateY(-50%);
-  z-index:200;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  background:none;
-  border:none;
-  padding:0;
-  margin:0;
-}
-
-.top-nav-inner{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.top-nav-inner::-webkit-scrollbar{ display:none; }
-
-.nav-btn{
-  width:108px;
-  padding:10px 8px;
-  border-radius:999px;
-  border:1.5px solid var(--pink);
-  background:white;
-  color:var(--text);
-  font-family:'Paperozi',sans-serif;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  white-space:nowrap;
-  text-align:center;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  box-shadow:0 2px 10px rgba(235,131,159,0.13);
-  transition:background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-  background:var(--pink-soft);
-  border-color:var(--pink-deep);
-  color:var(--pink-deep);
-  box-shadow:0 4px 14px rgba(235,131,159,0.25);
-}
-
-/* 모바일: 작은 화면에선 숨기기 */
-@media(max-width:600px){
-  .top-nav{
-    display:none;
-  }
-}
-
-
 /* ===== 워크플로우 카드 ===== */
 .workflow-card{
   background:linear-gradient(135deg,#fff0f5 0%,#fff7fa 100%);
@@ -1345,17 +1285,6 @@ details.option-box summary{
 
 <div class="container">
 
-  <nav class="top-nav" id="topNav">
-    <div class="top-nav-inner">
-      <button class="nav-btn" onclick="scrollToSection('sec-slot')"><span>📅</span> 슬롯현황</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-notice')"><span>⚠️</span> 주의사항</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-price')"><span>💰</span> 가격표</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-sample')"><span>🖌️</span> 샘플보기</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-collab')"><span>🤝</span> 협업작가</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-style')"><span>🎨</span> 그림체 참고</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-form')"><span>📄</span> 신청서 작성</button>
-    </div>
-  </nav>
 
   <div class="hero">
     <div class="hero-badge">Live2D Model Illustration Commission</div>
@@ -1869,40 +1798,6 @@ details.option-box summary{
 
 
 <script>
-function scrollToSection(id){
-  const el = document.getElementById(id);
-  if(!el) return;
-  // details 요소면 열기
-  if(el.tagName === 'DETAILS') el.open = true;
-  const navH = document.getElementById('topNav')?.offsetHeight || 0;
-  const top = el.getBoundingClientRect().top + window.scrollY - navH - 8;
-  window.scrollTo({ top, behavior:'smooth' });
-}
-
-function updateActiveNav(){
-  const navH = document.getElementById('topNav')?.offsetHeight || 0;
-  const sections = [
-    { id:'sec-slot',    btn:0 },
-    { id:'sec-notice',  btn:1 },
-    { id:'sec-price',   btn:2 },
-    { id:'sec-sample',  btn:3 },
-    { id:'sec-collab',  btn:4 },
-    { id:'sec-style',   btn:5 },
-    { id:'sec-form',    btn:6 },
-  ];
-  const btns = document.querySelectorAll('.nav-btn');
-  let active = 0;
-  sections.forEach(({ id }, i) => {
-    const el = document.getElementById(id);
-    if(!el) return;
-    if(el.getBoundingClientRect().top - navH - 24 <= 0) active = i;
-  });
-  btns.forEach((b, i) => b.classList.toggle('active', i === active));
-}
-
-window.addEventListener('scroll', updateActiveNav, { passive:true });
-
-
 function preloadImages(list){
   list.forEach(src => {
     const img = new Image();
