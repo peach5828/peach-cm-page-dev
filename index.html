@@ -1188,35 +1188,33 @@ details.option-box summary{
 
 /* ===== 상단 네비게이션 ===== */
 .top-nav{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border-bottom:1.5px solid var(--line);
-  padding:0 14px;
-  margin:0 -14px 18px;
+  position:fixed;
+  top:50%;
+  right:16px;
+  transform:translateY(-50%);
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  background:none;
+  border:none;
+  padding:0;
+  margin:0;
 }
 
 .top-nav-inner{
-  max-width:760px;
-  margin:auto;
   display:flex;
-  gap:2px;
-  overflow-x:auto;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-  padding:8px 0;
+  flex-direction:column;
+  gap:7px;
 }
 
 .top-nav-inner::-webkit-scrollbar{ display:none; }
 
 .nav-btn{
-  flex:0 0 auto;
-  padding:6px 13px;
-  border-radius:20px;
-  border:1.5px solid var(--line);
+  width:108px;
+  padding:10px 8px;
+  border-radius:999px;
+  border:1.5px solid var(--pink);
   background:white;
   color:var(--text);
   font-family:'Paperozi',sans-serif;
@@ -1224,136 +1222,114 @@ details.option-box summary{
   font-weight:600;
   cursor:pointer;
   white-space:nowrap;
-  transition:background 0.18s, color 0.18s, border-color 0.18s;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  box-shadow:0 2px 10px rgba(235,131,159,0.13);
+  transition:background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
 }
 
 .nav-btn:hover,
 .nav-btn.active{
-  background:var(--pink);
-  color:white;
+  background:var(--pink-soft);
   border-color:var(--pink-deep);
+  color:var(--pink-deep);
+  box-shadow:0 4px 14px rgba(235,131,159,0.25);
 }
+
+/* 모바일: 작은 화면에선 숨기기 */
+@media(max-width:600px){
+  .top-nav{
+    display:none;
+  }
+}
+
 
 /* ===== 워크플로우 카드 ===== */
 .workflow-card{
-  background:linear-gradient(135deg, #fff4f8 0%, #fff8fb 100%);
-  border:1.5px solid var(--line);
+  background:linear-gradient(135deg,#fff0f5 0%,#fff7fa 100%);
+  border:1.5px solid #f2c4d4;
   border-radius:22px;
-  padding:22px 20px 24px;
+  padding:20px 20px 22px;
   margin-bottom:14px;
-  box-shadow:var(--shadow);
+  box-shadow:0 4px 18px rgba(235,131,159,0.12);
 }
 
 .workflow-label{
   font-size:11px;
   font-weight:700;
-  letter-spacing:0.08em;
-  color:var(--pink-deep);
+  letter-spacing:0.12em;
+  color:var(--pink);
   text-transform:uppercase;
-  margin-bottom:4px;
+  margin-bottom:5px;
 }
 
 .workflow-title{
-  font-size:22px;
+  font-size:21px;
   font-weight:700;
-  color:#3d3340;
-  margin:0 0 18px;
-}
-
-.workflow-steps{
+  color:#2e1a26;
+  margin:0 0 16px;
   display:flex;
-  align-items:center;
-  gap:0;
+  align-items:baseline;
   flex-wrap:wrap;
-  row-gap:10px;
-}
-
-.wf-step{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   gap:6px;
-  min-width:52px;
 }
 
-.wf-icon{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  border:1.5px solid var(--line);
+.wf-title-icon{
+  font-size:20px;
+}
+
+.wf-title-note{
+  font-size:12px;
+  font-weight:400;
+  color:#b08898;
+  margin-left:2px;
+}
+
+.wf-flow-box{
   background:white;
+  border-radius:16px;
+  padding:18px 16px;
+  border:1px solid #f2c4d4;
+}
+
+.wf-flow-row{
   display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 6px;
+}
+
+.wf-pill{
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  font-size:18px;
-  color:var(--pink);
-  box-shadow:0 2px 8px rgba(235,131,159,0.10);
-  transition:background 0.18s, color 0.18s;
-}
-
-.wf-icon.highlight{
-  background:var(--pink-soft);
-  border-color:var(--pink);
-  color:var(--pink-deep);
-}
-
-.wf-label{
-  font-size:12px;
-  font-weight:600;
-  color:var(--text);
-  text-align:center;
-  white-space:nowrap;
-}
-
-.wf-arrow{
-  font-size:16px;
-  color:var(--pink);
-  padding:0 4px;
-  margin-bottom:18px;
-  flex-shrink:0;
-}
-
-.workflow-flow{
-  margin-top:14px;
-  font-size:13.5px;
-  color:#7a6070;
-  line-height:1.7;
   background:white;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px 14px;
-}
-
-.workflow-flow .flow-row{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:4px 2px;
-}
-
-.flow-step-pill{
-  display:inline-block;
-  background:var(--pink-soft);
-  border:1px solid var(--line);
+  border:1.5px solid var(--pink);
   color:var(--pink-deep);
-  border-radius:20px;
-  padding:2px 10px;
-  font-size:12.5px;
+  border-radius:999px;
+  padding:7px 18px;
+  font-size:13.5px;
   font-weight:600;
   white-space:nowrap;
+  font-family:'Paperozi',sans-serif;
+  line-height:1.2;
 }
 
-.flow-arrow{
-  color:var(--pink);
-  font-size:13px;
-  padding:0 2px;
+.wf-pill.accent{
+  background:var(--pink);
+  color:white;
+  border-color:var(--pink-deep);
 }
 
-.workflow-note{
-  margin-top:10px;
-  font-size:12px;
-  color:#ab8fa0;
-  text-align:center;
+.wf-sep{
+  color:#e08aab;
+  font-size:14px;
+  font-weight:700;
+  flex-shrink:0;
+  padding:0 1px;
 }
 
 
@@ -1371,13 +1347,13 @@ details.option-box summary{
 
   <nav class="top-nav" id="topNav">
     <div class="top-nav-inner">
-      <button class="nav-btn" onclick="scrollToSection('sec-slot')">📅 슬롯현황</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-notice')">⚠️ 주의사항</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-price')">💰 가격표</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-sample')">🖌️ 샘플보기</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-collab')">🤝 협업작가</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-style')">🎨 그림체 참고</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-form')">📄 신청서 작성</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-slot')"><span>📅</span> 슬롯현황</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-notice')"><span>⚠️</span> 주의사항</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-price')"><span>💰</span> 가격표</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-sample')"><span>🖌️</span> 샘플보기</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-collab')"><span>🤝</span> 협업작가</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-style')"><span>🎨</span> 그림체 참고</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-form')"><span>📄</span> 신청서 작성</button>
     </div>
   </nav>
 
@@ -1749,101 +1725,48 @@ details.option-box summary{
     
   <!-- 디자인 과정 -->
   <div class="workflow-card">
-    <div class="workflow-label">진행 과정</div>
-    <div class="workflow-title">✏️ 디자인 과정</div>
-    <div class="workflow-steps">
-      <div class="wf-step">
-        <div class="wf-icon">💬</div>
-        <div class="wf-label">상담</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon">🖼️</div>
-        <div class="wf-label">시안 3장</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon highlight">✔️</div>
-        <div class="wf-label">컨펌</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon">🖼️</div>
-        <div class="wf-label">시안 3장</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon highlight">✔️</div>
-        <div class="wf-label">마지막 컨펌</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon">🌟</div>
-        <div class="wf-label">최종 결정</div>
+    <div class="workflow-label">Work Process</div>
+    <div class="workflow-title">
+      <span class="wf-title-icon">✏️</span> 디자인 과정
+      <span class="wf-title-note">※ 상황에 따라 상의 후 컨펌 일정이 조정될 수 있습니다.</span>
+    </div>
+    <div class="wf-flow-box">
+      <div class="wf-flow-row">
+        <span class="wf-pill">상담</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill">시안 3장</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill">컨펌</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill">시안 3장</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill accent">마지막 컨펌</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill accent">최종 디자인 결정</span>
       </div>
     </div>
-    <div class="workflow-flow">
-      <div class="flow-row">
-        <span class="flow-step-pill">상담</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">시안 3장</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">컨펌</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">시안 3장</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">마지막 컨펌</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">최종 디자인 결정</span>
-      </div>
-    </div>
-    <div class="workflow-note">※ 상황에 따라 상의 후 컨펌 일정이 조정될 수 있습니다.</div>
   </div>
 
   <!-- 본작업 과정 -->
   <div class="workflow-card">
-    <div class="workflow-label">진행 과정</div>
-    <div class="workflow-title">🎨 본작업 과정</div>
-    <div class="workflow-steps">
-      <div class="wf-step">
-        <div class="wf-icon">✂️</div>
-        <div class="wf-label">파츠분리<br>일러 제작</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon highlight">✔️</div>
-        <div class="wf-label">50% 완성<br>1차 컨펌</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon highlight">✔️</div>
-        <div class="wf-label">90% 완성<br>2차 컨펌</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon highlight">✔️</div>
-        <div class="wf-label">마지막<br>3차 컨펌</div>
-      </div>
-      <div class="wf-arrow">➟</div>
-      <div class="wf-step">
-        <div class="wf-icon">🎁</div>
-        <div class="wf-label">완성</div>
+    <div class="workflow-label">Work Process</div>
+    <div class="workflow-title">
+      <span class="wf-title-icon">🎨</span> 본작업 과정
+      <span class="wf-title-note">💗 웬만하면 컨펌은 더 자주 자주 드리고 있습니다!</span>
+    </div>
+    <div class="wf-flow-box">
+      <div class="wf-flow-row">
+        <span class="wf-pill">파츠분리 및 일러스트 제작</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill">50% 완성 1차 컨펌</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill">90% 완성 2차 컨펌</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill accent">마지막 3차 컨펌</span>
+        <span class="wf-sep">→</span>
+        <span class="wf-pill accent">완성</span>
       </div>
     </div>
-    <div class="workflow-flow">
-      <div class="flow-row">
-        <span class="flow-step-pill">파츠분리 및 일러스트 제작</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">50% 완성 1차 컨펌</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">90% 완성 2차 컨펌</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">마지막 3차 컨펌</span>
-        <span class="flow-arrow">➟</span>
-        <span class="flow-step-pill">완성</span>
-      </div>
-    </div>
-    <div class="workflow-note">💗 웬만하면 컨펌은 더 자주 자주 드리고 있습니다!</div>
   </div>
 
   <div class="card static-card">
@@ -1980,6 +1903,7 @@ function updateActiveNav(){
 window.addEventListener('scroll', updateActiveNav, { passive:true });
 
 
+function preloadImages(list){
   list.forEach(src => {
     const img = new Image();
     img.src = src;
@@ -2242,12 +2166,18 @@ function fadeSwap(imgEl, newSrc, callback){
   imgEl.classList.add('fading');
   setTimeout(() => {
     imgEl.src = newSrc;
-    imgEl.onload = () => {
+    const finish = () => {
       imgEl.classList.remove('fading');
       if(callback) callback();
     };
-    // fallback: remove fading even if onload fires late
-    setTimeout(() => imgEl.classList.remove('fading'), 500);
+    if(imgEl.complete && imgEl.naturalWidth){
+      // 캐시된 이미지는 onload 안 터짐 → 즉시 실행
+      finish();
+    } else {
+      imgEl.onload = finish;
+      imgEl.onerror = finish;
+      setTimeout(finish, 600); // 최종 안전장치
+    }
   }, 260);
 }
 
