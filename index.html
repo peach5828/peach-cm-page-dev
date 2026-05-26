@@ -1290,7 +1290,7 @@ details.option-box summary{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
-  align-items:start; /* 카드 높이가 달라도 상단 정렬 */
+  align-items:stretch; /* 두 카드 높이 동일하게 */
 }
 
 .usage-card{
@@ -1302,6 +1302,15 @@ details.option-box summary{
   transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease, background .22s ease;
   position:relative;
   user-select:none;
+  display:flex;
+  flex-direction:column;
+}
+
+/* 리스트 영역이 남은 공간을 채워서 fine-print를 하단으로 밀어냄 */
+.usage-card .usage-list{
+  flex:1;
+  display:flex;
+  flex-direction:column;
 }
 
 .usage-card:hover{
@@ -1937,7 +1946,7 @@ details.option-box summary{
         <div class="usage-list">
           <div class="usage-list-item ok"><span class="usage-icon">○</span><span>방송 스트리밍 (후원/수익 창출 가능)</span></div>
           <div class="usage-list-item ok"><span class="usage-icon">○</span><span>SNS 업로드 및 프로필 활용</span></div>
-          <div class="usage-list-item ok"><span class="usage-icon">○</span><span>개인 소장 커미션 의뢰</span></div>
+          <div class="usage-list-item ok"><span class="usage-icon">○</span><span>개인 소장 및 커미션 의뢰</span></div>
           <div class="usage-list-divider"></div>
           <div class="usage-list-item no"><span class="usage-icon">✕</span><span>오리지널 3D 제작 / 굿즈 제작 불가</span></div>
           <div class="usage-list-item no"><span class="usage-icon">✕</span><span>PSD 파일 제공 및 가공 불가</span></div>
@@ -1956,11 +1965,12 @@ details.option-box summary{
         </div>
         <div class="usage-card-divider"></div>
         <div class="usage-list">
-          <div class="usage-list-item ok"><span class="usage-icon">○</span><span>방송 스트리밍 및 후원 수익 창출</span></div>
+          <div class="usage-list-item ok"><span class="usage-icon">○</span><span>비상업용의 모든 사용범위</span></div>
           <div class="usage-list-item ok"><span class="usage-icon">○</span><span>오리지널 3D 제작</span></div>
           <div class="usage-list-item ok"><span class="usage-icon">○</span><span>굿즈 제작 및 배포/판매</span></div>
           <div class="usage-list-item ok"><span class="usage-icon">○</span><span>PSD 레이어 가공 / 의상 추가 등 타 작가 의뢰</span></div>
           <div class="usage-list-item ok"><span class="usage-icon">○</span><span>모델 양도</span></div>
+          <div style="flex:1;"></div>
           <div class="usage-fine-print">* 구매 이후에도 디자인 및 일러스트의 원저작권은 작가에게 귀속됩니다.</div>
         </div>
       </div>
@@ -1968,7 +1978,7 @@ details.option-box summary{
     </div>
 
     <div class="usage-corp-notice">
-      ✕ 기업 소속(기업세) 의뢰의 경우, 이용 범위 및 단가가 상이하므로 신청 전 반드시 별도로 문의해 주세요.
+      ※ 기업 소속(기업세) 의뢰의 경우, 이용 범위 및 단가가 상이하므로 신청 전 반드시 별도로 문의해 주세요.
     </div>
   </div>
 
