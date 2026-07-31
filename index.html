@@ -501,6 +501,7 @@ details.option-box[open] .option-guide{
 textarea{
   width:100%;
   min-height:390px;
+  max-height:500px;
   padding:14px;
   border-radius:16px;
   border:1px solid var(--line);
@@ -511,7 +512,7 @@ textarea{
   color:var(--text);
   margin-top:10px;
   resize:none;
-  overflow:hidden;
+  overflow-y:auto;
 }
 
 .copy-btn{
@@ -1676,22 +1677,22 @@ details.option-box summary{
         <div class="option-stack">
 
           <div class="price-box">
-            <div class="price-head">✨ 표정 <span class="plain-note">(맞춤형 표정은 의뢰자님만을 위한 주문제작 파츠입니다!)</span></div>
+            <div class="price-head">✨ 표정 <span class="plain-note">(눈동자 컬러, 눈매 등 변경 가능합니다.)</span></div>
             <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="기본 표정 추가" onclick="toggleAddonOption(this, '기본 표정 추가', 5000)">
-                <span class="addon-label">기본 표정 추가 +5,000원</span>
+              <div class="price-item addon-item" data-addon-name="샘플 표정 추가" onclick="toggleAddonOption(this, '샘플 표정 추가', 5000)">
+                <span class="addon-label">샘플 표정 추가 +5,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('기본 표정 추가', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="기본 표정 추가">1</span>
-                  <button type="button" onclick="changeAddonQty('기본 표정 추가', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('샘플 표정 추가', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="샘플 표정 추가">1</span>
+                  <button type="button" onclick="changeAddonQty('샘플 표정 추가', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
-              <div class="price-item addon-item" data-addon-name="맞춤형 표정" onclick="toggleAddonOption(this, '맞춤형 표정', 10000)">
-                <span class="addon-label">맞춤형 표정 +10,000원~</span>
+              <div class="price-item addon-item" data-addon-name="주문제작 표정 추가" onclick="toggleAddonOption(this, '주문제작 표정 추가', 9000)">
+                <span class="addon-label">주문제작 표정 추가 +9,000원</span>
                 <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('맞춤형 표정', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="맞춤형 표정">1</span>
-                  <button type="button" onclick="changeAddonQty('맞춤형 표정', 1);event.stopPropagation();">+</button>
+                  <button type="button" onclick="changeAddonQty('주문제작 표정 추가', -1);event.stopPropagation();">−</button>
+                  <span class="qty-value" data-qty-for="주문제작 표정 추가">1</span>
+                  <button type="button" onclick="changeAddonQty('주문제작 표정 추가', 1);event.stopPropagation();">+</button>
                 </span>
               </div>
               <div class="price-item addon-item inquiry-item" data-addon-name="표정 별도문의" onclick="toggleAddonOption(this, '표정 별도문의', 0)">
@@ -2006,6 +2007,7 @@ details.option-box summary{
           만원 할인 + 표정 3종 리깅 무료<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
       <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=49415" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">감자야 작가님</span><br>일러 5만원 + 리깅 10만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
       <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=51881" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">Eryn 작가님</span><br>일러 5만원 + 리깅 5만원 할인<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
+      <a class="collab-link" href="https://artmug.kr/index.php?channel=view&uid=56616" target="_blank" rel="noopener noreferrer"><div class="collab-item"><span class="collab-name">욤 작가님</span><br>일러 3만원 할인+리깅 5만원 할인/볼빵빵 무료<br><span class="collab-arrow">클릭하여 페이지 이동 ↗</span></div></a>
     </div>
   </div>
 
@@ -2285,8 +2287,11 @@ function updateSelectionSummary(){
 function autoResizeTextarea(){
   const textarea = document.getElementById('inputText');
   if(!textarea) return;
+  const maxHeight = 500;
   textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
+  const newHeight = Math.min(textarea.scrollHeight, maxHeight);
+  textarea.style.height = newHeight + 'px';
+  textarea.style.overflowY = textarea.scrollHeight > maxHeight ? 'auto' : 'hidden';
 }
 
 function updateFormText(){
