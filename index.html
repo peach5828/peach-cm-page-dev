@@ -1905,36 +1905,36 @@ details.option-box summary{
       </div>
  
       <div class="viewer">
-        <img id="galleryImg" src="93_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
+        <img id="galleryImg" src="Cheriko_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
       </div>
       <div class="thumb-grid" id="sampleThumbGrid">
         <div class="thumb-item">
-          <img src="93_sample_collage.png" alt="93" loading="eager" decoding="async" onclick="selectSample(0)">
+          <img src="Cheriko_sample_collage.png" alt="체리코" loading="eager" decoding="async" onclick="selectSample(0)">
+          <div class="thumb-label">체리코</div>
+        </div>
+        <div class="thumb-item">
+          <img src="93_sample_collage.png" alt="93" loading="lazy" decoding="async" onclick="selectSample(1)">
           <div class="thumb-label">93</div>
         </div>
         <div class="thumb-item">
-          <img src="sina_sample_collage.png" alt="시나" loading="lazy" decoding="async" onclick="selectSample(1)">
+          <img src="sina_sample_collage.png" alt="시나" loading="lazy" decoding="async" onclick="selectSample(2)">
           <div class="thumb-label">시나</div>
         </div>
         <div class="thumb-item">
-          <img src="rararu_sample_collage.png" alt="라라루" loading="lazy" decoding="async" onclick="selectSample(2)">
+          <img src="rararu_sample_collage.png" alt="라라루" loading="lazy" decoding="async" onclick="selectSample(3)">
           <div class="thumb-label">라라루</div>
         </div>
         <div class="thumb-item">
-          <img src="koya_sample_collage.png" alt="네무키 코야" loading="lazy" decoding="async" onclick="selectSample(3)">
+          <img src="koya_sample_collage.png" alt="네무키 코야" loading="lazy" decoding="async" onclick="selectSample(4)">
           <div class="thumb-label">네무키 코야</div>
         </div>
         <div class="thumb-item">
-          <img src="raruka_sample_collage.png" alt="라루카" loading="lazy" decoding="async" onclick="selectSample(4)">
+          <img src="raruka_sample_collage.png" alt="라루카" loading="lazy" decoding="async" onclick="selectSample(5)">
           <div class="thumb-label">라루카</div>
         </div>
         <div class="thumb-item">
-          <img src="B_sample_collage.png" alt="양 수인" loading="lazy" decoding="async" onclick="selectSample(5)">
+          <img src="B_sample_collage.png" alt="양 수인" loading="lazy" decoding="async" onclick="selectSample(6)">
           <div class="thumb-label">양 수인</div>
-        </div>
-        <div class="thumb-item">
-          <img src="Cheriko_sample_collage.png" alt="체리코" loading="lazy" decoding="async" onclick="selectSample(6)">
-          <div class="thumb-label">체리코</div>
         </div>
       </div>
     </div>
@@ -1990,12 +1990,12 @@ details.option-box summary{
     <div class="title">💖 표정 샘플</div>
     <div style="margin-top:10px;">
       <div class="style-viewer">
-        <img id="faceGallery" src="raruka_face_types.png" alt="표정 샘플" loading="eager" decoding="async">
+        <img id="faceGallery" src="Cheriko_expressions.png" alt="표정 샘플" loading="eager" decoding="async">
         <button type="button" class="circle-nav left" onclick="prevFace()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextFace()">❯</button>
       </div>
  
-      <div id="faceDesc" class="desc-box">라루카님 표정 샘플</div>
+      <div id="faceDesc" class="desc-box">체리코님 표정 샘플</div>
       <div id="faceDots" class="dots">● ○ ○</div>
     </div>
   </div>
@@ -2437,13 +2437,13 @@ function copyText() {
  
 let current = 0;
 const images = [
+  'Cheriko_sample_collage.png',
   '93_sample_collage.png',
   'sina_sample_collage.png',
   'rararu_sample_collage.png',
   'koya_sample_collage.png',
   'raruka_sample_collage.png',
-  'B_sample_collage.png',
-  'Cheriko_sample_collage.png'
+  'B_sample_collage.png'
 ];
  
 function fadeSwap(imgEl, newSrc, callback){
@@ -2485,16 +2485,16 @@ function updateSampleThumbBorder(){
  
 let faceCurrent = 0;
 const faceImages = [
+  'Cheriko_expressions.png',
   'raruka_face_types.png',
   'koya_face_9types.png',
-  'sia_face_types.png',
-  'Cheriko_expressions.png'
+  'sia_face_types.png'
 ];
 const faceDescriptions = [
+  '체리코님 표정 샘플',
   '라루카님 표정 샘플',
   '네무키 코야님 표정 샘플',
-  '시로유키 시아님 1.0 표정 샘플',
-  '체리코님 표정 샘플'
+  '시로유키 시아님 1.0 표정 샘플'
 ];
  
 function showFace(index){
