@@ -356,26 +356,24 @@ details.option-box[open] .option-guide{
   border-radius:16px;
   display:block;
   background:#fff;
-  transition: opacity 0.35s ease;
-  opacity:1;
 }
 
-.viewer img.fading,
-#faceGallery.fading,
-#styleGallery.fading{
-  opacity:0;
+.img-loader{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:25%;
+  max-width:100px;
+  min-width:64px;
+  height:auto;
+  z-index:3;
+  display:none;
+  pointer-events:none;
 }
 
-.skeleton{
-  background: linear-gradient(90deg, #fce8ef 25%, #f4cddb 50%, #fce8ef 75%);
-  background-size:200% 100%;
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
-  border-radius:16px;
-}
-
-@keyframes skeleton-shimmer{
-  0%{background-position:200% 0;}
-  100%{background-position:-200% 0;}
+.img-loader.active{
+  display:block;
 }
 
 .thumb-grid{
@@ -460,7 +458,6 @@ details.option-box[open] .option-guide{
   width:100%;
   max-height:420px;
   object-fit:contain;
-  transition: opacity 0.35s ease;
 }
 
 .desc-box{
@@ -1915,6 +1912,7 @@ details.option-box summary{
 
       <div class="viewer">
         <img id="galleryImg" src="Cheriko_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
+        <img class="img-loader" src="loading_heart.gif" alt="로딩중" aria-hidden="true">
       </div>
       <div class="thumb-grid" id="sampleThumbGrid">
         <div class="thumb-item">
@@ -2000,6 +1998,7 @@ details.option-box summary{
     <div style="margin-top:10px;">
       <div class="style-viewer">
         <img id="faceGallery" src="Cheriko_expressions.png" alt="표정 샘플" loading="eager" decoding="async">
+        <img class="img-loader" src="loading_heart.gif" alt="로딩중" aria-hidden="true">
         <button type="button" class="circle-nav left" onclick="prevFace()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextFace()">❯</button>
       </div>
@@ -2034,6 +2033,7 @@ details.option-box summary{
 
       <div class="style-viewer">
         <img id="styleGallery" src="style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='style_1.png';}">
+        <img class="img-loader" src="loading_heart.gif" alt="로딩중" aria-hidden="true">
         <button type="button" class="circle-nav left" onclick="prevStyle()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextStyle()">❯</button>
       </div>
@@ -2463,29 +2463,50 @@ const images = [
   'B_sample_collage.png'
 ];
 
-function fadeSwap(imgEl, newSrc, callback){
+function showLoader(container){
+  if(!container) return;
+  const loader = container.querySelector('.img-loader');
+  if(loader) loader.classList.add('active');
+}
+
+function hideLoader(container){
+  if(!container) return;
+  const loader = container.querySelector('.img-loader');
+  if(loader) loader.classList.remove('active');
+}
+
+function changeGalleryImage(imgEl, newSrc, callback){
   const container = imgEl.parentElement;
-  imgEl.classList.add('fading');
-  if(container) container.classList.add('skeleton');
+
+  // 1. 현재 화면의 기존 이미지를 즉시 숨기고 하트 GIF 로더 표시
+  //    (display:none 대신 visibility:hidden을 사용해 뷰어 영역의 레이아웃 높이가
+  //    갑자기 무너지지 않도록 함 → 로더가 정중앙에 안정적으로 표시됨)
+  imgEl.style.visibility = 'hidden';
+  showLoader(container);
+
+  // 2. 백그라운드 메모리에서 새 이미지 미리 로드
+  const tempImg = new Image();
 
   let done = false;
   const finish = () => {
     if(done) return;
     done = true;
+    // 3. 다운로드가 100% 완료된 후에만 화면 교체 → 잔상/분할 렌더링 방지
+    hideLoader(container);
     imgEl.src = newSrc;
-    imgEl.classList.remove('fading');
-    if(container) container.classList.remove('skeleton');
+    imgEl.style.visibility = 'visible';
     if(callback) callback();
   };
 
-  // 이미지를 완전히 미리 로드한 뒤에만 실제 src를 교체 → 이전 이미지 잔상 및
-  // 이미지가 위에서 아래로 천천히 그려지는 현상(progressive render) 방지
-  const preload = new Image();
-  preload.onload = () => setTimeout(finish, 260);
-  preload.onerror = () => setTimeout(finish, 260);
-  preload.src = newSrc;
+  tempImg.onload = finish;
+  tempImg.onerror = finish;
+  tempImg.src = newSrc;
 
-  setTimeout(finish, 1200); // 최종 안전장치 (네트워크 지연 등 대비)
+  setTimeout(finish, 1200); // 최종 안전장치 (네트워크 지연 등으로 로드 이벤트가 없을 경우 대비)
+}
+
+function fadeSwap(imgEl, newSrc, callback){
+  changeGalleryImage(imgEl, newSrc, callback);
 }
 
 function showGallery(index){
