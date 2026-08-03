@@ -38,9 +38,6 @@
 
 html{
   scroll-behavior:smooth;
-  overflow-x:hidden;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
 }
 
 body{
@@ -49,7 +46,6 @@ body{
   background:white;
   color:var(--text);
   overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
 }
 
 .container{
@@ -392,6 +388,28 @@ details.option-box[open] .option-guide{
   70%{transform:scale(1);}
 }
 
+.heart-loader-track,
+.heart-loader-trace{
+  fill:none;
+  stroke-width:9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.heart-loader-track{
+  stroke:var(--line);
+}
+
+.heart-loader-trace{
+  stroke:var(--pink-deep);
+  stroke-dasharray:75 189.54;
+  animation:heart-loader-trace 2s linear infinite;
+}
+
+@keyframes heart-loader-trace{
+  to{ stroke-dashoffset:-264.54; }
+}
+
 .thumb-grid{
   display:grid;
   grid-template-columns:repeat(4, 1fr);
@@ -629,11 +647,12 @@ textarea{
   opacity:1;
 }
 
+.addon-item{
+  display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
 }
-.addon-label{
   flex:1;
   min-width:0;
 }
@@ -1367,6 +1386,7 @@ details.option-box summary{
 }
 
 
+#inputText{
   height:520px;
   overflow:hidden;
   resize:none;
@@ -1930,8 +1950,8 @@ details.option-box summary{
         <img id="galleryImg" src="Cheriko_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
           <g class="heart-loader-beat">
-            <path d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30" fill="none" stroke="#fff3f7" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 82 C73 62,92 45,92 27 C92 10,76 6,63 14 C56 18,52 24,50 30" fill="none" stroke="#eb839f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/>
+            <path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/>
           </g>
         </svg>
       </div>
@@ -2021,8 +2041,8 @@ details.option-box summary{
         <img id="faceGallery" src="Cheriko_expressions.png" alt="표정 샘플" loading="eager" decoding="async">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
           <g class="heart-loader-beat">
-            <path d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30" fill="none" stroke="#fff3f7" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 82 C73 62,92 45,92 27 C92 10,76 6,63 14 C56 18,52 24,50 30" fill="none" stroke="#eb839f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/>
+            <path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/>
           </g>
         </svg>
         <button type="button" class="circle-nav left" onclick="prevFace()">❮</button>
@@ -2061,8 +2081,8 @@ details.option-box summary{
         <img id="styleGallery" src="style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='style_1.png';}">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
           <g class="heart-loader-beat">
-            <path d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30" fill="none" stroke="#fff3f7" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 82 C73 62,92 45,92 27 C92 10,76 6,63 14 C56 18,52 24,50 30" fill="none" stroke="#eb839f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/>
+            <path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/>
           </g>
         </svg>
         <button type="button" class="circle-nav left" onclick="prevStyle()">❮</button>
@@ -2494,47 +2514,53 @@ const images = [
   'B_sample_collage.png'
 ];
 
+// 이미지 요소별 "가장 최신 요청"의 토큰을 저장. 연타 등으로 같은 요소에 대해
+// 여러 로딩이 동시에 진행될 때, 늦게 끝난 이전 요청이 최신 요청 결과를
+// 덮어써서 엉뚱한 이미지가 노출되는 레이스 컨디션을 막기 위함.
+const galleryLoadTokens = new WeakMap();
+
 function showLoader(container){
-  if(!container) return;
-  const loader = container.querySelector('.heart-loader');
-  if(!loader) return;
-  loader.classList.add('active');
-  loader.style.display = 'block'; // 클래스 우선순위 문제와 무관하게 무조건 표시
+  const loader = container?.querySelector('.heart-loader');
+  loader?.classList.add('active');
 }
 
 function hideLoader(container){
-  if(!container) return;
-  const loader = container.querySelector('.heart-loader');
-  if(!loader) return;
-  loader.classList.remove('active');
-  loader.style.display = 'none'; // 클래스 우선순위 문제와 무관하게 무조건 제거
+  const loader = container?.querySelector('.heart-loader');
+  loader?.classList.remove('active');
 }
 
 function changeGalleryImage(imgEl, newSrc, callback){
   const container = imgEl.parentElement;
 
-  // 1. 현재 화면의 기존 이미지를 완전히 숨기고 하트 로더 표시
+  // 이번 호출만의 고유 토큰 발급. 이 함수가 끝나기 전에 같은 imgEl로
+  // 또 다른 호출이 들어오면 galleryLoadTokens의 값이 새 토큰으로 바뀌므로,
+  // 아래 isStale()이 true가 되어 이전(느린) 요청의 후속 처리를 전부 무시한다.
+  const token = Symbol('galleryLoad');
+  galleryLoadTokens.set(imgEl, token);
+  const isStale = () => galleryLoadTokens.get(imgEl) !== token;
+
+  // 1. 기존 이미지를 완전히 숨기고 하트 로더 표시.
   //    (display:none 대신 visibility:hidden을 사용해 뷰어 영역의 레이아웃 높이가
   //    갑자기 무너지지 않도록 함 → 로더가 정중앙에 안정적으로 표시됨)
   imgEl.style.visibility = 'hidden';
   showLoader(container);
 
-  let done = false;
   const finish = () => {
-    if(done) return;
-    done = true;
-    // 4. 디코딩까지 완전히 끝난 뒤에만 로더 제거 + 이미지 노출 → 잔상/겹침 및
-    //    위→아래로 그려지는 현상을 동시에 차단
+    if(isStale()) return;
+    // 디코딩까지 완전히 끝난 뒤에만 로더 제거 + 이미지 노출 → 잔상/겹침 및
+    // 위→아래로 그려지는 현상을 동시에 차단. 시간 기반 처리는 전혀 없으며
+    // 오직 실제 로딩 성공/실패 이벤트에 의해서만 호출된다.
     hideLoader(container);
     imgEl.style.visibility = 'visible';
     if(callback) callback();
   };
 
   // 3. 실제 화면에 보여줄 <img> 요소에 src를 넣은 뒤, 그 요소 기준으로도
-  //    디코딩 완료를 재확인. onload는 "다운로드 완료"만 보장할 뿐 "디코딩/페인트
+  //    디코딩 완료를 재확인한다. onload는 "다운로드 완료"만 보장할 뿐 "디코딩/페인트
   //    준비 완료"는 보장하지 않아 큰 이미지에서 위→아래로 그려지는 현상이 남을 수
-  //    있으므로, decode()를 통해 100% 디코딩이 끝난 시점에만 finish() 호출.
+  //    있으므로, decode()를 통해 100% 디코딩이 끝난 시점에만 finish()를 호출한다.
   const reveal = () => {
+    if(isStale()) return;
     imgEl.src = newSrc;
     if(imgEl.decode){
       imgEl.decode().then(finish).catch(finish);
@@ -2544,7 +2570,7 @@ function changeGalleryImage(imgEl, newSrc, callback){
   };
 
   // 2. 백그라운드 메모리에서 새 이미지를 완전히 다운로드 + 디코딩까지 마친 후에만
-  //    실제 화면 요소에 반영 (사전 로드)
+  //    실제 화면 요소에 반영한다 (사전 로드).
   const tempImg = new Image();
   tempImg.src = newSrc;
 
@@ -2554,8 +2580,6 @@ function changeGalleryImage(imgEl, newSrc, callback){
     tempImg.onload = reveal;
     tempImg.onerror = reveal;
   }
-
-  setTimeout(finish, 1500); // 최종 안전장치 (네트워크 지연 등으로 이벤트가 없을 경우 대비)
 }
 
 function fadeSwap(imgEl, newSrc, callback){
