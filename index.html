@@ -653,6 +653,8 @@ textarea{
   justify-content:space-between;
   gap:10px;
 }
+.addon-info,
+.addon-label{
   flex:1;
   min-width:0;
 }
@@ -1575,6 +1577,308 @@ details.option-box summary{
   .usage-check-btn{width:44px;height:44px;font-size:22px;border-radius:11px;}
 }
 
+
+/* ===== STAGE 2 FINAL REDESIGN ===== */
+:root{
+  --pink:#c25b64;
+  --pink-deep:#e3818a;
+  --pink-soft:#f9eeee;
+  --pink-bg:#fdfbfb;
+  --text:#514348;
+  --line:#c9a3a9;
+  --shadow:0 12px 28px rgba(123,72,80,.08);
+  --soft-shadow:0 6px 18px rgba(123,72,80,.06);
+}
+
+body{background:#fff;color:var(--text);}
+
+.container{
+  width:min(calc(100% - 48px),940px);
+  max-width:940px;
+  margin:0 auto;
+  padding:26px 0 54px;
+}
+
+.card,
+.workflow-card{
+  background:var(--pink-bg);
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--soft-shadow);
+}
+.card{padding:24px;margin-bottom:20px;}
+
+.hero{
+  min-height:600px;
+  padding:44px 42px 50px;
+  margin-bottom:22px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 88% 8%,rgba(227,129,138,.15),transparent 180px),
+    radial-gradient(circle at 12% 94%,rgba(194,91,100,.05),transparent 200px),
+    #fdfbfb;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  animation:hero-enter .72s cubic-bezier(.22,.8,.2,1) both;
+}
+.hero::after{display:none}
+@keyframes hero-enter{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{margin:0 0 22px;padding:10px 18px;font-size:14px;color:#fff;background:var(--pink);border-radius:999px;box-shadow:0 8px 18px rgba(194,91,100,.14)}
+.hero-icon-wrap{width:142px;height:142px;padding:6px;margin:0 0 22px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 10px 24px rgba(194,91,100,.10)}
+.hero-icon{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover}
+.hero-title{margin:0 0 16px;font-size:clamp(30px,4vw,44px);line-height:1.22;color:var(--pink);letter-spacing:-.035em}
+.hero-desc{max-width:700px;font-size:17px;line-height:1.9}
+.hero-main-copy.small,.small{margin-top:18px;font-size:13px;line-height:1.85;opacity:.68}
+
+.title,summary{color:var(--pink)}
+.title{font-size:21px;line-height:1.35}
+.section-sub,.form-top-note{font-size:13px;line-height:1.75}
+
+.notice-grid,.usage-grid,.collab-grid{gap:14px}
+.notice-card,.usage-card,.collab-item,.wf-flow-box,.basic-included,.desc-box,.notice,.notice-box,.sample-intro,.slot,.slot-notice,.price-option-guide,.category-option-content{border-color:var(--line)}
+.notice-card{background:#fff;border-radius:18px;padding:17px}
+
+/* ===== 가격표: 두 개의 세로 카드 ===== */
+.price-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:16px;
+  margin-top:18px;
+  align-items:stretch;
+}
+.price-panel{
+  min-width:0;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+}
+.price-panel .price-head{
+  margin-bottom:12px;
+  color:var(--pink);
+  font-size:18px;
+}
+.price-panel .price-item{
+  margin-top:6px;
+}
+.price-panel .price-item:first-child{margin-top:0}
+.price-panel .basic-included{
+  margin-top:16px;
+  padding:14px 2px 0;
+  border:0;
+  border-top:1px solid var(--line);
+  border-radius:0;
+  background:transparent;
+}
+.basic-included-title{color:var(--pink);font-size:13px;font-weight:700;margin-bottom:7px}
+.basic-included-text{font-size:13px;line-height:1.85;color:#77656a}
+
+.base-option-item{
+  padding:13px 14px;
+  border:1px solid transparent;
+  border-radius:14px;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+.base-option-item:hover{background:#fbefef;border-color:#e3c4c8;transform:translateY(-1px)}
+.base-option-item.active{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:700}
+
+.option-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.option-panel-title{font-size:18px;font-weight:700;color:var(--pink);line-height:1.4}
+.price-option-guide,
+.option-guide-global{
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+.price-option-guide{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--pink);margin-bottom:5px}
+.option-guide-global{display:block;font-size:12px;line-height:1.65;color:#8a747a;margin-bottom:12px}
+.summary-caret-static{color:var(--pink-deep);font-size:21px;line-height:1}
+
+/* 각 옵션 토글: 바깥/안쪽 중첩 테두리 최소화 */
+details.category-option{
+  background:transparent;
+  border:0;
+  border-top:1px solid var(--line);
+  border-radius:0;
+  margin:0;
+  overflow:visible;
+  transition:background .2s ease;
+}
+details.category-option:first-of-type{border-top:1px solid var(--line)}
+details.category-option>summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:52px;
+  padding:13px 2px;
+  font-size:16px;
+  font-weight:700;
+  color:var(--text);
+  background:transparent;
+  list-style:none;
+  cursor:pointer;
+}
+details.category-option>summary:hover{color:var(--pink)}
+details.category-option[open]>summary{color:var(--pink)}
+details.category-option summary::-webkit-details-marker{display:none}
+.summary-caret{margin-left:auto;color:var(--pink-deep);font-size:21px;transition:transform .2s ease}
+details.category-option[open] .summary-caret{transform:rotate(180deg)}
+.category-option-content{padding:0 0 10px;background:transparent;border:0}
+.category-option-content .price-box{padding:0;background:transparent;border:0;border-radius:0}
+.category-option-content .price-head{display:none}
+.option-stack{display:block;margin-top:0}
+.price-item{border-radius:12px;padding:9px 10px}
+.price-item:hover{background:#fbefef}
+.price-item.active{background:var(--pink);color:#fff}
+
+.addon-item{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px}
+.addon-label{min-width:0;padding-right:6px}
+.qty-controls{display:flex!important;align-items:center;gap:7px;flex:0 0 auto;margin-left:auto}
+.qty-controls button{
+  width:31px;height:31px;flex:0 0 31px;padding:0;
+  border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--pink);
+  font-size:18px;line-height:1;cursor:pointer;pointer-events:auto;touch-action:manipulation;
+}
+.qty-controls button:hover{background:#f9eded;border-color:var(--pink-deep)}
+.qty-value{min-width:24px;color:inherit;font-size:14px;font-weight:700;text-align:center}
+.price-item.active .qty-controls button{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.14);color:#fff}
+.price-item.active .qty-value{color:#fff}
+
+/* ===== 선택 내역 / 견적 요약 ===== */
+.selection-summary{
+  width:100%;
+  max-width:none;
+  margin:22px 0 0;
+  padding:0;
+  border:1px solid var(--line)!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  overflow:hidden;
+}
+.selection-summary-title{
+  margin:0!important;
+  padding:18px 20px 12px;
+  text-align:left!important;
+  font-size:20px!important;
+  font-weight:700!important;
+  color:var(--pink)!important;
+  background:#fff7f7;
+  border-bottom:1px solid var(--line);
+}
+.selection-summary-list{display:flex;flex-direction:column;gap:0;padding:4px 20px}
+.selection-summary-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:13px 0;
+  border-bottom:1px solid #ead8da;
+}
+.selection-summary-item:last-child{border-bottom:0}
+.selection-summary-item .left{min-width:0;display:flex;flex-direction:column;gap:3px}
+.selection-summary-item .name{font-size:15px;font-weight:700;color:var(--text)!important}
+.selection-summary-item .sub{font-size:12px;color:#92777e!important}
+.selection-summary-item .right{display:flex;align-items:center;gap:8px;flex:0 0 auto;font-size:14px;color:var(--text)!important}
+.selection-summary-item .right>strong{white-space:nowrap}
+.selection-summary-item .remove-btn,
+.selection-summary-item .change-btn{
+  width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);background:#fff;color:var(--pink);cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.selection-summary-item .remove-btn{font-size:22px;line-height:1}
+.selection-summary-item .change-btn{width:auto;padding:0 11px;border-radius:999px;font-size:12px;font-weight:700}
+.selection-summary-item .remove-btn:hover,.selection-summary-item .change-btn:hover{background:#fbefef;border-color:var(--pink-deep);transform:translateY(-1px)}
+.selection-summary-empty{padding:22px 20px;color:#b69fa4;font-size:13px}
+.selection-summary-divider{height:1px;background:var(--line)!important;margin:0!important}
+.selection-summary-totals{padding:14px 20px 18px;display:flex;flex-direction:column;gap:8px;background:#fff}
+.selection-summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;color:var(--text)!important}
+.selection-summary-row span,.selection-summary-row strong{color:var(--text)!important}
+.selection-summary-row.total span,.selection-summary-row.total strong{font-size:20px;color:var(--pink)!important}
+
+.copy-btn-large{
+  width:100%;max-width:none;height:62px;margin:16px 0 0;border-radius:18px;
+  background:var(--pink)!important;border:1px solid var(--pink)!important;color:#fff!important;
+  box-shadow:0 10px 22px rgba(194,91,100,.16)!important;
+  font-size:18px!important;gap:10px;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+}
+.copy-btn-large:hover{filter:brightness(1.03);transform:translateY(-2px) scale(1.01);box-shadow:0 14px 28px rgba(194,91,100,.22)!important}
+@keyframes copy-breathe{0%,100%{transform:translateY(0) scale(1);box-shadow:0 10px 22px rgba(194,91,100,.16)}50%{transform:translateY(-1px) scale(1.012);box-shadow:0 14px 28px rgba(194,91,100,.23)}}
+.copy-btn-large:hover{animation:copy-breathe 1.8s ease-in-out infinite}
+
+/* ===== 작업 과정 hover ===== */
+.workflow-card{
+  padding:20px 20px 22px;
+  margin-bottom:18px;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.workflow-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(123,72,80,.11);border-color:var(--pink-deep)}
+.wf-flow-box{transition:background .22s ease,border-color .22s ease}
+.workflow-card:hover .wf-flow-box{background:#fff5f5;border-color:#ddb9bf}
+
+.viewer img{max-height:700px}
+#faceGallery,#styleGallery{max-height:540px}
+.style-viewer{max-width:720px}
+
+@media(max-width:760px){
+  .container{width:min(calc(100% - 24px),940px);padding:16px 0 40px}
+  .card{padding:18px;border-radius:20px;margin-bottom:16px}
+  .hero{min-height:520px;padding:36px 20px 40px;border-radius:24px}
+  .hero-icon-wrap{width:118px;height:118px}
+  .hero-title{font-size:30px}
+  .hero-desc{font-size:15px}
+  .notice-grid,.usage-grid,.collab-grid{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr}
+  .price-panel{padding:16px}
+}
+@media(max-width:480px){
+  .hero{min-height:470px}
+  .hero-badge{font-size:12px}
+  .hero-title{font-size:26px}
+  .selection-summary-title{font-size:18px!important}
+  .selection-summary-list,.selection-summary-totals{padding-left:15px;padding-right:15px}
+  .selection-summary-item{gap:8px}
+  .selection-summary-item .right{gap:5px}
+}
+/* 선택 상태: 박스 전체 채움 + 흰색 글자 반전 */
+.price-item.active,
+.base-option-item.active,
+.usage-card.selected,
+.addon-item.active {
+    background-color: #fca4b6 !important;
+    border-color: #fca4b6 !important;
+    color: #ffffff !important;
+}
+
+/* 선택된 박스 내부 하위 요소 글자색도 흰색으로 일괄 강제 */
+.price-item.active *,
+.base-option-item.active *,
+.usage-card.selected *,
+.addon-item.active * {
+    color: #ffffff !important;
+}
+
+/* 추가옵션 미선택 시 노출될 회색 안내 박스 */
+.empty-addon-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border: 1px dashed #cccccc;
+    border-radius: 8px;
+    color: #999999;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+html{scroll-padding-top:24px;}
+
 </style>
 </head>
 
@@ -1585,6 +1889,9 @@ details.option-box summary{
 
   <div class="hero">
     <div class="hero-badge">Live2D Model Illustration Commission</div>
+    <div class="hero-icon-wrap">
+      <img class="hero-icon" src="data:image/jpeg;base64,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" alt="peach5828 icon" loading="eager" decoding="async">
+    </div>
     <h1 class="hero-title">💗 Live2D 버츄얼 모델 일러스트 커미션</h1>
 <!-- 첫 번째 문단 (크게) -->
 <p class="hero-desc hero-main-copy">
@@ -1683,10 +1990,8 @@ details.option-box summary{
     <div class="section-sub">기본 패키지 및 추가 옵션 안내</div>
 
     <div class="price-grid">
-
-      <div class="price-group">
-        <div class="price-box">
-          <div class="price-head">기본 모델</div>
+      <div class="price-panel" id="basePricePanel">
+                  <div class="price-head">기본 모델</div>
           <div class="price-list">
             <div class="price-item base-option-item" onclick="toggleBaseOption(this, '전신 패키지', 800000)">
               Live2D 전신 패키지 +800,000원
@@ -1706,225 +2011,242 @@ details.option-box summary{
               - PSD 파일 제공
             </div>
           </div>
-        </div>
       </div>
 
-      <details class="option-box">
-        <summary><span>추가옵션</span><span class="summary-caret">▼</span></summary>
-        <div class="option-guide">옵션 구성이 어려운 경우 선택 전 문의 주세요!! 상세히 안내 드립니다.</div>
-
-        <div class="option-stack">
-
-          <div class="price-box">
-            <div class="price-head">✨ 표정 <span class="plain-note">(눈동자 컬러, 눈매 등 변경 가능합니다.)</span></div>
-            <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="샘플 표정 추가" onclick="toggleAddonOption(this, '샘플 표정 추가', 5000)">
-                <span class="addon-label">샘플 표정 추가 +5,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('샘플 표정 추가', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="샘플 표정 추가">1</span>
-                  <button type="button" onclick="changeAddonQty('샘플 표정 추가', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="주문제작 표정 추가" onclick="toggleAddonOption(this, '주문제작 표정 추가', 9000)">
-                <span class="addon-label">주문제작 표정 추가 +9,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('주문제작 표정 추가', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="주문제작 표정 추가">1</span>
-                  <button type="button" onclick="changeAddonQty('주문제작 표정 추가', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="표정 별도문의" onclick="toggleAddonOption(this, '표정 별도문의', 0)">
-                <span class="addon-label">⯎ 별도 문의 ⯎</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('표정 별도문의', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="표정 별도문의">1</span>
-                  <button type="button" onclick="changeAddonQty('표정 별도문의', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-            </div>
+      <div class="price-panel" id="addonPricePanel">
+        <div class="option-panel-head">
+          <div>
+            <div class="price-option-guide"><span class="summary-caret-static">▾</span><span>옵션 선택</span></div>
+            <div class="option-guide-global">옵션 구성이 어려운 경우 선택 전 문의 주세요!! 상세히 안내 드립니다.</div>
           </div>
-
+        </div>
+      <details class="option-box category-option">
+        <summary><span>표정</span><span class="summary-caret">▾</span></summary>
+        <div class="category-option-content">
           <div class="price-box">
-            <div class="price-head">✨ 팔 / 포즈</div>
-            <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)">
-                <span class="addon-label">추가 팔 파츠 +20,000</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="추가 팔 파츠">1</span>
-                  <button type="button" onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="추가 소매 파츠" onclick="toggleAddonOption(this, '추가 소매 파츠', 10000)">
-                <span class="addon-label">추가 소매 파츠 +10,000</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="추가 소매 파츠">1</span>
-                  <button type="button" onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="팔포즈 별도문의" onclick="toggleAddonOption(this, '팔포즈 별도문의', 0)">
-                <span class="addon-label">⯎ 별도 문의 ⯎</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('팔포즈 별도문의', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="팔포즈 별도문의">1</span>
-                  <button type="button" onclick="changeAddonQty('팔포즈 별도문의', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="price-box">
-            <div class="price-head">✨ 소품</div>
-            <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="마이크" onclick="toggleAddonOption(this, '마이크', 35000)">
-                <span class="addon-label">마이크 +35,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('마이크', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="마이크">1</span>
-                  <button type="button" onclick="changeAddonQty('마이크', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="게임기" onclick="toggleAddonOption(this, '게임기', 35000)">
-                <span class="addon-label">게임기 +35,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('게임기', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="게임기">1</span>
-                  <button type="button" onclick="changeAddonQty('게임기', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-
-              <div class="price-item addon-item" data-addon-name="끌어안는 인형" onclick="toggleAddonOption(this, '끌어안는 인형', 30000)">
-                <span class="addon-label">끌어안는 인형 +30,000</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="끌어안는 인형">1</span>
-                  <button type="button" onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="소품 별도문의" onclick="toggleAddonOption(this, '소품 별도문의', 0)">
-                <span class="addon-label">⯎ 별도 문의 ⯎</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('소품 별도문의', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="소품 별도문의">1</span>
-                  <button type="button" onclick="changeAddonQty('소품 별도문의', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="price-box">
-            <div class="price-head">✨ 의상 / 헤어</div>
-            <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="신의상" onclick="toggleAddonOption(this, '신의상', 100000)">
-                <span class="addon-label">신의상 +100,000원~</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('신의상', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="신의상">1</span>
-                  <button type="button" onclick="changeAddonQty('신의상', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="겉옷" onclick="toggleAddonOption(this, '겉옷', 80000)">
-                <span class="addon-label">겉옷 (on/off) +80,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('겉옷', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="겉옷">1</span>
-                  <button type="button" onclick="changeAddonQty('겉옷', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="후드 모자" onclick="toggleAddonOption(this, '후드 모자', 40000)">
-                <span class="addon-label">후드 모자 +40,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="후드 모자">1</span>
-                  <button type="button" onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="헤어 바리에이션" onclick="toggleAddonOption(this, '헤어 바리에이션', 50000)">
-                <span class="addon-label">헤어 바리에이션 +50,000원~</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="헤어 바리에이션">1</span>
-                  <button type="button" onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="의상헤어 별도문의" onclick="toggleAddonOption(this, '의상헤어 별도문의', 0)">
-                <span class="addon-label">⯎ 별도 문의 ⯎</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('의상헤어 별도문의', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="의상헤어 별도문의">1</span>
-                  <button type="button" onclick="changeAddonQty('의상헤어 별도문의', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="price-box">
-            <div class="price-head">✨ 기타</div>
-            <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="간단 펫" onclick="toggleAddonOption(this, '간단 펫', 35000)">
-                <span class="addon-label">간단 펫 +35,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="간단 펫">1</span>
-                  <button type="button" onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="고가동 파츠분리" onclick="toggleAddonOption(this, '고가동 파츠분리', 100000)">
-                <span class="addon-label">고가동 파츠 분리 +100,000원~</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="고가동 파츠분리">1</span>
-                  <button type="button" onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="삼면도" onclick="toggleAddonOption(this, '삼면도', 110000)">
-                <span class="addon-label">캐릭터 시트(삼면도) +110,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('삼면도', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="삼면도">1</span>
-                  <button type="button" onclick="changeAddonQty('삼면도', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="작업과정 비공개" onclick="toggleAddonOption(this, '작업과정 비공개', 40000)">
-                <span class="addon-label">작업과정 비공개 +40,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="작업과정 비공개">1</span>
-                  <button type="button" onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="작업물 비공개 1개월" onclick="toggleAddonOption(this, '작업물 비공개 1개월', 20000)">
-                <span class="addon-label">작업물 비공개 (1개월) +20,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="작업물 비공개 1개월">1</span>
-                  <button type="button" onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item" data-addon-name="동물 귀+꼬리" data-price="60000" onclick="toggleAddonOption(this, '동물 귀+꼬리', 60000)">
-                <span class="addon-label">동물 귀+꼬리 +60,000원</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('동물 귀+꼬리', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="동물 귀+꼬리">1</span>
-                  <button type="button" onclick="changeAddonQty('동물 귀+꼬리', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="기타 별도문의" onclick="toggleAddonOption(this, '기타 별도문의', 0)">
-                <span class="addon-label">⯎ 별도 문의 ⯎</span>
-                <span class="qty-controls" onclick="event.stopPropagation()">
-                  <button type="button" onclick="changeAddonQty('기타 별도문의', -1);event.stopPropagation();">−</button>
-                  <span class="qty-value" data-qty-for="기타 별도문의">1</span>
-                  <button type="button" onclick="changeAddonQty('기타 별도문의', 1);event.stopPropagation();">+</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
+<div class="price-head">✨ 표정 <span class="plain-note">(눈동자 컬러, 눈매 등 변경 가능합니다.)</span></div>
+<div class="price-list">
+<div class="price-item addon-item" data-addon-name="샘플 표정 추가" onclick="toggleAddonOption(this, '샘플 표정 추가', 5000)" data-price="5000">
+<span class="addon-label">샘플 표정 추가 +5,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('샘플 표정 추가', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="샘플 표정 추가">0</span>
+<button onclick="changeAddonQty('샘플 표정 추가', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="주문제작 표정 추가" onclick="toggleAddonOption(this, '주문제작 표정 추가', 9000)" data-price="9000">
+<span class="addon-label">주문제작 표정 추가 +9,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('주문제작 표정 추가', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="주문제작 표정 추가">0</span>
+<button onclick="changeAddonQty('주문제작 표정 추가', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item inquiry-item" data-addon-name="표정 별도문의" onclick="toggleAddonOption(this, '표정 별도문의', 0)" data-price="0">
+<span class="addon-label">⯎ 별도 문의 ⯎</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('표정 별도문의', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="표정 별도문의">0</span>
+<button onclick="changeAddonQty('표정 별도문의', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+</div>
+</div>
         </div>
       </details>
-
+      <details class="option-box category-option">
+        <summary><span>팔 / 포즈</span><span class="summary-caret">▾</span></summary>
+        <div class="category-option-content">
+          <div class="price-box">
+<div class="price-head">✨ 팔 / 포즈</div>
+<div class="price-list">
+<div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)" data-price="20000">
+<span class="addon-label">추가 팔 파츠 +20,000</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="추가 팔 파츠">0</span>
+<button onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="추가 소매 파츠" onclick="toggleAddonOption(this, '추가 소매 파츠', 10000)" data-price="10000">
+<span class="addon-label">추가 소매 파츠 +10,000</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="추가 소매 파츠">0</span>
+<button onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item inquiry-item" data-addon-name="팔포즈 별도문의" onclick="toggleAddonOption(this, '팔포즈 별도문의', 0)" data-price="0">
+<span class="addon-label">⯎ 별도 문의 ⯎</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('팔포즈 별도문의', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="팔포즈 별도문의">0</span>
+<button onclick="changeAddonQty('팔포즈 별도문의', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+</div>
+</div>
+        </div>
+      </details>
+      <details class="option-box category-option">
+        <summary><span>소품</span><span class="summary-caret">▾</span></summary>
+        <div class="category-option-content">
+          <div class="price-box">
+<div class="price-head">✨ 소품</div>
+<div class="price-list">
+<div class="price-item addon-item" data-addon-name="마이크" onclick="toggleAddonOption(this, '마이크', 35000)" data-price="35000">
+<span class="addon-label">마이크 +35,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('마이크', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="마이크">0</span>
+<button onclick="changeAddonQty('마이크', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="게임기" onclick="toggleAddonOption(this, '게임기', 35000)" data-price="35000">
+<span class="addon-label">게임기 +35,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('게임기', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="게임기">0</span>
+<button onclick="changeAddonQty('게임기', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="끌어안는 인형" onclick="toggleAddonOption(this, '끌어안는 인형', 30000)" data-price="30000">
+<span class="addon-label">끌어안는 인형 +30,000</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="끌어안는 인형">0</span>
+<button onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item inquiry-item" data-addon-name="소품 별도문의" onclick="toggleAddonOption(this, '소품 별도문의', 0)" data-price="0">
+<span class="addon-label">⯎ 별도 문의 ⯎</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('소품 별도문의', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="소품 별도문의">0</span>
+<button onclick="changeAddonQty('소품 별도문의', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+</div>
+</div>
+        </div>
+      </details>
+      <details class="option-box category-option">
+        <summary><span>의상 / 헤어</span><span class="summary-caret">▾</span></summary>
+        <div class="category-option-content">
+          <div class="price-box">
+<div class="price-head">✨ 의상 / 헤어</div>
+<div class="price-list">
+<div class="price-item addon-item" data-addon-name="신의상" onclick="toggleAddonOption(this, '신의상', 100000)" data-price="100000">
+<span class="addon-label">신의상 +100,000원~</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('신의상', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="신의상">0</span>
+<button onclick="changeAddonQty('신의상', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="겉옷" onclick="toggleAddonOption(this, '겉옷', 80000)" data-price="80000">
+<span class="addon-label">겉옷 (on/off) +80,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('겉옷', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="겉옷">0</span>
+<button onclick="changeAddonQty('겉옷', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="후드 모자" onclick="toggleAddonOption(this, '후드 모자', 40000)" data-price="40000">
+<span class="addon-label">후드 모자 +40,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="후드 모자">0</span>
+<button onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="헤어 바리에이션" onclick="toggleAddonOption(this, '헤어 바리에이션', 50000)" data-price="50000">
+<span class="addon-label">헤어 바리에이션 +50,000원~</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="헤어 바리에이션">0</span>
+<button onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item inquiry-item" data-addon-name="의상헤어 별도문의" onclick="toggleAddonOption(this, '의상헤어 별도문의', 0)" data-price="0">
+<span class="addon-label">⯎ 별도 문의 ⯎</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('의상헤어 별도문의', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="의상헤어 별도문의">0</span>
+<button onclick="changeAddonQty('의상헤어 별도문의', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+</div>
+</div>
+        </div>
+      </details>
+      <details class="option-box category-option">
+        <summary><span>기타</span><span class="summary-caret">▾</span></summary>
+        <div class="category-option-content">
+          <div class="price-box">
+<div class="price-head">✨ 기타</div>
+<div class="price-list">
+<div class="price-item addon-item" data-addon-name="간단 펫" onclick="toggleAddonOption(this, '간단 펫', 35000)" data-price="35000">
+<span class="addon-label">간단 펫 +35,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="간단 펫">0</span>
+<button onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="고가동 파츠분리" onclick="toggleAddonOption(this, '고가동 파츠분리', 100000)" data-price="100000">
+<span class="addon-label">고가동 파츠 분리 +100,000원~</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="고가동 파츠분리">0</span>
+<button onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="삼면도" onclick="toggleAddonOption(this, '삼면도', 110000)" data-price="110000">
+<span class="addon-label">캐릭터 시트(삼면도) +110,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('삼면도', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="삼면도">0</span>
+<button onclick="changeAddonQty('삼면도', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="작업과정 비공개" onclick="toggleAddonOption(this, '작업과정 비공개', 40000)" data-price="40000">
+<span class="addon-label">작업과정 비공개 +40,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="작업과정 비공개">0</span>
+<button onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="작업물 비공개 1개월" onclick="toggleAddonOption(this, '작업물 비공개 1개월', 20000)" data-price="20000">
+<span class="addon-label">작업물 비공개 (1개월) +20,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="작업물 비공개 1개월">0</span>
+<button onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item" data-addon-name="동물 귀+꼬리" data-price="60000" onclick="toggleAddonOption(this, '동물 귀+꼬리', 60000)">
+<span class="addon-label">동물 귀+꼬리 +60,000원</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('동물 귀+꼬리', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="동물 귀+꼬리">0</span>
+<button onclick="changeAddonQty('동물 귀+꼬리', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+<div class="price-item addon-item inquiry-item" data-addon-name="기타 별도문의" onclick="toggleAddonOption(this, '기타 별도문의', 0)" data-price="0">
+<span class="addon-label">⯎ 별도 문의 ⯎</span>
+<span class="qty-controls" onclick="event.stopPropagation()" aria-label="수량 조절">
+<button onclick="changeAddonQty('기타 별도문의', -1);event.stopPropagation();" type="button">−</button>
+<span class="qty-value" data-qty-for="기타 별도문의">0</span>
+<button onclick="changeAddonQty('기타 별도문의', 1);event.stopPropagation();" type="button">+</button>
+</span>
+</div>
+</div>
+</div>
+        </div>
+      </details>
+      </div>
     </div>
   </div>
 
@@ -2143,13 +2465,15 @@ details.option-box summary{
     </div>
   </div>
 
-  <div class="card static-card" id="sec-form">
-    <div class="title">📄 신청서</div>
-    <div class="form-top-note">
+<div class="card static-card" id="sec-form" style="padding: 20px; box-sizing: border-box;">
+  <!-- [상단] 1. 상단 좌/우 통합 신청서 블록 -->
+  <div class="form-header-block" style="margin-bottom: 20px;">
+    <div class="title" style="color: #d85265; font-weight: 600; font-size: 1.25rem; margin-bottom: 6px;">📄 신청서</div>
+    <div class="form-top-note" style="font-size: 0.85rem; color: #888; margin-bottom: 10px;">
       해당하는 부분만 적어주시면 됩니다. 괄호 안의 글씨는 삭제하고 작성해 주세요!
     </div>
 
-    <textarea id="inputText">1. 신청자명 / 활동명 : 
+    <textarea id="inputText" style="width: 100%; height: 260px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 0.9rem; line-height: 1.5; box-sizing: border-box; resize: vertical;">1. 신청자명 / 활동명 : 
 
 2. 채널 / 방송국 : 
 
@@ -2166,36 +2490,114 @@ details.option-box summary{
 
 8. 추가 옵션 : 
 
-9. 예상 합계 : 
+9. 예상 합계 : 기본 패키지 미선택 + 추가옵션 0원 / 예상 합계 0원
 
 10. 작가에게 전할 말 : (기타 문의 및 요청)</textarea>
-
-    <div class="selection-summary" id="selectionSummary">
-      <div class="selection-summary-title">. ₊‧˳⁺ ꒰ঌ 선택 내역 ໒꒱ ⁺˳‧₊ </div>
-      <div class="selection-summary-list" id="selectionSummaryList"></div>
-      <div class="selection-summary-divider"></div>
-      <div class="selection-summary-totals">
-        <div class="selection-summary-row">
-          <span>기본 패키지</span>
-          <strong id="summaryBasePrice">미선택</strong>
-        </div>
-        <div class="selection-summary-row">
-          <span>추가옵션</span>
-          <strong id="summaryAddonPrice">0원</strong>
-        </div>
-        <div class="selection-summary-row total">
-          <span>예상 합계</span>
-          <strong id="summaryTotalPrice">0원</strong>
-        </div>
-      </div>
-    </div>
-
-    <button class="copy-btn copy-btn-large" onclick="copyText()"><span class="copy-emoji">📋</span><span>작성한 양식 복사하기</span></button>
   </div>
 
+  <!-- [하단] 좌/우 박스 구분 레이아웃 -->
+  <div class="form-bottom-grid" style="display: flex; gap: 16px; align-items: stretch; flex-wrap: wrap;">
+
+    <!-- [하단 좌측 블록] 옵션 선택 박스 -->
+    <div class="bottom-left-box" style="flex: 1; min-width: 300px; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px; background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.02); box-sizing: border-box; display: flex; flex-direction: column; gap: 20px;">
+      
+<!-- 1. 버츄얼 패키지 -->
+<div class="form-section-group">
+  <div class="section-title-red" style="color: #fca4b6; font-weight: 600; font-size: 1.05rem; margin-bottom: 10px;">1. 버츄얼 패키지</div>
+  <div class="package-options-grid" style="display: flex; gap: 8px; flex-wrap: wrap;">
+    <div class="base-option-item" onclick="toggleBaseOption(this, 'Live2D 전신 패키지', 800000)" style="flex: 1; min-width: 130px; padding: 12px; border: 1px solid #fca4b6; border-radius: 10px; cursor: pointer; text-align: center;">
+      <div class="pkg-name" style="font-weight: 600; font-size: 0.9rem;">Live2D 전신 패키지</div>
+      <div class="pkg-price" style="color: #fca4b6; font-size: 0.85rem; margin-top: 4px;">+800,000원</div>
+    </div>
+    <div class="base-option-item" onclick="toggleBaseOption(this, 'Live2D 반신 패키지', 500000)" style="flex: 1; min-width: 130px; padding: 12px; border: 1px solid #fca4b6; border-radius: 10px; cursor: pointer; text-align: center;">
+      <div class="pkg-name" style="font-weight: 600; font-size: 0.9rem;">Live2D 반신 패키지</div>
+      <div class="pkg-price" style="color: #fca4b6; font-size: 0.85rem; margin-top: 4px;">+500,000원</div>
+    </div>
+  </div>
 </div>
 
+      <!-- 2. 추가 옵션 -->
+      <div class="form-section-group">
+        <div class="section-title-red" style="color: #d85265; font-weight: 600; font-size: 1.05rem; margin-bottom: 10px;">2. 추가 옵션</div>
+        <div class="addon-options-list" style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="addon-item" data-addon-name="추가 팔 파츠" data-price="20000" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border: 1px solid #f0f0f0; border-radius: 8px;">
+            <span class="addon-label" style="font-size: 0.88rem;">추가 팔 파츠 +20,000원</span>
+            <div class="qty-controls" style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" onclick="changeAddonQty('추가 팔 파츠', -1)" style="width: 24px; height: 24px; border: 1px solid #d85265; color: #d85265; background: #fff; border-radius: 50%; cursor: pointer;">-</button>
+              <span data-qty-for="추가 팔 파츠" style="font-size: 0.9rem; font-weight: 600;">0</span>
+              <button type="button" onclick="changeAddonQty('추가 팔 파츠', 1)" style="width: 24px; height: 24px; border: 1px solid #d85265; color: #d85265; background: #fff; border-radius: 50%; cursor: pointer;">+</button>
+            </div>
+          </div>
+          <div class="addon-item" data-addon-name="샘플 표정 추가" data-price="5000" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border: 1px solid #f0f0f0; border-radius: 8px;">
+            <span class="addon-label" style="font-size: 0.88rem;">샘플 표정 추가 +5,000원</span>
+            <div class="qty-controls" style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" onclick="changeAddonQty('샘플 표정 추가', -1)" style="width: 24px; height: 24px; border: 1px solid #d85265; color: #d85265; background: #fff; border-radius: 50%; cursor: pointer;">-</button>
+              <span data-qty-for="샘플 표정 추가" style="font-size: 0.9rem; font-weight: 600;">0</span>
+              <button type="button" onclick="changeAddonQty('샘플 표정 추가', 1)" style="width: 24px; height: 24px; border: 1px solid #d85265; color: #d85265; background: #fff; border-radius: 50%; cursor: pointer;">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- 3. 협업 리깅 작가 -->
+      <div class="form-section-group">
+        <div class="section-title-red" style="color: #d85265; font-weight: 600; font-size: 1.05rem; margin-bottom: 10px;">3. 협업 리깅 작가</div>
+        <div id="artistSelectionArea">
+          <div class="empty-artist-box" id="emptyArtistBox" style="border: 2px dashed #d1d5db; border-radius: 10px; padding: 14px; text-align: center; color: #9ca3af; background-color: #f9fafb; font-size: 0.85rem;">
+            선택한 협업 작가가 없습니다.
+          </div>
+          <div class="selected-artist-card" id="selectedArtistCard" style="display: none; justify-content: space-between; align-items: center; padding: 10px 14px; border: 1px solid #d85265; border-radius: 10px; background-color: #fff5f6;">
+            <div id="artistCardContent" style="font-size: 0.88rem; color: #333;"></div>
+            <button type="button" class="remove-btn" onclick="deselectArtist()" style="border: none; background: none; color: #d85265; font-size: 1.1rem; cursor: pointer;">×</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- [하단 우측 블록] 선택내역 & 금액 & 복사 버튼 박스 -->
+    <div class="bottom-right-box" style="flex: 1; min-width: 300px; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px; background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+      
+      <!-- 선택내역 및 금액 실시간 연동 영역 -->
+      <div class="selection-summary-container" style="display: flex; flex-direction: column; flex: 1;">
+        <!-- 선택내역 제목 중앙 정렬 -->
+        <div class="summary-title-centered" style="text-align: center; color: #d85265; font-weight: 600; font-size: 1rem; margin-bottom: 12px;">
+          . + * ꒰ঌ 선택 내역 ໒꒱ * + .
+        </div>
+
+        <!-- 선택 목록 스크롤 영역 -->
+        <div id="selectionSummaryList" style="min-height: 100px; max-height: 180px; overflow-y: auto; margin-bottom: 12px; padding-right: 4px;">
+          <div class="empty-msg" style="text-align: center; color: #9ca3af; padding: 30px 0; font-size: 0.85rem;">선택된 항목이 없습니다.</div>
+        </div>
+
+        <div style="border-top: 1px solid #f0f0f0; margin: 8px 0 12px 0;"></div>
+
+        <!-- 금액 요약 -->
+        <div class="summary-totals-rows" style="font-size: 0.88rem; color: #444; display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>기본 패키지</span>
+            <strong id="summaryBasePrice">미선택</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>추가옵션</span>
+            <strong id="summaryAddonPrice">0원</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 6px; color: #d85265; font-size: 1.05rem; font-weight: bold;">
+            <span>예상 합계</span>
+            <strong id="summaryTotalPrice">0원</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- 최하단 가로 작성한 양식 복사하기 버튼 -->
+      <button class="copy-btn copy-btn-large" onclick="copyText()" style="width: 100%; margin-top: 16px; padding: 12px; background-color: #d85265; color: #fff; border: none; border-radius: 10px; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px;">
+        <span class="copy-emoji">📋</span><span>작성한 양식 복사하기</span>
+      </button>
+
+    </div>
+
+  </div>
+</div>
 
 
 <script>
@@ -2220,21 +2622,8 @@ function replaceLineByPrefix(lines, prefix, newLine){
 
 let selectedBaseOption = null;
 let selectedAddonOptions = [];
+let selectedArtist = null;
 let isCommercialUsage = false;
-
-function selectUsage(type){
-  isCommercialUsage = (type === 'com');
-  const cardNon = document.getElementById('usageCardNon');
-  const cardCom = document.getElementById('usageCardCom');
-  if(isCommercialUsage){
-    cardNon.classList.remove('selected');
-    cardCom.classList.add('selected');
-  } else {
-    cardCom.classList.remove('selected');
-    cardNon.classList.add('selected');
-  }
-  updateUI();
-}
 
 function getBaseOptionItems(){
   return Array.from(document.querySelectorAll('.base-option-item'));
@@ -2267,8 +2656,7 @@ function enforceAddonRules(){
     const idx = selectedAddonOptions.findIndex(o => o.name === name);
     if(idx > -1){
       selectedAddonOptions.splice(idx, 1);
-      const el = findAddonElement(name);
-      if(el) el.classList.remove('active');
+      syncAddonItem(name);
       changed = true;
     }
   });
@@ -2277,89 +2665,90 @@ function enforceAddonRules(){
 }
 
 function updateSelectionSummary(){
-  const list = document.getElementById('selectionSummaryList');
+  const summaryListEl = document.getElementById('selectionSummaryList');
+  if(!summaryListEl) return;
+
+  summaryListEl.innerHTML = '';
+  let itemsCount = 0;
+
+  // 1. 기본 패키지 표시
+  if(selectedBaseOption){
+    itemsCount++;
+    const itemEl = document.createElement('div');
+    itemEl.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.85rem; color: #333;';
+    itemEl.innerHTML = `
+      <span>${selectedBaseOption.name} (+${formatPrice(selectedBaseOption.price)}원)</span>
+      <button type="button" onclick="removeBaseOption()" style="border: none; background: none; color: #d85265; font-size: 1rem; cursor: pointer;" aria-label="삭제">×</button>
+    `;
+    summaryListEl.appendChild(itemEl);
+  }
+
+  // 2. 추가 옵션 표시
+  selectedAddonOptions.forEach(addon => {
+    itemsCount++;
+    const itemEl = document.createElement('div');
+    itemEl.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.85rem; color: #333;';
+    itemEl.innerHTML = `
+      <span>${addon.name} x${addon.qty} (+${formatPrice(addon.price * addon.qty)}원)</span>
+      <button type="button" onclick="removeAddon('${addon.name}')" style="border: none; background: none; color: #d85265; font-size: 1rem; cursor: pointer;" aria-label="삭제">×</button>
+    `;
+    summaryListEl.appendChild(itemEl);
+  });
+
+  // 3. 협업 작가 표시
+  if(selectedArtist){
+    itemsCount++;
+    const itemEl = document.createElement('div');
+    itemEl.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.85rem; color: #333;';
+    itemEl.innerHTML = `
+      <span>협업작가: ${selectedArtist.name}</span>
+      <button type="button" onclick="deselectArtist()" style="border: none; background: none; color: #d85265; font-size: 1rem; cursor: pointer;" aria-label="삭제">×</button>
+    `;
+    summaryListEl.appendChild(itemEl);
+  }
+
+  if(itemsCount === 0){
+    summaryListEl.innerHTML = '<div class="empty-msg" style="text-align: center; color: #9ca3af; padding: 30px 0; font-size: 0.85rem;">선택된 항목이 없습니다.</div>';
+  }
+
+  // 4. 금액 계산 및 업데이트
   const basePriceEl = document.getElementById('summaryBasePrice');
   const addonPriceEl = document.getElementById('summaryAddonPrice');
   const totalPriceEl = document.getElementById('summaryTotalPrice');
 
-  list.innerHTML = '';
-
   const baseTotal = selectedBaseOption ? selectedBaseOption.price : 0;
-  let addonTotal = 0;
+  let addonTotal = selectedAddonOptions.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  if(isCommercialUsage) addonTotal += 300000;
 
-  if(selectedBaseOption){
-    const item = document.createElement('div');
-    item.className = 'selection-summary-item';
-    item.innerHTML = `
-      <div class="left">
-        <div class="name">패키지</div>
-        <div class="sub">${selectedBaseOption.name}</div>
-      </div>
-      <div class="right">
-        <strong>${formatPrice(selectedBaseOption.price)}원</strong>
-      </div>
-    `;
-    list.appendChild(item);
-    basePriceEl.textContent = `${formatPrice(selectedBaseOption.price)}원`;
-  }else{
-    basePriceEl.textContent = '미선택';
+  if(basePriceEl) basePriceEl.textContent = selectedBaseOption ? `${formatPrice(baseTotal)}원` : '미선택';
+  if(addonPriceEl) addonPriceEl.textContent = `${formatPrice(addonTotal)}원`;
+  if(totalPriceEl) totalPriceEl.textContent = `${formatPrice(baseTotal + addonTotal)}원`;
+
+  // 5. 하단 좌측 협업 작가 영역 UI 연동
+  const emptyArtistBox = document.getElementById('emptyArtistBox');
+  const selectedArtistCard = document.getElementById('selectedArtistCard');
+  const artistCardContent = document.getElementById('artistCardContent');
+
+  if(emptyArtistBox && selectedArtistCard && artistCardContent){
+    if(selectedArtist){
+      emptyArtistBox.style.display = 'none';
+      selectedArtistCard.style.display = 'flex';
+      artistCardContent.innerHTML = `<strong>${selectedArtist.name}</strong> ${selectedArtist.detail ? `(${selectedArtist.detail})` : ''}`;
+    } else {
+      emptyArtistBox.style.display = 'block';
+      selectedArtistCard.style.display = 'none';
+    }
   }
-
-  selectedAddonOptions.forEach(option => {
-    const subtotal = option.price * option.qty;
-    addonTotal += subtotal;
-
-    const isInquiry = option.price === 0;
-    const item = document.createElement('div');
-    item.className = 'selection-summary-item';
-    item.innerHTML = `
-      <div class="left">
-        <div class="name">${isInquiry ? option.name.replace(' 별도문의','') : option.name}</div>
-        <div class="sub">${isInquiry ? '별도 문의' : `${option.qty}개 (+${formatPrice(option.price)}원)`}</div>
-      </div>
-      <div class="right">
-        <strong>${isInquiry ? '문의' : formatPrice(subtotal)+'원'}</strong>
-        <button type="button" class="remove-btn" data-remove="${option.name}" aria-label="${option.name} 제거">×</button>
-      </div>
-    `;
-    list.appendChild(item);
-  });
-
-  // 상업용 선택 시 저작이용권 구매 항목 추가
-  if(isCommercialUsage){
-    const commercialPrice = 300000;
-    addonTotal += commercialPrice;
-    const item = document.createElement('div');
-    item.className = 'selection-summary-item';
-    item.innerHTML = `
-      <div class="left">
-        <div class="name">저작이용권 구매</div>
-        <div class="sub">상업용 이용권</div>
-      </div>
-      <div class="right">
-        <strong>${formatPrice(commercialPrice)}원</strong>
-      </div>
-    `;
-    list.appendChild(item);
-  }
-
-  addonPriceEl.textContent = `${formatPrice(addonTotal)}원`;
-  totalPriceEl.textContent = `${formatPrice(baseTotal + addonTotal)}원`;
-}
-
-function autoResizeTextarea(){
-  const textarea = document.getElementById('inputText');
-  if(!textarea) return;
-  const maxHeight = 500;
-  textarea.style.height = 'auto';
-  const newHeight = Math.min(textarea.scrollHeight, maxHeight);
-  textarea.style.height = newHeight + 'px';
-  textarea.style.overflowY = textarea.scrollHeight > maxHeight ? 'auto' : 'hidden';
 }
 
 function updateFormText(){
   const textarea = document.getElementById('inputText');
+  if(!textarea) return;
   const lines = textarea.value.split('\n');
+
+  const artistText = selectedArtist
+    ? `6. 협업 리깅 작가 : ${selectedArtist.name}${selectedArtist.detail ? ` (${selectedArtist.detail})` : ''}`
+    : '6. 협업 리깅 작가 : (선택사항입니다! 다른 리깅작가가 있다면 작가명을 기재해 주세요.)';
 
   const baseText = selectedBaseOption
     ? `7. 버츄얼 패키지 : ${selectedBaseOption.name} (+${formatPrice(selectedBaseOption.price)}원)`
@@ -2376,22 +2765,20 @@ function updateFormText(){
     ? `8. 추가 옵션 : ${addonParts.join(', ')}`
     : '8. 추가 옵션 : ';
 
-  const basePriceText = document.getElementById('summaryBasePrice').textContent;
-  const addonPriceText = document.getElementById('summaryAddonPrice').textContent;
-  const totalPriceText = document.getElementById('summaryTotalPrice').textContent;
+  const basePriceText = document.getElementById('summaryBasePrice')?.textContent || '미선택';
+  const addonPriceText = document.getElementById('summaryAddonPrice')?.textContent || '0원';
+  const totalPriceText = document.getElementById('summaryTotalPrice')?.textContent || '0원';
   const totalText = `9. 예상 합계 : 기본 패키지 ${basePriceText} + 추가옵션 ${addonPriceText} / 예상 합계 ${totalPriceText}`;
 
+  replaceLineByPrefix(lines, '6. 협업 리깅 작가', artistText);
   replaceLineByPrefix(lines, '7. 버츄얼 패키지', baseText);
   replaceLineByPrefix(lines, '8. 추가 옵션', addonText);
   replaceLineByPrefix(lines, '9. 예상 합계', totalText);
   textarea.value = lines.join('\n');
-  autoResizeTextarea();
 }
 
 function updateUI(){
-  if(enforceAddonRules()){
-    // dependent add-ons removed; proceed with refreshed state
-  }
+  enforceAddonRules();
   updateSelectionSummary();
   updateFormText();
 }
@@ -2399,69 +2786,81 @@ function updateUI(){
 function toggleBaseOption(el, name, price){
   const isSame = selectedBaseOption && selectedBaseOption.name === name;
 
-  getBaseOptionItems().forEach(item => item.classList.remove('active'));
+  getBaseOptionItems().forEach(item => {
+    item.style.borderColor = '#ecd5d8';
+    item.style.backgroundColor = '#fff';
+  });
 
   if(isSame){
     selectedBaseOption = null;
-    el.classList.remove('active');
   }else{
     selectedBaseOption = { name, price };
-    el.classList.add('active');
+    if(el){
+      el.style.borderColor = '#d85265';
+      el.style.backgroundColor = '#fff5f6';
+    }
   }
 
   updateUI();
 }
 
-function toggleAddonOption(el, name, price){
-  const idx = selectedAddonOptions.findIndex(o => o.name === name);
+function syncAddonItem(name){
+  const option = selectedAddonOptions.find(o => o.name === name);
+  const qty = option ? Math.max(0, Number(option.qty) || 0) : 0;
+  setQtyValue(name, qty);
+}
 
-  if(idx > -1){
-    selectedAddonOptions.splice(idx, 1);
-    el.classList.remove('active');
+function changeAddonQty(name, delta){
+  const item = findAddonElement(name);
+  const price = item ? Number(item.dataset.price || 0) : 0;
+  const existing = selectedAddonOptions.find(o => o.name === name);
+  const currentQty = existing ? Math.max(0, Number(existing.qty) || 0) : 0;
+  const nextQty = Math.max(0, currentQty + Number(delta));
+
+  if(nextQty === 0){
+    selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
+    syncAddonItem(name);
     updateUI();
     return;
   }
-
   if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
     alert("추가 팔 파츠’를 먼저 체크해야 선택 가능한 옵션이에요!,,⁃ ⩊ ⁃,,");
     return;
   }
-
-  selectedAddonOptions.push({ name, price, qty: 1 });
-  el.classList.add('active');
-  setQtyValue(name, 1);
+  if(existing) existing.qty = nextQty;
+  else selectedAddonOptions.push({ name, price, qty: nextQty });
+  syncAddonItem(name);
   updateUI();
 }
 
-function changeAddonQty(name, delta){
-  const option = selectedAddonOptions.find(o => o.name === name);
-  if(!option) return;
-
-  option.qty += delta;
-
-  if(option.qty <= 0){
-    selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
-    const item = findAddonElement(name);
-    if(item) item.classList.remove('active');
-  }else{
-    option.qty = Math.max(1, option.qty);
-    setQtyValue(name, option.qty);
-    const item = findAddonElement(name);
-    if(item) item.classList.add('active');
-  }
-
+function removeBaseOption(){
+  getBaseOptionItems().forEach(item => {
+    item.style.borderColor = '#ecd5d8';
+    item.style.backgroundColor = '#fff';
+  });
+  selectedBaseOption = null;
   updateUI();
 }
 
 function removeAddon(name){
   selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
-  const item = findAddonElement(name);
-  if(item) item.classList.remove('active');
+  syncAddonItem(name);
+  updateUI();
+}
+
+function selectArtist(artistObj){
+  selectedArtist = artistObj;
+  updateUI();
+}
+
+function deselectArtist(){
+  selectedArtist = null;
   updateUI();
 }
 
 function copyText() {
   const textarea = document.getElementById('inputText');
+  if(!textarea) return;
   const text = textarea.value;
 
   function finishCopy(){
@@ -2497,208 +2896,81 @@ function copyText() {
   }
 }
 
-let current = 0;
-const images = [
-  'Cheriko_sample_collage.png',
-  '93_sample_collage.png',
-  'sina_sample_collage.png',
-  'rararu_sample_collage.png',
-  'koya_sample_collage.png',
-  'raruka_sample_collage.png',
-  'B_sample_collage.png'
-];
-
-// 이미지 요소별 "가장 최신 요청"의 토큰을 저장. 연타 등으로 같은 요소에 대해
-// 여러 로딩이 동시에 진행될 때, 늦게 끝난 이전 요청이 최신 요청 결과를
-// 덮어써서 엉뚱한 이미지가 노출되는 레이스 컨디션을 막기 위함.
-const galleryLoadTokens = new WeakMap();
-
-function showLoader(container){
-  const loader = container?.querySelector('.heart-loader');
-  loader?.classList.add('active');
-}
-
-function hideLoader(container){
-  const loader = container?.querySelector('.heart-loader');
-  loader?.classList.remove('active');
-}
-
-function changeGalleryImage(imgEl, newSrc, callback){
-  const container = imgEl.parentElement;
-
-  // 이번 호출만의 고유 토큰 발급. 이 함수가 끝나기 전에 같은 imgEl로
-  // 또 다른 호출이 들어오면 galleryLoadTokens의 값이 새 토큰으로 바뀌므로,
-  // 아래 isStale()이 true가 되어 이전(느린) 요청의 후속 처리를 전부 무시한다.
-  const token = Symbol('galleryLoad');
-  galleryLoadTokens.set(imgEl, token);
-  const isStale = () => galleryLoadTokens.get(imgEl) !== token;
-
-  // 1. 기존 이미지를 완전히 숨기고 하트 로더 표시.
-  //    (display:none 대신 visibility:hidden을 사용해 뷰어 영역의 레이아웃 높이가
-  //    갑자기 무너지지 않도록 함 → 로더가 정중앙에 안정적으로 표시됨)
-  imgEl.style.visibility = 'hidden';
-  showLoader(container);
-
-  const finish = () => {
-    if(isStale()) return;
-    // 디코딩까지 완전히 끝난 뒤에만 로더 제거 + 이미지 노출 → 잔상/겹침 및
-    // 위→아래로 그려지는 현상을 동시에 차단. 시간 기반 처리는 전혀 없으며
-    // 오직 실제 로딩 성공/실패 이벤트에 의해서만 호출된다.
-    hideLoader(container);
-    imgEl.style.visibility = 'visible';
-    if(callback) callback();
-  };
-
-  // 3. 실제 화면에 보여줄 <img> 요소에 src를 넣은 뒤, 그 요소 기준으로도
-  //    디코딩 완료를 재확인한다. onload는 "다운로드 완료"만 보장할 뿐 "디코딩/페인트
-  //    준비 완료"는 보장하지 않아 큰 이미지에서 위→아래로 그려지는 현상이 남을 수
-  //    있으므로, decode()를 통해 100% 디코딩이 끝난 시점에만 finish()를 호출한다.
-  const reveal = () => {
-    if(isStale()) return;
-    imgEl.src = newSrc;
-    if(imgEl.decode){
-      imgEl.decode().then(finish).catch(finish);
-    } else {
-      finish();
-    }
-  };
-
-  // 2. 백그라운드 메모리에서 새 이미지를 완전히 다운로드 + 디코딩까지 마친 후에만
-  //    실제 화면 요소에 반영한다 (사전 로드).
-  const tempImg = new Image();
-  tempImg.src = newSrc;
-
-  if(tempImg.decode){
-    tempImg.decode().then(reveal).catch(reveal);
-  } else {
-    tempImg.onload = reveal;
-    tempImg.onerror = reveal;
-  }
-}
-
-function fadeSwap(imgEl, newSrc, callback){
-  changeGalleryImage(imgEl, newSrc, callback);
-}
-
-function showGallery(index){
-  current = index;
-  const img = document.getElementById('galleryImg');
-  fadeSwap(img, images[current], updateSampleThumbBorder);
-  updateSampleThumbBorder();
-}
-
-function selectSample(index){
-  showGallery(index);
-}
-
-function updateSampleThumbBorder(){
-  const thumbs = document.querySelectorAll('#sampleThumbGrid img');
-  thumbs.forEach((thumb, index) => {
-    thumb.style.border = index === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
-  });
-}
-
-let faceCurrent = 0;
-const faceImages = [
-  'Cheriko_expressions.png',
-  'raruka_face_types.png',
-  'koya_face_9types.png',
-  'sia_face_types.png'
-];
-const faceDescriptions = [
-  '체리코님 표정 샘플',
-  '라루카님 표정 샘플',
-  '네무키 코야님 표정 샘플',
-  '시로유키 시아님 1.0 표정 샘플'
-];
-
-function showFace(index){
-  faceCurrent = index;
-  const img = document.getElementById('faceGallery');
-  const desc = document.getElementById('faceDesc');
-  fadeSwap(img, faceImages[faceCurrent], () => {
-    desc.innerHTML = faceDescriptions[faceCurrent];
-    updateFaceDots();
-  });
-  updateFaceDots();
-}
-
-function nextFace(){
-  showFace((faceCurrent + 1) % faceImages.length);
-}
-
-function prevFace(){
-  showFace((faceCurrent - 1 + faceImages.length) % faceImages.length);
-}
-
-function updateFaceDots(){
-  const dotsEl = document.getElementById('faceDots');
-  if(dotsEl) {
-    dotsEl.innerText = faceImages.map((_, i) => i === faceCurrent ? '●' : '○').join(' ');
-  }
-}
-
-let styleCurrent = 0;
-const styleImages = [
-  'style_01.png',
-  'style_02.png',
-  'style_03.png',
-  'style_04.png'
-];
-
-function showStyle(index){
-  styleCurrent = index;
-  const img = document.getElementById('styleGallery');
-  fadeSwap(img, styleImages[styleCurrent], updateStyleDots);
-  updateStyleDots();
-}
-
-function nextStyle(){
-  showStyle((styleCurrent + 1) % styleImages.length);
-}
-
-function prevStyle(){
-  showStyle((styleCurrent - 1 + styleImages.length) % styleImages.length);
-}
-
-function updateStyleDots(){
-  const dotsEl = document.getElementById('styleDots');
-  if(dotsEl) {
-    dotsEl.innerText = styleImages.map((_, i) => i === styleCurrent ? '●' : '○').join(' ');
-  }
-}
-
-// 💡 안전한 실행을 위해 모든 함수가 준비된 후 이미지 프리로드 및 초기화 실행
-if(typeof preloadImages === 'function'){
-  preloadImages(images);
-  preloadImages(faceImages);
-  preloadImages(styleImages);
-}
-
-document.addEventListener('click', (event) => {
-  const btn = event.target.closest('.remove-btn');
-  if(btn && typeof removeAddon === 'function'){
-    removeAddon(btn.dataset.remove);
-  }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-  if(document.getElementById('galleryImg')) showGallery(0);
-  if(document.getElementById('faceGallery')) showFace(0);
-  if(document.getElementById('styleGallery')) showStyle(0);
-  
   if(typeof updateUI === 'function'){
     updateUI();
   }
-
-  const textarea = document.getElementById('inputText');
-  if(textarea && typeof autoResizeTextarea === 'function'){
-    autoResizeTextarea();
-    textarea.addEventListener('input', autoResizeTextarea);
-  }
 });
-</script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. 상업용/비상업용 카드 클릭 토글 및 가격 반영
+    const usageCards = document.querySelectorAll('.usage-card');
+    usageCards.forEach(card => {
+        card.addEventListener('click', () => {
+            usageCards.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            
+            if (typeof updateTotalPrice === 'function') {
+                updateTotalPrice();
+            }
+        });
+    });
 
+    // 2. 샘플 슬라이더 (faceGallery, styleGallery) 순환 기능
+    const galleryData = {
+        faceGallery: {
+            images: [], // 기존 이미지 경로 배열 연동
+            currentIndex: 0
+        },
+        styleGallery: {
+            images: [], // 기존 이미지 경로 배열 연동
+            currentIndex: 0
+        }
+    };
+
+    document.querySelectorAll('.circle-nav').forEach(navBtn => {
+        navBtn.addEventListener('click', (e) => {
+            const container = navBtn.closest('#faceGallery, #styleGallery');
+            if (!container) return;
+
+            const galleryId = container.id;
+            const targetData = galleryData[galleryId];
+            const imgElement = container.querySelector('img');
+            
+            if (!targetData || !imgElement || !targetData.images.length) return;
+
+            const isRight = navBtn.classList.contains('right');
+            if (isRight) {
+                targetData.currentIndex = (targetData.currentIndex + 1) % targetData.images.length;
+            } else {
+                targetData.currentIndex = (targetData.currentIndex - 1 + targetData.images.length) % targetData.images.length;
+            }
+
+            imgElement.src = targetData.images[targetData.currentIndex];
+        });
+    });
+});
+// 추가옵션 선택 수량에 따른 회색 박스 및 옵션 항목 노출 제어
+function updateAddonEmptyState() {
+    const activeAddons = document.querySelectorAll('.addon-item.active');
+    const emptyBox = document.getElementById('emptyAddonBox');
+    
+    if (emptyBox) {
+        if (activeAddons.length === 0) {
+            emptyBox.style.display = 'flex';
+        } else {
+            emptyBox.style.display = 'none';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateAddonEmptyState();
+});
+/* 미선택(수량 0) 상태인 추가옵션 항목은 화면에서 숨김 */
+.addon-item:not(.active) {
+    display: none !important;
+}
+</script>
 
 </body>
 </html>
