@@ -401,12 +401,23 @@ details:not([open]) > *:not(summary){
 }
 
 .option-stack{
-  display:grid;
+  display:flex;
+  flex-wrap:wrap;
   gap:10px;
   margin-top:10px;
 }
 
-/* 하위 카테고리(표정/팔·포즈/소품/의상·헤어/기타) 개별 여닫기 */
+.option-stack > details.price-box{
+  flex:0 0 calc(50% - 5px);
+  min-width:0;
+  align-self:flex-start;
+}
+
+@media (max-width:899px){
+  .option-stack > details.price-box{
+    flex:0 0 100%;
+  }
+}
 details.price-box{
   cursor:default;
 }
@@ -430,6 +441,11 @@ details.price-box:not([open]) > summary{
   transition:transform .2s ease;
 }
 
+.price-head-label{
+  flex:1;
+  min-width:0;
+}
+
 details.price-box[open] .summary-caret-sm{
   transform:rotate(180deg);
 }
@@ -438,11 +454,7 @@ details.price-box .price-list{
   margin-top:2px;
 }
 
-@media (min-width:900px){
-  .option-stack{
-    grid-template-columns:1fr 1fr;
-  }
-}
+/* 하위 카테고리(표정/팔·포즈/소품/의상·헤어/기타) 개별 여닫기 */
 
 /* ============================================================
    실제 커미션 샘플 / 표정 샘플 / 그림체 참고 (뷰어)
@@ -663,26 +675,44 @@ details.price-box .price-list{
 }
 
 /* ============================================================
-   협업 작가 — 좌우 캐러셀 (페이지당 4명, 체크 선택 가능)
+   협업 작가 — 캐러셀 (페이지당 4명 · 2x2 고정, 하단 좌우 버튼)
    ============================================================ */
 
-.collab-carousel{
-  display:flex;
-  align-items:center;
+.collab-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   gap:10px;
   margin-top:12px;
 }
 
-.collab-carousel .circle-nav{
-  position:static;
-  flex-shrink:0;
+.collab-nav-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  margin-top:10px;
 }
 
-.collab-grid{
-  flex:1;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+.collab-nav-row .dots{
+  margin-top:0;
+}
+
+.circle-nav-sm{
+  width:32px;
+  height:32px;
+  border-radius:999px;
+  border:none;
+  background:rgba(235,131,159,0.95);
+  color:white;
+  font-size:14px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(235,131,159,0.25);
+  padding:0;
+  flex-shrink:0;
 }
 
 .collab-card{
@@ -772,10 +802,6 @@ details.price-box .price-list{
 .collab-check-icon{
   font-size:15px;
   line-height:1;
-}
-
-@media (max-width:640px){
-  .collab-grid{ grid-template-columns:1fr; }
 }
 
 #modal{
@@ -1069,6 +1095,10 @@ textarea{
   overflow-y:auto;
 }
 
+@media (max-width:640px){
+  textarea{ min-height:260px; max-height:380px; }
+}
+
 #inputText{
   height:420px;
   overflow:hidden;
@@ -1149,6 +1179,24 @@ textarea{
   font-size:12.5px;
   color:var(--text);
   line-height:1.45;
+  cursor:default;
+  transition:border-color .18s, background .18s, opacity .18s;
+}
+
+/* 클릭 가능한 선택형 칩 (패키지·사용범위) */
+.mini-chip.selectable{
+  cursor:pointer;
+  opacity:0.55;
+  border-style:dashed;
+}
+.mini-chip.selectable:hover{
+  opacity:0.8;
+  border-color:var(--pink);
+  border-style:dashed;
+}
+.mini-chip.selectable.active{
+  opacity:1;
+  border-style:solid;
 }
 
 .mini-chip.active{
@@ -1205,7 +1253,7 @@ textarea{
 
 @media (min-width:700px){
   .form-quad-left{
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
   }
 }
 
@@ -1249,10 +1297,31 @@ textarea{
 
 .wf-flow-row{
   display:flex;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   gap:8px 6px;
+  overflow-x:auto;
+  padding-bottom:6px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:var(--pink) var(--pink-bg);
+}
+.wf-flow-row::-webkit-scrollbar{
+  height:5px;
+}
+.wf-flow-row::-webkit-scrollbar-thumb{
+  background:var(--pink);
+  border-radius:999px;
+}
+
+@media (min-width:640px){
+  .wf-flow-row{
+    flex-wrap:wrap;
+    justify-content:center;
+    overflow-x:visible;
+    padding-bottom:0;
+  }
 }
 
 .wf-pill{
@@ -1269,6 +1338,7 @@ textarea{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  flex-shrink:0;
 }
 
 .wf-pill.accent{
@@ -1303,19 +1373,20 @@ textarea{
   margin-left:2px;
 }
 
-/* ===== 안내사항 2열 3행 카드 그리드 ===== */
+/* ===== 안내사항 3열 카드 그리드 (모든 화면 폭에서 3열 고정) ===== */
 .notice-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
 .notice-card{
   background:var(--pink-soft);
   border:1px solid var(--line);
   border-radius:18px;
-  padding:16px;
+  padding:14px 12px;
   transition:box-shadow .2s ease, transform .2s ease;
+  min-width:0;
 }
 
 .notice-card:hover{
@@ -1324,38 +1395,45 @@ textarea{
 }
 
 .notice-card-head{
-  font-size:14px;
+  font-size:13px;
   font-weight:700;
   color:var(--pink);
-  margin-bottom:10px;
-  padding-bottom:8px;
+  margin-bottom:8px;
+  padding-bottom:7px;
   border-bottom:1px dashed var(--line);
+  word-break:keep-all;
 }
 
 .notice-card-body{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:7px;
 }
 
 .notice-item{
   display:flex;
   align-items:flex-start;
-  gap:6px;
-  font-size:13px;
-  line-height:1.75;
+  gap:5px;
+  font-size:11.5px;
+  line-height:1.65;
   color:var(--text);
+  min-width:0;
 }
 
 .ni-icon{
   flex-shrink:0;
   color:var(--pink);
-  font-size:13px;
+  font-size:11.5px;
   margin-top:1px;
 }
 
-@media (min-width:900px){
-  .notice-grid{ grid-template-columns:repeat(3,1fr); }
+@media (min-width:640px){
+  .notice-grid{ gap:12px; }
+  .notice-card{ padding:16px; }
+  .notice-card-head{ font-size:14px; margin-bottom:10px; padding-bottom:8px; }
+  .notice-card-body{ gap:8px; }
+  .notice-item{ font-size:13px; line-height:1.75; gap:6px; }
+  .ni-icon{ font-size:13px; }
 }
 
 /* ============================================================
@@ -1553,15 +1631,35 @@ textarea{
 
   .card{padding:16px;border-radius:20px;margin-bottom:14px;}
 
-  .collab-grid{grid-template-columns:1fr;}
   .thumb-grid{grid-template-columns:repeat(2,1fr);}
   .circle-nav{width:34px;height:34px;font-size:16px;}
   .style-viewer{max-width:100%;}
 
-  .notice-grid{grid-template-columns:1fr;}
-  .usage-grid{grid-template-columns:1fr;}
-  .usage-card-title{font-size:20px;}
-  .usage-check-btn{width:44px;height:44px;font-size:22px;border-radius:11px;}
+  /* 비상업용/상업용: 세로로 쌓지 않고 2열 유지, 내용은 압축 */
+  .usage-card{padding:13px 10px 11px;}
+  .usage-card-header{margin-bottom:9px;gap:6px;}
+  .usage-card-title{font-size:16px;}
+  .usage-card-badge{font-size:9.5px;padding:2px 7px;}
+  .usage-check-btn{width:32px;height:32px;font-size:16px;border-radius:9px;}
+  .usage-card-divider{margin-bottom:9px;}
+  .usage-list{font-size:11.5px;line-height:1.55;}
+  .usage-list-item{padding:4px 3px;gap:5px;}
+  .usage-list-item .usage-icon{font-size:12px;}
+  .usage-fine-print{font-size:10px;padding:0 2px;}
+
+  /* 협업 작가: 2열(2x2) 유지, 카드/버튼은 압축 */
+  .collab-card{padding:11px 38px 11px 11px;min-height:112px;}
+  .collab-link{font-size:12px;gap:4px;}
+  .collab-check-btn{width:26px;height:26px;top:10px;right:10px;}
+  .collab-check-icon{font-size:13px;}
+
+  /* 신청서 하단 미니 박스: 고정 높이를 줄여 스크롤 부담 축소, 4열 → 2×2 */
+  .form-mini-col{height:180px;}
+  .form-quad-left{grid-template-columns:repeat(2,1fr);}
+  .selection-summary-list{max-height:170px;}
+
+  /* 추가 옵션 수량 +/- 버튼: 터치하기 편하도록 확대 */
+  .qty-controls button{width:32px;height:32px;font-size:15px;}
 }
 
 </style>
@@ -1709,7 +1807,7 @@ textarea{
         <div class="option-stack">
 
           <details class="price-box">
-            <summary class="price-head">✨ 표정 <span class="plain-note">(눈동자 컬러, 눈매 등 변경 가능합니다.)</span><span class="summary-caret-sm">▾</span></summary>
+            <summary class="price-head"><span class="price-head-label">✨ 표정 <span class="plain-note">(눈동자 컬러, 눈매 등 변경 가능합니다.)</span></span><span class="summary-caret-sm">▾</span></summary>
             <div class="price-list">
               <div class="price-item addon-item" data-addon-name="샘플 표정 추가" onclick="toggleAddonOption(this, '샘플 표정 추가', 5000)">
                 <span class="addon-label">샘플 표정 추가 +5,000원</span>
@@ -2045,12 +2143,12 @@ textarea{
   <div class="card static-card reveal" id="sec-collab">
     <div class="title">🤝 협업 작가</div>
     <div class="section-sub">협업하고 싶은 작가님을 선택하면 신청서에 자동으로 반영됩니다. (최대 1명)</div>
-    <div class="collab-carousel">
-      <button type="button" class="circle-nav left" onclick="prevCollabPage()">❮</button>
-      <div class="collab-grid" id="collabGrid"></div>
-      <button type="button" class="circle-nav right" onclick="nextCollabPage()">❯</button>
+    <div class="collab-grid" id="collabGrid"></div>
+    <div class="collab-nav-row">
+      <button type="button" class="circle-nav-sm" onclick="prevCollabPage()">❮</button>
+      <div id="collabDots" class="dots">● ○ ○</div>
+      <button type="button" class="circle-nav-sm" onclick="nextCollabPage()">❯</button>
     </div>
-    <div id="collabDots" class="dots">● ○ ○</div>
   </div>
 
   <div class="card static-card reveal" id="sec-style">
@@ -2153,25 +2251,40 @@ textarea{
 
 8. 추가 옵션 : 
 
-9. 예상 합계 : 
+9. 사용 범위 : 
 
-10. 작가에게 전할 말 : (기타 문의 및 요청)</textarea>
+10. 예상 합계 : 
 
-    <!-- 신청서 박스 4등분: 상단(작성란) / 하단좌(1.패키지·2.옵션·3.협업작가) / 하단우(선택내역+복사버튼) -->
+11. 작가에게 전할 말 : (기타 문의 및 요청)</textarea>
+
+    <!-- 신청서 박스: 상단(작성란) / 하단좌 4열(패키지·옵션·협업작가·사용범위) / 하단우(선택내역+복사) -->
     <div class="form-quad-bottom">
       <div class="form-quad-left">
+
+        <!-- 1. 버츄얼 패키지: 직접 선택 가능 -->
         <div class="form-mini-col">
           <div class="form-mini-head">1. 버츄얼 패키지</div>
           <div class="form-mini-body" id="miniPackageBody"></div>
         </div>
+
+        <!-- 2. 추가 옵션 -->
         <div class="form-mini-col">
           <div class="form-mini-head">2. 추가 옵션</div>
           <div class="form-mini-body" id="miniAddonBody"></div>
         </div>
+
+        <!-- 3. 협업 리깅 작가 -->
         <div class="form-mini-col">
           <div class="form-mini-head">3. 협업 리깅 작가</div>
           <div class="form-mini-body" id="miniCollabBody"></div>
         </div>
+
+        <!-- 4. 사용 범위: 직접 선택 가능 -->
+        <div class="form-mini-col">
+          <div class="form-mini-head">4. 사용 범위</div>
+          <div class="form-mini-body" id="miniUsageBody"></div>
+        </div>
+
       </div>
 
       <div class="form-quad-right">
@@ -2248,16 +2361,16 @@ function selectUsage(type){
    ============================================================ */
 
 const collabArtists = [
+  { name:'Eryn 작가님', desc:'일러 5만원 + 리깅 5만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=51881' },
+  { name:'욤 작가님', desc:'일러 3만원 할인+리깅 5만원 할인/볼빵빵 무료', href:'https://artmug.kr/index.php?channel=view&uid=56616' },
+  { name:'네코노바 작가님', desc:'일러 5만원 + 리깅 10만원 할인 + 표정 3종 리깅 무료', href:'https://artmug.kr/index.php?channel=view&uid=51824' },
+  { name:'감자야 작가님', desc:'일러 5만원 + 리깅 10만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=49415' },
   { name:'다중 작가님', desc:'일러 5만원 + 리깅 5만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=42826' },
   { name:'ROPON 작가님', desc:'리깅 5만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=26980' },
   { name:'마가린 작가님', desc:'일러 3만원 + 리깅 3만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=42853' },
   { name:'하예나 작가님', desc:'리깅 10만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=26603' },
   { name:'세르팡 작가님', desc:'', href:'https://artmug.kr/index.php?channel=view&uid=25829' },
-  { name:'꽃무 작가님', desc:'', href:'https://artmug.kr/index.php?channel=view&uid=31127' },
-  { name:'네코노바 작가님', desc:'일러 5만원 + 리깅 10만원 할인 + 표정 3종 리깅 무료', href:'https://artmug.kr/index.php?channel=view&uid=51824' },
-  { name:'감자야 작가님', desc:'일러 5만원 + 리깅 10만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=49415' },
-  { name:'Eryn 작가님', desc:'일러 5만원 + 리깅 5만원 할인', href:'https://artmug.kr/index.php?channel=view&uid=51881' },
-  { name:'욤 작가님', desc:'일러 3만원 할인+리깅 5만원 할인/볼빵빵 무료', href:'https://artmug.kr/index.php?channel=view&uid=56616' }
+  { name:'꽃무 작가님', desc:'', href:'https://artmug.kr/index.php?channel=view&uid=31127' }
 ];
 
 const COLLAB_PAGE_SIZE = 4;
@@ -2458,7 +2571,7 @@ function updateSelectionSummary(){
 function autoResizeTextarea(){
   const textarea = document.getElementById('inputText');
   if(!textarea) return;
-  const maxHeight = 500;
+  const maxHeight = window.matchMedia('(max-width: 640px)').matches ? 380 : 500;
   textarea.style.height = 'auto';
   const newHeight = Math.min(textarea.scrollHeight, maxHeight);
   textarea.style.height = newHeight + 'px';
@@ -2484,14 +2597,17 @@ function updateFormText(){
     ? `8. 추가 옵션 : ${addonParts.join(', ')}`
     : '8. 추가 옵션 : ';
 
+  const usageText = `9. 사용 범위 : ${isCommercialUsage ? '상업용' : '비상업용'}`;
+
   const basePriceText = document.getElementById('summaryBasePrice').textContent;
   const addonPriceText = document.getElementById('summaryAddonPrice').textContent;
   const totalPriceText = document.getElementById('summaryTotalPrice').textContent;
-  const totalText = `9. 예상 합계 : 기본 패키지 ${basePriceText} + 추가옵션 ${addonPriceText} / 예상 합계 ${totalPriceText}`;
+  const totalText = `10. 예상 합계 : 기본 패키지 ${basePriceText} + 추가옵션 ${addonPriceText} / 예상 합계 ${totalPriceText}`;
 
   replaceLineByPrefix(lines, '7. 버츄얼 패키지', baseText);
   replaceLineByPrefix(lines, '8. 추가 옵션', addonText);
-  replaceLineByPrefix(lines, '9. 예상 합계', totalText);
+  replaceLineByPrefix(lines, '9. 사용 범위', usageText);
+  replaceLineByPrefix(lines, '10. 예상 합계', totalText);
   textarea.value = lines.join('\n');
   autoResizeTextarea();
 }
@@ -2511,17 +2627,44 @@ function renderMiniPackage(){
   const el = document.getElementById('miniPackageBody');
   if(!el) return;
 
-  if(!selectedBaseOption){
-    el.innerHTML = '<div class="form-mini-empty">선택된 패키지가 없습니다.</div>';
-    return;
+  const baseOptions = [
+    { name:'전신 패키지', price:800000 },
+    { name:'반신 패키지', price:500000 }
+  ];
+
+  el.innerHTML = baseOptions.map(opt => {
+    const isActive = selectedBaseOption && selectedBaseOption.name === opt.name;
+    return `
+      <div class="mini-chip selectable${isActive ? ' active' : ''}"
+           onclick="miniSelectPackage('${opt.name}', ${opt.price})">
+        <div class="mini-chip-name">${escapeHtml(opt.name)}</div>
+        <div class="mini-chip-meta"><strong>+${formatPrice(opt.price)}원</strong></div>
+      </div>
+    `;
+  }).join('');
+}
+
+function miniSelectPackage(name, price){
+  // 이미 선택된 항목이면 해제
+  const isSame = selectedBaseOption && selectedBaseOption.name === name;
+
+  // 가격표 섹션의 기존 선택 상태도 동기화
+  document.querySelectorAll('.base-option-item').forEach(el => {
+    el.classList.remove('active');
+  });
+
+  if(isSame){
+    selectedBaseOption = null;
+  } else {
+    selectedBaseOption = { name, price };
+    document.querySelectorAll('.base-option-item').forEach(el => {
+      if(el.textContent.includes(name)){
+        el.classList.add('active');
+      }
+    });
   }
 
-  el.innerHTML = `
-    <div class="mini-chip active">
-      <div class="mini-chip-name">${escapeHtml(selectedBaseOption.name)}</div>
-      <div class="mini-chip-meta"><strong>+${formatPrice(selectedBaseOption.price)}원</strong></div>
-    </div>
-  `;
+  updateUI();
 }
 
 function renderMiniAddon(){
@@ -2564,31 +2707,49 @@ function renderMiniAddon(){
 
 function renderMiniCollab(){
   const el = document.getElementById('miniCollabBody');
-  const textarea = document.getElementById('inputText');
-  if(!el || !textarea) return;
+  if(!el) return;
 
-  const lines = textarea.value.split('\n');
-  const line = lines.find(l => l.trimStart().startsWith('6. 협업 리깅 작가'));
-
-  let raw = '';
-  if(line){
-    const idx = line.indexOf(':');
-    raw = idx !== -1 ? line.slice(idx + 1).trim() : '';
-  }
-
-  const isEmpty = !raw || raw.startsWith('(');
-
-  if(isEmpty){
+  if(!selectedCollabArtist){
     el.innerHTML = '<div class="form-mini-empty">선택한 협업 작가가 없습니다.</div>';
-  }else{
-    el.innerHTML = `<div class="mini-chip active"><div class="mini-chip-name">${escapeHtml(raw)}</div></div>`;
+    return;
   }
+
+  const artist = collabArtists.find(a => a.name === selectedCollabArtist);
+  const desc = artist && artist.desc ? ` (${artist.desc})` : '';
+  el.innerHTML = `<div class="mini-chip active"><div class="mini-chip-name">${escapeHtml(selectedCollabArtist)}${escapeHtml(desc)}</div></div>`;
+}
+
+function renderMiniUsage(){
+  const el = document.getElementById('miniUsageBody');
+  if(!el) return;
+
+  const options = [
+    { key:'non', label:'비상업용' },
+    { key:'com', label:'상업용' }
+  ];
+
+  el.innerHTML = options.map(opt => {
+    const isSelected = (opt.key === 'com') === isCommercialUsage;
+    // 초기값(비상업용)은 기본 선택이므로 항상 한 개는 active
+    return `
+      <div class="mini-chip selectable${isSelected ? ' active' : ''}"
+           onclick="miniSelectUsage('${opt.key}')">
+        <div class="mini-chip-name">${opt.label}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function miniSelectUsage(type){
+  selectUsage(type);
+  // selectUsage 내부에서 updateUI 호출 → renderMiniUsage도 자동 실행됨
 }
 
 function updateFormQuadrant(){
   renderMiniPackage();
   renderMiniAddon();
   renderMiniCollab();
+  renderMiniUsage();
 }
 
 /* ============================================================
@@ -2948,6 +3109,13 @@ document.addEventListener('DOMContentLoaded', () => {
       autoResizeTextarea();
       textarea.addEventListener('input', autoResizeTextarea);
       textarea.addEventListener('input', updateFormQuadrant);
+
+      // 화면 폭이 바뀌면(회전 등) 작성란 최대 높이도 다시 계산
+      let resizeTimer = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(autoResizeTextarea, 150);
+      });
     }
   }catch(e){ console.error(e); }
 });
