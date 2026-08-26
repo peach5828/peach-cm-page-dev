@@ -391,8 +391,8 @@ summary::-webkit-details-marker{display:none;}
 }
 
 @keyframes pricePop{
-  0%{ transform:scale(1); }
-  45%{ transform:scale(1.055); }
+  0%{ transform:scale(0.96); }
+  60%{ transform:scale(1.08); }
   100%{ transform:scale(1); }
 }
 
@@ -843,20 +843,14 @@ details.price-box .price-list{
   line-height:1.6;
   font-size:14px;
 }
-.collab-text-group{
-  color:inherit;
-  text-decoration:none;
-}
-.collab-text-group:hover,
+
+/* 협업 카드 전체 텍스트 그룹에 마우스를 올리면 내부 링크들 동시 강조 */
 .collab-text-group:hover .collab-name,
 .collab-text-group:hover .collab-desc,
 .collab-text-group:hover .collab-arrow{
   font-weight:700;
   text-decoration:underline;
-  text-decoration-thickness:1px;
-  text-underline-offset:2px;
 }
-
 
 .collab-name,
 .collab-desc,
@@ -951,7 +945,7 @@ details.price-box .price-list{
 }
 
 @keyframes checkPop{
-  0%{ transform:scale(.92); }
+  0%{ transform:scale(0.8); }
   60%{ transform:scale(1.1); }
   100%{ transform:scale(1); }
 }
@@ -1039,7 +1033,7 @@ details.price-box .price-list{
 }
 
 @keyframes qtyBump{
-  0%{ transform:scale(1); }
+  0%{ transform:scale(0.95); }
   50%{ transform:scale(1.1); }
   100%{ transform:scale(1); }
 }
@@ -1225,7 +1219,7 @@ details.price-box .price-list{
 }
 
 @keyframes copyCheckPop{
-  0%{ transform:scale(.92); }
+  0%{ transform:scale(0.8); }
   60%{ transform:scale(1.1); }
   100%{ transform:scale(1); }
 }
@@ -1530,13 +1524,13 @@ textarea{
   justify-content:center;
   flex-shrink:0;
   opacity:0;
-  transform:scale(0.6);
+  transform:scale(0.8);
 }
 
 /* 부모 워크플로우 카드가 화면에 들어오면, 알약들이 화살표를 따라 순서대로 통통 등장 */
 @keyframes wfPillPop{
-  0%{ opacity:0; transform:scale(.94); }
-  60%{ opacity:1; transform:scale(1.08); }
+  0%{ opacity:0; transform:scale(0.8); }
+  60%{ opacity:1; transform:scale(1.06); }
   100%{ opacity:1; transform:scale(1); }
 }
 .workflow-card.in-view .wf-pill{
@@ -1866,6 +1860,65 @@ textarea{
 }
 
 /* ============================================================
+   토스트 알림 (팔/포즈 안내 등)
+   ============================================================ */
+
+.toast-container{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  pointer-events:none;
+}
+
+.toast-message{
+  background:rgba(235,131,159,0.95);
+  color:white;
+  padding:12px 20px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+  box-shadow:0 6px 20px rgba(235,131,159,0.35);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .3s ease, transform .3s ease;
+  pointer-events:none;
+  max-width:90vw;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.toast-message.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ============================================================
+   팔/포즈 아코디언 리플 효과 (미클릭 시 반복)
+   ============================================================ */
+
+@keyframes ripplePulse{
+  0%{
+    box-shadow:0 0 0 0 rgba(235,131,159,0.6);
+  }
+  70%{
+    box-shadow:0 0 0 12px rgba(235,131,159,0);
+  }
+  100%{
+    box-shadow:0 0 0 0 rgba(235,131,159,0);
+  }
+}
+
+.ripple-on-summary{
+  animation:ripplePulse 1.8s ease-out infinite;
+}
+
+/* ============================================================
    반응형 (모바일)
    ============================================================ */
 
@@ -1928,73 +1981,11 @@ textarea{
   .qty-controls button{width:32px;height:32px;font-size:15px;}
 }
 
-
-/* ============================================================
-   추가옵션 안내 토스트 / 팔·포즈 아코디언 유도 리플
-   ============================================================ */
-.addon-toast{
-  position:fixed;
-  left:50%;
-  bottom:28px;
-  transform:translate(-50%, 14px);
-  z-index:1200;
-  padding:11px 18px;
-  border:1px solid rgba(235,131,159,.45);
-  border-radius:999px;
-  background:rgba(255,250,252,.96);
-  color:#7d5965;
-  box-shadow:0 8px 24px rgba(100,55,70,.14);
-  font-size:13px;
-  font-weight:700;
-  line-height:1.4;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transition:opacity .22s ease, transform .22s cubic-bezier(.22,1,.36,1), visibility .22s;
-}
-.addon-toast.show{
-  opacity:1;
-  visibility:visible;
-  transform:translate(-50%, 0);
-}
-.price-box.arm-pose-hint > .price-head{
-  position:relative;
-  isolation:isolate;
-}
-.price-box.arm-pose-hint > .price-head::after{
-  content:'';
-  position:absolute;
-  inset:50% auto auto 50%;
-  width:12px;
-  height:12px;
-  border:2px solid rgba(235,131,159,.65);
-  border-radius:50%;
-  transform:translate(-50%,-50%) scale(.35);
-  opacity:0;
-  pointer-events:none;
-  z-index:-1;
-  animation:armPoseRipple 1.8s ease-out infinite;
-}
-.price-box.arm-pose-hint.arm-pose-hint-stopped > .price-head::after{
-  animation:none;
-  display:none;
-}
-@keyframes armPoseRipple{
-  0%{ opacity:.7; transform:translate(-50%,-50%) scale(.35); }
-  70%{ opacity:.18; transform:translate(-50%,-50%) scale(3.8); }
-  100%{ opacity:0; transform:translate(-50%,-50%) scale(4.5); }
-}
-@media (prefers-reduced-motion: reduce){
-  .addon-toast{ transition:none; }
-  .price-box.arm-pose-hint > .price-head::after{ animation:none; }
-}
-
 </style>
 <noscript><style>.reveal{opacity:1!important;transform:none!important;} .crossfade-img{opacity:1!important;visibility:visible!important;}</style></noscript>
 </head>
 
 <body>
-<div class="addon-toast" id="addonToast" role="status" aria-live="polite">팔 / 포즈 옵션을 먼저 선택해 주세요!</div>
 
 <div class="container">
 
@@ -2655,8 +2646,8 @@ textarea{
 
 </div>
 
-
-
+<!-- 토스트 컨테이너 -->
+<div class="toast-container" id="toastContainer"></div>
 
 <script>
 function preloadImages(list){
@@ -2734,11 +2725,11 @@ function renderCollabPage(direction){
     const descHtml = artist.desc ? `<a class="collab-desc" href="${artist.href}" target="_blank" rel="noopener noreferrer">${escapeHtml(artist.desc)}</a>` : '';
     return `
       <div class="collab-card${isSelected ? ' selected' : ''}">
-        <a class="collab-text-group" href="${artist.href}" target="_blank" rel="noopener noreferrer">
-          <span class="collab-name">${escapeHtml(artist.name)}</span>
-          ${artist.desc ? `<span class="collab-desc">${escapeHtml(artist.desc)}</span>` : ''}
-          <span class="collab-arrow">클릭하여 페이지 이동 ↗</span>
-        </a>
+        <div class="collab-text-group">
+          <a class="collab-name" href="${artist.href}" target="_blank" rel="noopener noreferrer">${escapeHtml(artist.name)}</a>
+          ${descHtml}
+          <a class="collab-arrow" href="${artist.href}" target="_blank" rel="noopener noreferrer">클릭하여 페이지 이동 ↗</a>
+        </div>
         <button type="button" class="collab-check-btn" aria-label="${escapeHtml(artist.name)} 선택" onclick="toggleCollabArtist('${escapeHtml(artist.name)}')">
           <span class="collab-check-icon">✓</span>
         </button>
@@ -3163,6 +3154,37 @@ function initScrollReveal(){
 }
 
 /* ============================================================
+   토스트 알림 기능
+   ============================================================ */
+
+let toastTimer = null;
+
+function showToast(message, duration = 2600){
+  const container = document.getElementById('toastContainer');
+  if(!container) return;
+
+  // 기존 토스트가 있으면 제거 (연속 표시 방지)
+  container.innerHTML = '';
+  if(toastTimer) clearTimeout(toastTimer);
+
+  const toast = document.createElement('div');
+  toast.className = 'toast-message';
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  // 다음 프레임에 show 클래스 추가 → transition 시작
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  // 자동으로 사라짐
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 350);
+  }, duration);
+}
+
+/* ============================================================
    추가옵션 하위 카테고리(표정/팔·포즈/소품/의상·헤어/기타) 아코디언
    — 네이티브 details의 즉시 전환 대신, max-height를 계산해 부드럽게 여닫는다.
    ============================================================ */
@@ -3176,238 +3198,124 @@ function setupAccordionAnimation(){
     const content = details.querySelector('.price-box-content');
     if(!summary || !content) return;
 
-    // 아코디언별로 진행 중인 transitionend 리스너와 안전장치 타이머를 보관한다.
-    // 빠르게 연속 클릭해도 이전 상태가 새 애니메이션을 방해하지 않도록 한다.
-    let transitionCleanup = null;
-    let transitionTimer = null;
-
-    const cleanupTransition = () => {
-      if(transitionCleanup){
-        transitionCleanup();
-        transitionCleanup = null;
-      }
-      if(transitionTimer){
-        clearTimeout(transitionTimer);
-        transitionTimer = null;
-      }
+    // 각 details에 대한 상태 저장용 WeakMap (클로저 내부에서 타이머 및 리스너 추적)
+    const state = {
+      endListener: null,
+      timeoutId: null
     };
 
-    // 팔 / 포즈 아코디언은 사용자가 한 번이라도 클릭하면 유도 리플을 영구히 멈춘다.
-    const isArmPose = summary.textContent.replace(/\s+/g, '').includes('팔/포즈');
-    if(isArmPose){
-      details.classList.add('arm-pose-hint');
-      summary.addEventListener('click', () => {
-        details.classList.add('arm-pose-hint-stopped');
-      }, { once:true });
-    }
+    const clearPending = () => {
+      if(state.endListener){
+        content.removeEventListener('transitionend', state.endListener);
+        state.endListener = null;
+      }
+      if(state.timeoutId){
+        clearTimeout(state.timeoutId);
+        state.timeoutId = null;
+      }
+    };
 
     summary.addEventListener('click', (event) => {
       // reduced-motion이면 네이티브 즉시 토글 그대로 사용
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       event.preventDefault();
-      cleanupTransition();
 
-      // 현재 진행 중인 transition의 영향을 제거한 뒤 현재 실제 높이에서 재시작한다.
+      // 이전 대기 중이던 리스너와 타이머를 확실히 정리
+      clearPending();
+
+      // 이미 애니메이션 진행 중이면 그 트랜지션을 먼저 정리
       content.style.transition = 'none';
-      const computedHeight = content.getBoundingClientRect().height;
-      content.style.maxHeight = computedHeight + 'px';
       void content.offsetHeight;
       content.style.transition = '';
 
-      const finalize = (opening) => {
-        cleanupTransition();
-        if(opening){
-          // 이후 수량 변경 등으로 내용 높이가 바뀌어도 안 잘리도록 제한을 푼다.
-          content.style.maxHeight = 'none';
-        }else{
+      if(details.open){
+        // 닫기: 현재 높이에서 시작해 0으로 줄어든 뒤, 끝나면 실제로 open을 해제
+        const startHeight = content.scrollHeight;
+        content.style.maxHeight = startHeight + 'px';
+        void content.offsetHeight;
+        content.style.maxHeight = '0px';
+
+        state.endListener = (e) => {
+          if(e.propertyName !== 'max-height') return;
+          clearPending();
           details.open = false;
           content.style.maxHeight = '';
-        }
-      };
+        };
+        content.addEventListener('transitionend', state.endListener);
 
-      const opening = !details.open;
-      const duration = 320;
-
-      if(opening){
+        // 안전장치: transitionend가 발생하지 않을 경우를 대비해 타이머 백업
+        state.timeoutId = setTimeout(() => {
+          clearPending();
+          details.open = false;
+          content.style.maxHeight = '';
+        }, 400);
+      } else {
+        // 열기: 먼저 open을 켜서 내용을 그릴 수 있게 한 뒤, 0에서 실제 높이로 늘린다
         details.open = true;
         content.style.maxHeight = '0px';
         void content.offsetHeight;
         const targetHeight = content.scrollHeight;
         content.style.maxHeight = targetHeight + 'px';
-      }else{
-        // 닫기는 현재 높이에서 0으로 줄인 뒤 실제 open 상태를 해제한다.
-        const startHeight = content.scrollHeight;
-        content.style.maxHeight = startHeight + 'px';
-        void content.offsetHeight;
-        content.style.maxHeight = '0px';
+
+        state.endListener = (e) => {
+          if(e.propertyName !== 'max-height') return;
+          clearPending();
+          // 이후 수량 변경 등으로 내용 높이가 바뀌어도 안 잘리도록 제한을 푼다
+          content.style.maxHeight = 'none';
+        };
+        content.addEventListener('transitionend', state.endListener);
+
+        state.timeoutId = setTimeout(() => {
+          clearPending();
+          content.style.maxHeight = 'none';
+        }, 400);
       }
-
-      const onEnd = (e) => {
-        if(e.propertyName !== 'max-height') return;
-        finalize(opening);
-      };
-      content.addEventListener('transitionend', onEnd);
-      transitionCleanup = () => content.removeEventListener('transitionend', onEnd);
-
-      // transitionend가 빠른 재클릭/브라우저 상황에서 누락되어도 상태가 멈추지 않도록 백업 타이머를 둔다.
-      transitionTimer = setTimeout(() => finalize(opening), duration + 40);
     });
   });
 }
 
-function updateUI(){
-  if(enforceAddonRules()){
-    // dependent add-ons removed; proceed with refreshed state
-  }
-  updateSelectionSummary();
-  updateFormQuadrant();
-  updateFormText();
-  updateCopyButtonHint();
-}
+/* ============================================================
+   팔/포즈 아코디언 리플 효과 (첫 클릭 전까지 반복)
+   ============================================================ */
 
-/* '버츄얼 패키지'가 선택되어 있을 때만 복사 버튼에 숨쉬는 효과를 재생 */
-function updateCopyButtonHint(){
-  const btn = document.querySelector('.copy-btn-large');
-  if(!btn) return;
-  btn.classList.toggle('breathe', !!selectedBaseOption);
-}
+let isArmPoseOpened = false;
 
-function toggleBaseOption(el, name, price){
-  const isSame = selectedBaseOption && selectedBaseOption.name === name;
-
-  getBaseOptionItems().forEach(item => item.classList.remove('active'));
-
-  if(isSame){
-    selectedBaseOption = null;
-    el.classList.remove('active');
-  }else{
-    selectedBaseOption = { name, price };
-    el.classList.add('active');
-  }
-
-  updateUI();
-}
-
-let addonToastTimer = null;
-
-function showAddonToast(){
-  const toast = document.getElementById('addonToast');
-  if(!toast) return;
-
-  clearTimeout(addonToastTimer);
-  toast.classList.remove('show');
-  void toast.offsetWidth;
-  toast.classList.add('show');
-
-  addonToastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 1800);
-}
-
-function toggleAddonOption(el, name, price){
-  const idx = selectedAddonOptions.findIndex(o => o.name === name);
-
-  if(idx > -1){
-    selectedAddonOptions.splice(idx, 1);
-    el.classList.remove('active');
-    updateUI();
-    return;
-  }
-
-  if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
-    showAddonToast();
-    return;
-  }
-
-  selectedAddonOptions.push({ name, price, qty: 1 });
-  el.classList.add('active');
-  setQtyValue(name, 1);
-  updateUI();
-}
-
-function changeAddonQty(name, delta){
-  const option = selectedAddonOptions.find(o => o.name === name);
-  if(!option) return;
-
-  option.qty += delta;
-
-  if(option.qty <= 0){
-    selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
-    const item = findAddonElement(name);
-    if(item) item.classList.remove('active');
-  }else{
-    option.qty = Math.max(1, option.qty);
-    setQtyValue(name, option.qty);
-    const item = findAddonElement(name);
-    if(item) item.classList.add('active');
-  }
-
-  updateUI();
-}
-
-function copyText() {
-  const textarea = document.getElementById('inputText');
-  const text = textarea.value;
-
-  function finishCopy(){
-    const btn = document.querySelector('.copy-btn-large');
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if(btn){
-      btn.classList.add('copy-success');
+function initArmPoseRipple(){
+  const armPoseDetails = document.querySelector('details.price-box');
+  // 두 번째 details가 팔/포즈? 확인해보자: HTML 구조에서 팔/포즈는 두 번째 details.
+  // 정확히 찾기 위해 summary 텍스트 포함 여부로 체크.
+  const detailsList = document.querySelectorAll('details.price-box');
+  let target = null;
+  detailsList.forEach(details => {
+    const summary = details.querySelector('summary');
+    if(summary && summary.textContent.includes('팔 / 포즈')){
+      target = details;
     }
+  });
 
-    // alert가 뜨기 전에 브라우저가 체크 상태를 최소 한 프레임 그릴 시간을 준다
-    setTimeout(() => {
-      alert('복사 완료! 문의란에 붙여넣어 주세요 ( ◜ᴗ◝ )♡');
-      if(btn) btn.classList.remove('copy-success');
-    }, prefersReduced ? 0 : 60);
+  if(!target) return;
+
+  const summary = target.querySelector('summary');
+  if(!summary) return;
+
+  // 아직 열린 적이 없으면 리플 효과 클래스 부여
+  if(!isArmPoseOpened){
+    summary.classList.add('ripple-on-summary');
   }
 
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(text).then(finishCopy).catch(() => fallbackCopy(text));
-  }else{
-    fallbackCopy(text);
-  }
-
-  function fallbackCopy(value){
-    const temp = document.createElement('textarea');
-    temp.value = value;
-    temp.setAttribute('readonly', '');
-    temp.style.position = 'fixed';
-    temp.style.left = '-9999px';
-    temp.style.top = '0';
-    document.body.appendChild(temp);
-    temp.focus();
-    temp.select();
-    temp.setSelectionRange(0, temp.value.length);
-
-    try{
-      document.execCommand('copy');
-      finishCopy();
-    }catch(err){
-      alert('복사가 안 될 경우, 텍스트를 꾹 눌러 복사해 주세요 💗');
-    }finally{
-      temp.remove();
+  summary.addEventListener('click', () => {
+    if(!isArmPoseOpened){
+      isArmPoseOpened = true;
+      summary.classList.remove('ripple-on-summary');
     }
-  }
+  });
 }
 
-let current = 0;
-const images = [
-  'Cheriko_sample_collage.png',
-  '93_sample_collage.png',
-  'sina_sample_collage.png',
-  'rararu_sample_collage.png',
-  'koya_sample_collage.png',
-  'raruka_sample_collage.png',
-  'B_sample_collage.png'
-];
+/* ============================================================
+   이미지 로더 타이밍 개선 (하트 로더가 크로스페이드 완료 후 사라지도록)
+   ============================================================ */
 
-// 이미지 요소별 "가장 최신 요청"의 토큰을 저장. 연타 등으로 같은 요소에 대해
-// 여러 로딩이 동시에 진행될 때, 늦게 끝난 이전 요청이 최신 요청 결과를
-// 덮어써서 엉뚱한 이미지가 노출되는 레이스 컨디션을 막기 위함.
 const galleryLoadTokens = new WeakMap();
 
 function showLoader(container){
@@ -3423,76 +3331,83 @@ function hideLoader(container){
 function changeGalleryImage(imgEl, newSrc, callback){
   const container = imgEl.parentElement;
 
-  // 이번 호출만의 고유 토큰 발급. 같은 imgEl에 새 요청이 들어오면 이전 요청의 후속 처리를 무시한다.
   const token = Symbol('galleryLoad');
   galleryLoadTokens.set(imgEl, token);
   const isStale = () => galleryLoadTokens.get(imgEl) !== token;
 
-  let revealTimer = null;
-  let revealCleanup = null;
-  const cleanupReveal = () => {
-    if(revealCleanup){
-      revealCleanup();
-      revealCleanup = null;
-    }
-    if(revealTimer){
-      clearTimeout(revealTimer);
-      revealTimer = null;
-    }
-  };
-
-  // 기존 이미지는 유지한 채 로더를 먼저 보여준다. 새 이미지가 완전히 나타날 때까지 로더를 유지한다.
+  // 1. 기존 이미지를 숨기고 하트 로더 표시
   imgEl.style.visibility = 'hidden';
   imgEl.classList.remove('crossfade-visible');
   showLoader(container);
 
-  const finish = () => {
-    if(isStale()) return;
-
-    imgEl.src = newSrc;
-    imgEl.style.visibility = 'visible';
-
-    requestAnimationFrame(() => {
-      if(isStale()) return;
-      imgEl.classList.add('crossfade-visible');
-
-      // 새 이미지의 opacity가 100%가 되는 순간 로더를 제거한다.
-      const revealComplete = (e) => {
-        if(e && e.propertyName !== 'opacity') return;
-        cleanupReveal();
-        hideLoader(container);
-        if(callback) callback();
-      };
-
-      imgEl.addEventListener('transitionend', revealComplete);
-      revealCleanup = () => imgEl.removeEventListener('transitionend', revealComplete);
-
-      // transitionend 누락 대비용 백업. CSS 크로스페이드 0.45초보다 약간 여유를 둔다.
-      revealTimer = setTimeout(revealComplete, 500);
-
-      // reduced-motion에서는 transition이 없으므로 즉시 로더를 제거한다.
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        revealComplete();
-      }
-    });
-  };
+  // 2. 새 이미지를 메모리에서 로드 & 디코딩 완료 후 실제 img에 반영
+  const tempImg = new Image();
+  tempImg.src = newSrc;
 
   const reveal = () => {
     if(isStale()) return;
     imgEl.src = newSrc;
+
+    // 이미지가 로드되면 크로스페이드 시작 (opacity 0 → 1)
+    // 크로스페이드 완료 후 로더를 숨기기 위해 transitionend 또는 타이머로 대기
+    const onCrossfadeEnd = () => {
+      if(isStale()) return;
+      // 크로스페이드가 끝난 뒤에만 로더를 제거하고 이미지를 완전히 노출
+      hideLoader(container);
+      imgEl.style.visibility = 'visible';
+    };
+
+    imgEl.classList.add('crossfade-visible');
+
     if(imgEl.decode){
-      imgEl.decode().then(finish).catch(finish);
-    }else{
-      finish();
+      imgEl.decode().then(() => {
+        // 디코딩 완료 후 크로스페이드 트랜지션을 기다리기 위해 transitionend 또는 fallback 타이머
+        // transitionend가 안 올 경우를 대비해 500ms 타이머도 추가
+        let crossfadeEndCalled = false;
+        const crossfadeEndHandler = (e) => {
+          if(e.propertyName !== 'opacity') return;
+          if(crossfadeEndCalled) return;
+          crossfadeEndCalled = true;
+          imgEl.removeEventListener('transitionend', crossfadeEndHandler);
+          onCrossfadeEnd();
+        };
+        imgEl.addEventListener('transitionend', crossfadeEndHandler);
+        // 안전장치: transitionend가 발생하지 않을 수 있으므로 550ms 후 강제로 처리
+        setTimeout(() => {
+          if(!crossfadeEndCalled){
+            crossfadeEndCalled = true;
+            imgEl.removeEventListener('transitionend', crossfadeEndHandler);
+            onCrossfadeEnd();
+          }
+        }, 550);
+      }).catch(() => {
+        hideLoader(container);
+        imgEl.style.visibility = 'visible';
+        imgEl.classList.add('crossfade-visible');
+      });
+    } else {
+      // decode 미지원 브라우저: onload로 처리
+      tempImg.onload = () => {
+        if(isStale()) return;
+        imgEl.classList.add('crossfade-visible');
+        setTimeout(() => {
+          if(isStale()) return;
+          hideLoader(container);
+          imgEl.style.visibility = 'visible';
+        }, 550);
+      };
+      tempImg.onerror = () => {
+        hideLoader(container);
+        imgEl.style.visibility = 'visible';
+        imgEl.classList.add('crossfade-visible');
+      };
+      tempImg.src = newSrc;
     }
   };
 
-  // 백그라운드에서 새 이미지를 다운로드/디코딩한 뒤 실제 화면에 반영한다.
-  const tempImg = new Image();
-  tempImg.src = newSrc;
   if(tempImg.decode){
     tempImg.decode().then(reveal).catch(reveal);
-  }else{
+  } else {
     tempImg.onload = reveal;
     tempImg.onerror = reveal;
   }
@@ -3501,6 +3416,21 @@ function changeGalleryImage(imgEl, newSrc, callback){
 function fadeSwap(imgEl, newSrc, callback){
   changeGalleryImage(imgEl, newSrc, callback);
 }
+
+/* ============================================================
+   갤러리 네비게이션 (기존 함수 유지)
+   ============================================================ */
+
+let current = 0;
+const images = [
+  'Cheriko_sample_collage.png',
+  '93_sample_collage.png',
+  'sina_sample_collage.png',
+  'rararu_sample_collage.png',
+  'koya_sample_collage.png',
+  'raruka_sample_collage.png',
+  'B_sample_collage.png'
+];
 
 function showGallery(index){
   current = index;
@@ -3590,16 +3520,137 @@ function updateStyleDots(){
   }
 }
 
-// 💡 안전한 실행을 위해 모든 함수가 준비된 후 이미지 프리로드 및 초기화 실행
-if(typeof preloadImages === 'function'){
-  preloadImages(images);
-  preloadImages(faceImages);
-  preloadImages(styleImages);
+/* ============================================================
+   옵션 토글 함수 (추가 옵션 / 기본 패키지)
+   ============================================================ */
+
+function updateUI(){
+  if(enforceAddonRules()){
+    // dependent add-ons removed; proceed with refreshed state
+  }
+  updateSelectionSummary();
+  updateFormQuadrant();
+  updateFormText();
+  updateCopyButtonHint();
 }
 
+function updateCopyButtonHint(){
+  const btn = document.querySelector('.copy-btn-large');
+  if(!btn) return;
+  btn.classList.toggle('breathe', !!selectedBaseOption);
+}
+
+function toggleBaseOption(el, name, price){
+  const isSame = selectedBaseOption && selectedBaseOption.name === name;
+
+  getBaseOptionItems().forEach(item => item.classList.remove('active'));
+
+  if(isSame){
+    selectedBaseOption = null;
+    el.classList.remove('active');
+  }else{
+    selectedBaseOption = { name, price };
+    el.classList.add('active');
+  }
+
+  updateUI();
+}
+
+function toggleAddonOption(el, name, price){
+  const idx = selectedAddonOptions.findIndex(o => o.name === name);
+
+  if(idx > -1){
+    selectedAddonOptions.splice(idx, 1);
+    el.classList.remove('active');
+    updateUI();
+    return;
+  }
+
+  if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
+    // alert 대신 토스트로 안내
+    showToast('팔 / 포즈 옵션을 먼저 선택해 주세요!');
+    return;
+  }
+
+  selectedAddonOptions.push({ name, price, qty: 1 });
+  el.classList.add('active');
+  setQtyValue(name, 1);
+  updateUI();
+}
+
+function changeAddonQty(name, delta){
+  const option = selectedAddonOptions.find(o => o.name === name);
+  if(!option) return;
+
+  option.qty += delta;
+
+  if(option.qty <= 0){
+    selectedAddonOptions = selectedAddonOptions.filter(o => o.name !== name);
+    const item = findAddonElement(name);
+    if(item) item.classList.remove('active');
+  }else{
+    option.qty = Math.max(1, option.qty);
+    setQtyValue(name, option.qty);
+    const item = findAddonElement(name);
+    if(item) item.classList.add('active');
+  }
+
+  updateUI();
+}
+
+function copyText() {
+  const textarea = document.getElementById('inputText');
+  const text = textarea.value;
+
+  function finishCopy(){
+    const btn = document.querySelector('.copy-btn-large');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if(btn){
+      btn.classList.add('copy-success');
+    }
+
+    // alert가 뜨기 전에 브라우저가 체크 상태를 최소 한 프레임 그릴 시간을 준다
+    setTimeout(() => {
+      alert('복사 완료! 문의란에 붙여넣어 주세요 ( ◜ᴗ◝ )♡');
+      if(btn) btn.classList.remove('copy-success');
+    }, prefersReduced ? 0 : 60);
+  }
+
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(finishCopy).catch(() => fallbackCopy(text));
+  }else{
+    fallbackCopy(text);
+  }
+
+  function fallbackCopy(value){
+    const temp = document.createElement('textarea');
+    temp.value = value;
+    temp.setAttribute('readonly', '');
+    temp.style.position = 'fixed';
+    temp.style.left = '-9999px';
+    temp.style.top = '0';
+    document.body.appendChild(temp);
+    temp.focus();
+    temp.select();
+    temp.setSelectionRange(0, temp.value.length);
+
+    try{
+      document.execCommand('copy');
+      finishCopy();
+    }catch(err){
+      alert('복사가 안 될 경우, 텍스트를 꾹 눌러 복사해 주세요 💗');
+    }finally{
+      temp.remove();
+    }
+  }
+}
+
+/* ============================================================
+   초기화 실행 (DOMContentLoaded)
+   ============================================================ */
+
 document.addEventListener('DOMContentLoaded', () => {
-  // 콘텐츠 노출(스크롤 reveal)은 페이지를 보는 데 핵심적인 부분이므로,
-  // 아래의 다른 초기화 로직에서 예기치 못한 오류가 나더라도 항상 먼저 실행되게 합니다.
   initScrollReveal();
 
   try{
@@ -3611,6 +3662,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   try{
     setupAccordionAnimation();
+    initArmPoseRipple();
   }catch(e){ console.error(e); }
 
   try{
@@ -3626,7 +3678,6 @@ document.addEventListener('DOMContentLoaded', () => {
       textarea.addEventListener('input', autoResizeTextarea);
       textarea.addEventListener('input', updateFormQuadrant);
 
-      // 화면 폭이 바뀌면(회전 등) 작성란 최대 높이도 다시 계산
       let resizeTimer = null;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
@@ -3635,8 +3686,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }catch(e){ console.error(e); }
 });
-</script>
 
+if(typeof preloadImages === 'function'){
+  preloadImages(images);
+  preloadImages(faceImages);
+  preloadImages(styleImages);
+}
+</script>
 
 </body>
 </html>
