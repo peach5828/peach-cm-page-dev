@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,19 +7,19 @@
 
 <style>
 @font-face {
-    font-family: 'IsYun';
+    font-family: 'Paperozi';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
     font-weight: 400;
     font-display: swap;
 }
 @font-face {
-    font-family: 'IsYun';
+    font-family: 'Paperozi';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-display: swap;
 }
 @font-face {
-    font-family: 'IsYun';
+    font-family: 'Paperozi';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
     font-weight: 700;
     font-display: swap;
@@ -26,9 +27,9 @@
 
 /* ✅ 추가된 폰트 */
 @font-face {
-    font-family: 'DnfBitbeatV2';
-    src: url('//cdn.df.nexon.com/img/common/font/DNFBitBitv2.otf')format('opentype');
-    font-weight: 400;
+    font-family: 'RomanticGumi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiRomanceTTF.woff2') format('woff2');
+    font-weight: normal;
     font-display: swap;
 }
 @font-face {
@@ -61,7 +62,7 @@ html{
 
 body{
   margin:0;
-  font-family:'IsYun',sans-serif;
+  font-family:'Paperozi',sans-serif;
   background:white;
   color:var(--text);
   overflow-x:hidden;
@@ -176,7 +177,7 @@ body{
 
 .hero-title{
   font-size:32px;
-  font-weight:400;
+  font-weight:700;
   color:#eb839f;
   margin:0 0 22px;
   line-height:1.25;
@@ -249,7 +250,7 @@ body{
 
 .title,
 summary{
-  font-weight:400;
+  font-weight:700;
   color:var(--pink);
   font-size:18px;
   cursor:pointer;
@@ -1208,7 +1209,7 @@ details.price-box .price-list{
   font-weight:700;
   cursor:pointer;
   transition:.2s;
-  font-family:'IsYun',sans-serif;
+  font-family:'Paperozi',sans-serif;
 }
 
 .copy-btn-large{
@@ -1294,7 +1295,7 @@ textarea{
   border-radius:18px;
   border:1px solid var(--line);
   background:#fffafb;
-  font-family:'IsYun',sans-serif;
+  font-family:'Paperozi',sans-serif;
   font-size:14px;
   line-height:1.75;
   color:var(--text);
@@ -1512,7 +1513,7 @@ textarea{
 
 .workflow-title{
   font-size:21px;
-  font-weight:400;
+  font-weight:700;
   color:var(--pink);
   margin:0 0 16px;
   display:flex;
@@ -1560,7 +1561,7 @@ textarea{
   font-size:13.5px;
   font-weight:600;
   white-space:nowrap;
-  font-family:'IsYun',sans-serif;
+  font-family:'Paperozi',sans-serif;
   line-height:1.2;
   display:inline-flex;
   align-items:center;
@@ -2468,7 +2469,7 @@ textarea{
     <div class="workflow-label">Work Process</div>
     <div class="workflow-title">
       <span class="wf-title-icon">🎨</span> 본작업 과정
-      <span class="wf-title-note"> ※웬만하면 컨펌은 더 자주 자주 드리고 있습니다!</span>
+      <span class="wf-title-note">💗 웬만하면 컨펌은 더 자주 자주 드리고 있습니다!</span>
     </div>
     <div class="wf-flow-box">
       <div class="wf-flow-row">
@@ -3277,36 +3278,41 @@ function setupAccordionAnimation(){
   });
 }
 
-// 팔/포즈 details 요소에 클래스 추가 및 제거 로직
-function setupArmPoseRipple(){
-  const detailsList = document.querySelectorAll('details.price-box');
-  let armPoseDetails = null;
+/* ============================================================
+   팔/포즈 리플 효과 함수 (선택 실패 시에만 트리거)
+   ============================================================ */
 
+function triggerRippleOnArmPose(){
+  const armPoseDetails = document.querySelector('details.price-box');
+  // 두 번째 details가 팔/포즈? 확인해보자: HTML 구조에서 팔/포즈는 두 번째 details.
+  // 정확히 찾기 위해 summary 텍스트 포함 여부로 체크.
+  const detailsList = document.querySelectorAll('details.price-box');
+  let target = null;
   detailsList.forEach(details => {
     const summary = details.querySelector('summary');
     if(summary && summary.textContent.includes('팔 / 포즈')){
-      armPoseDetails = details;
+      target = details;
     }
   });
 
-  if(!armPoseDetails) return;
+  if(!target) return;
 
-  // 초기 상태: 아직 열리지 않음 → 지속 파동 클래스 부여
-  armPoseDetails.classList.add('details-arm-pose');
+  const summary = target.querySelector('summary');
+  if(!summary) return;
 
-  // summary 클릭 이벤트 (한 번 열리면 파동 제거)
-  const summary = armPoseDetails.querySelector('summary');
-  if(summary){
-    summary.addEventListener('click', () => {
-      armPoseDetails.classList.add('arm-pose-opened');
-    });
-  }
+  const rippleSpan = summary.querySelector('.ripple-target');
+  if(!rippleSpan) return;
+
+  // 이미 클래스가 있으면 재시작을 위해 제거 후 다시 추가
+  rippleSpan.classList.remove('ripple-active');
+  void rippleSpan.offsetWidth; // reflow to restart animation
+  rippleSpan.classList.add('ripple-active');
+
+  // 0.8초 후 클래스 제거 (애니메이션 종료)
+  setTimeout(() => {
+    rippleSpan.classList.remove('ripple-active');
+  }, 900);
 }
-
-// DOMContentLoaded에서 호출
-document.addEventListener('DOMContentLoaded', () => {
-  setupArmPoseRipple();
-});
 
 /* ============================================================
    이미지 로더 타이밍 개선 (하트 로더가 크로스페이드 완료 후 사라지도록)
@@ -3565,6 +3571,8 @@ function toggleAddonOption(el, name, price){
   if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
     // 일반 팝업으로 안내 (아트머그에서 토스트가 동작하지 않으므로)
     alert("팔 / 포즈 옵션을 먼저 선택해 주세요!");
+    // 팔/포즈 리플 효과 트리거
+    triggerRippleOnArmPose();
     return;
   }
 
@@ -3691,3 +3699,4 @@ if(typeof preloadImages === 'function'){
 
 </body>
 </html>
+```
