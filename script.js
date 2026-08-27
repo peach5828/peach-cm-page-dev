@@ -1,4 +1,4 @@
-<script>
+ 
 function preloadImages(list){
   list.forEach(src => {
     const img = new Image();
@@ -980,4 +980,4 @@ if(typeof preloadImages === 'function'){
   preloadImages(faceImages);
   preloadImages(styleImages);
 }
-</script>
+ 
