@@ -1,4 +1,3 @@
- 
 function preloadImages(list){
   list.forEach(src => {
     const img = new Image();
