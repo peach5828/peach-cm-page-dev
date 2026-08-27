@@ -189,7 +189,7 @@ summary::-webkit-details-marker{display:none;}
 .price-item{cursor:pointer;padding:7px 9px;border-radius:10px;transition:background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;user-select:none;}
 .price-item:hover{transform:translateY(-1px);background:#ffe3ec;}
 .price-item.active{background:var(--pink);color:#fff;font-weight:700;animation:pricePop .4s cubic-bezier(.22,1,.36,1);}
-@keyframes pricePop{0%{transform:scale(0.97);}50%{transform:scale(1.02);}100%{transform:scale(1);}}
+@keyframes pricePop{0%{ transform: scale(0.97) translateY(0); }50%{ transform: scale(1.02) translateY(0); }100%{ transform: scale(1) translateY(0); }}
 @media (prefers-reduced-motion: reduce){.price-item.active{animation:none;}}
 .basic-included{margin-top:12px;padding:14px;border-radius:14px;background:#fffdfd;border:1px solid #f4e8ec;}
 .basic-included-title{color:#b899a4;font-size:13px;font-weight:700;margin-bottom:6px;font-family:'IsYun',sans-serif;}
@@ -542,6 +542,9 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
   .selection-summary-item .name{font-size:14px;}
   .selection-summary-item .sub{font-size:12.5px;}
   .qty-controls button{width:32px;height:32px;font-size:15px;}
+}
+.no-anim{
+  animation: none !important;
 }
 </style>
 <noscript><style>.reveal{opacity:1!important;transform:none!important;} .crossfade-img{opacity:1!important;visibility:visible!important;}</style></noscript>
@@ -1296,7 +1299,8 @@ function renderMiniCollab(){
 
   const artist = collabArtists.find(a => a.name === selectedCollabArtist);
   const desc = artist && artist.desc ? ` (${artist.desc})` : '';
-  el.innerHTML = `<div class="mini-chip active selectable" onclick="miniDeselectCollab()" title="눌러서 선택 취소"><div class="mini-chip-name">${escapeHtml(selectedCollabArtist)}${escapeHtml(desc)}</div></div>`;
+  // 애니메이션 방지를 위해 'no-anim' 클래스 추가
+  el.innerHTML = `<div class="mini-chip active selectable no-anim" onclick="miniDeselectCollab()" title="눌러서 선택 취소"><div class="mini-chip-name">${escapeHtml(selectedCollabArtist)}${escapeHtml(desc)}</div></div>`;
 }
 
 function miniDeselectCollab(){
@@ -1348,7 +1352,8 @@ function syncSummaryHeight(){
 
   const addonHeight = addonBox.offsetHeight;
   const totalHeight = addonHeight - copyBtn.offsetHeight - 16;
-  summaryBox.style.height = Math.max(totalHeight, 200) + 'px';
+  summaryBox.style.minHeight = Math.max(totalHeight, 200) + 'px';
+  summaryBox.style.height = 'auto'; // 높이를 강제로 고정하지 않고 min-height로 변경
 }
 
 function updateFormQuadrant(){
