@@ -164,7 +164,7 @@ body{
 .card{background:white;border-radius:24px;padding:24px 22px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--line);}
 .title,summary{font-weight:400;color:var(--pink);font-size:18px;cursor:pointer;list-style:none;font-family:'RomanticGumi',sans-serif;}
 summary::-webkit-details-marker{display:none;}
-.section-sub{margin-top:6px;font-size:12px;color:#9a848c;font-family:'IsYun',sans-serif;}
+.section-sub{margin-top:6px;font-size:13.5px;color:#9a848c;font-family:'IsYun',sans-serif;}
 .sample-intro{margin-top:12px;background:linear-gradient(180deg, #fffafd 0%, #fff4f8 100%);border:1px solid var(--line);border-radius:16px;padding:14px;font-size:14px;line-height:1.9;color:#7e6972;font-family:'IsYun',sans-serif;}
 .price-card-open .title{cursor:default;}
 .slot{margin-top:12px;background:var(--pink-bg);border:1px solid var(--line);padding:14px;border-radius:16px;line-height:1.95;font-size:14px;}
@@ -177,7 +177,7 @@ summary::-webkit-details-marker{display:none;}
 .slot-notice{margin-top:14px;background:linear-gradient(180deg, #fffafd 0%, #fff3f7 100%);border:1px dashed var(--pink);border-radius:16px;padding:14px;font-size:13px;line-height:1.85;font-family:'IsYun',sans-serif;}
 .slot-notice strong{color:var(--pink);font-size:14px;}
 .slot-notice .start-em{color:var(--pink);font-weight:700;}
-.slot-note-soft{margin-top:8px;font-size:11px;color:#baa7ae;line-height:1.6;font-family:'IsYun',sans-serif;}
+.slot-note-soft{margin-top:8px;font-size:12.5px;color:#baa7ae;line-height:1.6;font-family:'IsYun',sans-serif;}
 
 /* 가격표 */
 .price-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px;}
@@ -197,16 +197,32 @@ summary::-webkit-details-marker{display:none;}
 .option-box{background:var(--pink-bg);border:1px solid var(--line);border-radius:16px;padding:14px;}
 .option-box-title{font-size:16px;font-weight:400;color:var(--pink);font-family:'RomanticGumi',sans-serif;}
 details:not([open]) > *:not(summary){display:none;}
-.option-guide{margin-top:10px;background:#fff;border:1px dashed var(--line);color:#8b7c81;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.7;font-family:'IsYun',sans-serif;}
-.option-stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
-.option-stack > details.price-box{flex:0 0 calc(50% - 5px);min-width:0;align-self:flex-start;}
-@media (max-width:899px){.option-stack > details.price-box{flex:0 0 100%;}}
+.option-guide{margin-top:10px;background:#fff;border:1px dashed var(--line);color:#8b7c81;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.7;font-family:'IsYun',sans-serif;}
+
+/* ✅ 수정: CSS Grid + 독립 열 */
+.option-stack{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+  align-items:start; /* 각 열 높이 독립 */
+}
+.option-col{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+}
+@media (max-width:899px){
+  .option-stack{grid-template-columns:1fr;}
+}
+
 details.price-box{cursor:default;}
 details.price-box > summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;}
 details.price-box:not([open]) > summary{margin-bottom:0;}
 .summary-caret-sm{font-size:12px;color:var(--pink-deep);flex-shrink:0;transition:transform .2s ease;}
 .price-head-label{flex:1;min-width:0;}
-.price-subnote{font-size:12px;color:#9e8d94;margin-top:6px;margin-bottom:2px;line-height:1.6;font-family:'IsYun',sans-serif;}
+.price-subnote{font-size:13px;color:#9e8d94;margin-top:6px;margin-bottom:2px;line-height:1.6;font-family:'IsYun',sans-serif;}
 details.price-box[open] .summary-caret-sm{transform:rotate(180deg);}
 details.price-box .price-list{margin-top:2px;}
 
@@ -218,7 +234,7 @@ details.price-box .price-list{margin-top:2px;}
 @media (prefers-reduced-motion: reduce){.price-box-content{transition:none;}}
 
 /* 뷰어 */
-.info-text{font-size:13px;color:#9e8d94;margin-bottom:8px;text-align:center;line-height:1.65;font-family:'IsYun',sans-serif;}
+.info-text{font-size:14px;color:#9e8d94;margin-bottom:8px;text-align:center;line-height:1.65;font-family:'IsYun',sans-serif;}
 .viewer{position:relative;margin-top:10px;}
 .viewer img{width:100%;max-height:560px;object-fit:contain;border-radius:16px;display:block;background:#fff;}
 .crossfade-img{opacity:0;transition:opacity .45s ease;}
@@ -236,7 +252,7 @@ details.price-box .price-list{margin-top:2px;}
 .thumb-item{text-align:center;}
 .thumb-item img{width:100%;height:80px;object-fit:contain;border-radius:12px;background:#fff;cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;}
 .thumb-item img:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(235,131,159,0.25);}
-.thumb-label{margin-top:6px;font-size:12px;color:var(--pink);background:var(--pink-soft);border-radius:999px;padding:5px 7px;line-height:1.3;word-break:keep-all;font-family:'IsYun',sans-serif;}
+.thumb-label{margin-top:6px;font-size:13px;color:var(--pink);background:var(--pink-soft);border-radius:999px;padding:5px 7px;line-height:1.3;word-break:keep-all;font-family:'IsYun',sans-serif;}
 .style-viewer{position:relative;margin-top:10px;max-width:520px;margin-left:auto;margin-right:auto;}
 .circle-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:999px;border:none;background:rgba(235,131,159,0.95);color:white;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 18px rgba(235,131,159,0.28);padding:0;z-index:2;}
 .circle-nav.left{left:10px;}
@@ -375,8 +391,8 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 .form-mini-col-tall .form-mini-body::-webkit-scrollbar-thumb{background:var(--pink);border-radius:999px;}
 .form-mini-head{font-weight:600;color:var(--pink-deep);font-size:13.5px;word-break:keep-all;flex-shrink:0;font-family:'IsYun',sans-serif;}
 .form-mini-body{display:flex;flex-direction:column;gap:8px;}
-.form-mini-empty{border:1px dashed var(--line);border-radius:12px;padding:16px 8px;text-align:center;color:#b9a3ac;font-size:12px;line-height:1.6;background:#fffdfe;font-family:'IsYun',sans-serif;}
-.mini-chip{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 10px;font-size:12.5px;color:var(--text);line-height:1.45;cursor:default;transition:border-color .18s, background .18s, opacity .18s;font-family:'IsYun',sans-serif;}
+.form-mini-empty{border:1px dashed var(--line);border-radius:12px;padding:16px 8px;text-align:center;color:#b9a3ac;font-size:13px;line-height:1.6;background:#fffdfe;font-family:'IsYun',sans-serif;}
+.mini-chip{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 10px;font-size:13.5px;color:var(--text);line-height:1.45;cursor:default;transition:border-color .18s, background .18s, opacity .18s;font-family:'IsYun',sans-serif;}
 .mini-chip.selectable{cursor:pointer;opacity:0.55;border-style:dashed;}
 .mini-chip.selectable:hover{opacity:0.8;border-color:var(--pink);border-style:dashed;}
 .mini-chip.selectable.active{opacity:1;border-style:solid;animation:pricePop .32s cubic-bezier(.22,1,.36,1);}
@@ -384,7 +400,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 .mini-chip-name{font-weight:600;color:#5c4b53;word-break:keep-all;overflow-wrap:break-word;}
 .mini-chip-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .mini-chip-meta:empty{display:none;}
-.mini-chip strong{color:var(--pink-deep);font-weight:700;white-space:nowrap;font-size:12.5px;margin-left:auto;}
+.mini-chip strong{color:var(--pink-deep);font-weight:700;white-space:nowrap;font-size:13px;margin-left:auto;}
 .mini-chip .qty-controls{display:flex;}
 .mini-chip .qty-controls button{width:24px;height:24px;border-color:var(--line);background:var(--pink-soft);color:var(--pink-deep);}
 .mini-chip .qty-value{font-size:12px;}
@@ -443,8 +459,8 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 .notice-card:hover{box-shadow:0 6px 18px rgba(235,131,159,0.16);transform:translateY(-2px);}
 .notice-card-head{font-size:13px;font-weight:700;color:var(--pink);margin-bottom:8px;padding-bottom:7px;border-bottom:1px dashed var(--line);word-break:keep-all;font-family:'IsYun',sans-serif;}
 .notice-card-body{display:flex;flex-direction:column;gap:7px;}
-.notice-item{display:flex;align-items:flex-start;gap:5px;font-size:11.5px;line-height:1.65;color:var(--text);min-width:0;font-family:'IsYun',sans-serif;}
-.ni-icon{flex-shrink:0;color:var(--pink);font-size:11.5px;margin-top:1px;}
+.notice-item{display:flex;align-items:flex-start;gap:5px;font-size:13px;line-height:1.65;color:var(--text);min-width:0;font-family:'IsYun',sans-serif;}
+.ni-icon{flex-shrink:0;color:var(--pink);font-size:13px;margin-top:1px;}
 @media (min-width:640px){.notice-grid{gap:12px;}.notice-card{padding:16px;}.notice-card-head{font-size:14px;margin-bottom:10px;padding-bottom:8px;}.notice-card-body{gap:8px;}.notice-item{font-size:13px;line-height:1.75;gap:6px;}.ni-icon{font-size:13px;}}
 
 /* 사용 범위 */
@@ -464,7 +480,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 .usage-card.selected .usage-check-btn{border-color:var(--pink);background:linear-gradient(160deg, #eb839f 0%, #d86c89 100%);color:white;animation:checkPop .3s cubic-bezier(.22,1,.36,1);}
 @media (prefers-reduced-motion: reduce){.usage-card.selected .usage-check-btn{animation:none;}}
 .usage-card-divider{height:1px;background:var(--line);margin-bottom:14px;border-radius:999px;}
-.usage-list{display:flex;flex-direction:column;gap:0;font-size:13.5px;line-height:1.55;color:var(--text);}
+.usage-list{display:flex;flex-direction:column;gap:0;font-size:14.5px;line-height:1.55;color:var(--text);}
 .usage-list-item{display:flex;align-items:flex-start;gap:9px;padding:6px 6px;border-radius:10px;transition:background .18s ease;font-family:'IsYun',sans-serif;}
 .usage-list-item:hover{background:#fff0f4;}
 .usage-list-item .usage-icon{flex-shrink:0;font-size:14px;margin-top:2px;line-height:1.3;}
@@ -472,7 +488,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 .usage-list-item.no .usage-icon{color:#d6637a;}
 .usage-list-item.no{color:#b89aa3;}
 .usage-list-divider{height:1px;background:#f3e0e8;margin:8px 0;border-radius:999px;}
-.usage-fine-print{margin-top:10px;font-size:11.5px;color:#b899a4;line-height:1.65;font-style:italic;padding:0 4px;font-family:'IsYun',sans-serif;}
+.usage-fine-print{margin-top:10px;font-size:13px;color:#b899a4;line-height:1.65;font-style:italic;padding:0 4px;font-family:'IsYun',sans-serif;}
 .usage-corp-notice{margin-top:12px;font-size:12px;color:#9a848c;line-height:1.75;padding:10px 14px;background:linear-gradient(180deg,#fffafd 0%,#fff4f8 100%);border:1px dashed #f0c8d8;border-radius:14px;font-family:'IsYun',sans-serif;}
 
 /* 팔/포즈 리플 */
@@ -501,10 +517,10 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
   .usage-card-badge{font-size:9.5px;padding:2px 7px;}
   .usage-check-btn{width:32px;height:32px;font-size:16px;border-radius:9px;}
   .usage-card-divider{margin-bottom:9px;}
-  .usage-list{font-size:11.5px;line-height:1.55;}
+  .usage-list{font-size:12.5px;line-height:1.55;}
   .usage-list-item{padding:4px 3px;gap:5px;}
   .usage-list-item .usage-icon{font-size:12px;}
-  .usage-fine-print{font-size:10px;padding:0 2px;}
+  .usage-fine-print{font-size:11px;padding:0 2px;}
   .collab-card{padding:11px 38px 11px 11px;min-height:112px;}
   .collab-text-group{font-size:12px;gap:4px;}
   .collab-check-btn{width:26px;height:26px;top:10px;right:10px;}
@@ -640,64 +656,68 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
         <div class="option-box-title">추가옵션</div>
         <div class="option-guide">옵션 구성이 어려운 경우 선택 전 문의 주세요!! 상세히 안내 드립니다.</div>
         <div class="option-stack">
-          <details class="price-box">
-            <summary class="price-head"><span class="price-head-label">✨ 표정</span><span class="summary-caret-sm">▾</span></summary>
-            <div class="price-box-content">
-<div class="price-subnote">(눈동자 컬러, 눈매 등 변경 가능합니다.)</div>
-            <div class="price-list">
-              <div class="price-item addon-item" data-addon-name="샘플 표정 추가" onclick="toggleAddonOption(this, '샘플 표정 추가', 5000)"><span class="addon-label">샘플 표정 추가 +5,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('샘플 표정 추가', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="샘플 표정 추가">1</span><button type="button" onclick="changeAddonQty('샘플 표정 추가', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="주문제작 표정 추가" onclick="toggleAddonOption(this, '주문제작 표정 추가', 9000)"><span class="addon-label">주문제작 표정 추가 +9,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('주문제작 표정 추가', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="주문제작 표정 추가">1</span><button type="button" onclick="changeAddonQty('주문제작 표정 추가', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="표정 별도문의" onclick="toggleAddonOption(this, '표정 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('표정 별도문의')">✕</button></div>
-            </div>
-            </div>
-          </details>
-          <details class="price-box">
-            <summary class="price-head"><span class="ripple-target">✨ 팔 / 포즈</span><span class="summary-caret-sm">▾</span></summary>
-            <div class="price-box-content">
-<div class="price-list">
-              <div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)"><span class="addon-label">추가 팔 파츠 +20,000</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="추가 팔 파츠">1</span><button type="button" onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="추가 소매 파츠" onclick="toggleAddonOption(this, '추가 소매 파츠', 10000)"><span class="addon-label">추가 소매 파츠 +10,000</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="추가 소매 파츠">1</span><button type="button" onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="팔포즈 별도문의" onclick="toggleAddonOption(this, '팔포즈 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('팔포즈 별도문의')">✕</button></div>
-            </div>
-            </div>
-          </details>
-          <details class="price-box">
-            <summary class="price-head">✨ 소품<span class="summary-caret-sm">▾</span></summary>
-            <div class="price-box-content">
-<div class="price-list">
-              <div class="price-item addon-item" data-addon-name="마이크" onclick="toggleAddonOption(this, '마이크', 35000)"><span class="addon-label">마이크 +35,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('마이크', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="마이크">1</span><button type="button" onclick="changeAddonQty('마이크', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="게임기" onclick="toggleAddonOption(this, '게임기', 35000)"><span class="addon-label">게임기 +35,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('게임기', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="게임기">1</span><button type="button" onclick="changeAddonQty('게임기', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="끌어안는 인형" onclick="toggleAddonOption(this, '끌어안는 인형', 30000)"><span class="addon-label">끌어안는 인형 +30,000</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="끌어안는 인형">1</span><button type="button" onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="소품 별도문의" onclick="toggleAddonOption(this, '소품 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('소품 별도문의')">✕</button></div>
-            </div>
-            </div>
-          </details>
-          <details class="price-box">
-            <summary class="price-head">✨ 의상 / 헤어<span class="summary-caret-sm">▾</span></summary>
-            <div class="price-box-content">
-<div class="price-list">
-              <div class="price-item addon-item" data-addon-name="신의상" onclick="toggleAddonOption(this, '신의상', 100000)"><span class="addon-label">신의상 +100,000원~</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('신의상', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="신의상">1</span><button type="button" onclick="changeAddonQty('신의상', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="겉옷" onclick="toggleAddonOption(this, '겉옷', 80000)"><span class="addon-label">겉옷 (on/off) +80,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('겉옷', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="겉옷">1</span><button type="button" onclick="changeAddonQty('겉옷', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="후드 모자" onclick="toggleAddonOption(this, '후드 모자', 40000)"><span class="addon-label">후드 모자 +40,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="후드 모자">1</span><button type="button" onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="헤어 바리에이션" onclick="toggleAddonOption(this, '헤어 바리에이션', 50000)"><span class="addon-label">헤어 바리에이션 +50,000원~</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="헤어 바리에이션">1</span><button type="button" onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="의상헤어 별도문의" onclick="toggleAddonOption(this, '의상헤어 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('의상헤어 별도문의')">✕</button></div>
-            </div>
-            </div>
-          </details>
-          <details class="price-box">
-            <summary class="price-head">✨ 기타<span class="summary-caret-sm">▾</span></summary>
-            <div class="price-box-content">
-<div class="price-list">
-              <div class="price-item addon-item" data-addon-name="간단 펫" onclick="toggleAddonOption(this, '간단 펫', 35000)"><span class="addon-label">간단 펫 +35,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="간단 펫">1</span><button type="button" onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="고가동 파츠분리" onclick="toggleAddonOption(this, '고가동 파츠분리', 100000)"><span class="addon-label">고가동 파츠 분리 +100,000원~</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="고가동 파츠분리">1</span><button type="button" onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="삼면도" onclick="toggleAddonOption(this, '삼면도', 110000)"><span class="addon-label">캐릭터 시트(삼면도) +110,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('삼면도', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="삼면도">1</span><button type="button" onclick="changeAddonQty('삼면도', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="작업과정 비공개" onclick="toggleAddonOption(this, '작업과정 비공개', 40000)"><span class="addon-label">작업과정 비공개 +40,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="작업과정 비공개">1</span><button type="button" onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="작업물 비공개 1개월" onclick="toggleAddonOption(this, '작업물 비공개 1개월', 20000)"><span class="addon-label">작업물 비공개 (1개월) +20,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="작업물 비공개 1개월">1</span><button type="button" onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item" data-addon-name="동물 귀+꼬리" data-price="60000" onclick="toggleAddonOption(this, '동물 귀+꼬리', 60000)"><span class="addon-label">동물 귀+꼬리 +60,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('동물 귀+꼬리', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="동물 귀+꼬리">1</span><button type="button" onclick="changeAddonQty('동물 귀+꼬리', 1);event.stopPropagation();">+</button></span></div>
-              <div class="price-item addon-item inquiry-item" data-addon-name="기타 별도문의" onclick="toggleAddonOption(this, '기타 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('기타 별도문의')">✕</button></div>
-            </div>
-            </div>
-          </details>
+          <div class="option-col">
+            <details class="price-box">
+              <summary class="price-head"><span class="price-head-label">✨ 표정</span><span class="summary-caret-sm">▾</span></summary>
+              <div class="price-box-content">
+                <div class="price-subnote">(눈동자 컬러, 눈매 등 변경 가능합니다.)</div>
+                <div class="price-list">
+                  <div class="price-item addon-item" data-addon-name="샘플 표정 추가" onclick="toggleAddonOption(this, '샘플 표정 추가', 5000)"><span class="addon-label">샘플 표정 추가 +5,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('샘플 표정 추가', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="샘플 표정 추가">1</span><button type="button" onclick="changeAddonQty('샘플 표정 추가', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="주문제작 표정 추가" onclick="toggleAddonOption(this, '주문제작 표정 추가', 9000)"><span class="addon-label">주문제작 표정 추가 +9,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('주문제작 표정 추가', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="주문제작 표정 추가">1</span><button type="button" onclick="changeAddonQty('주문제작 표정 추가', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item inquiry-item" data-addon-name="표정 별도문의" onclick="toggleAddonOption(this, '표정 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('표정 별도문의')">✕</button></div>
+                </div>
+              </div>
+            </details>
+            <details class="price-box">
+              <summary class="price-head"><span class="price-head-label">✨ 소품</span><span class="summary-caret-sm">▾</span></summary>
+              <div class="price-box-content">
+                <div class="price-list">
+                  <div class="price-item addon-item" data-addon-name="마이크" onclick="toggleAddonOption(this, '마이크', 35000)"><span class="addon-label">마이크 +35,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('마이크', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="마이크">1</span><button type="button" onclick="changeAddonQty('마이크', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="게임기" onclick="toggleAddonOption(this, '게임기', 35000)"><span class="addon-label">게임기 +35,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('게임기', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="게임기">1</span><button type="button" onclick="changeAddonQty('게임기', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="끌어안는 인형" onclick="toggleAddonOption(this, '끌어안는 인형', 30000)"><span class="addon-label">끌어안는 인형 +30,000</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('끌어안는 인형', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="끌어안는 인형">1</span><button type="button" onclick="changeAddonQty('끌어안는 인형', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item inquiry-item" data-addon-name="소품 별도문의" onclick="toggleAddonOption(this, '소품 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('소품 별도문의')">✕</button></div>
+                </div>
+              </div>
+            </details>
+            <details class="price-box">
+              <summary class="price-head"><span class="price-head-label">✨ 기타</span><span class="summary-caret-sm">▾</span></summary>
+              <div class="price-box-content">
+                <div class="price-list">
+                  <div class="price-item addon-item" data-addon-name="간단 펫" onclick="toggleAddonOption(this, '간단 펫', 35000)"><span class="addon-label">간단 펫 +35,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('간단 펫', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="간단 펫">1</span><button type="button" onclick="changeAddonQty('간단 펫', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="고가동 파츠분리" onclick="toggleAddonOption(this, '고가동 파츠분리', 100000)"><span class="addon-label">고가동 파츠 분리 +100,000원~</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('고가동 파츠분리', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="고가동 파츠분리">1</span><button type="button" onclick="changeAddonQty('고가동 파츠분리', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="삼면도" onclick="toggleAddonOption(this, '삼면도', 110000)"><span class="addon-label">캐릭터 시트(삼면도) +110,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('삼면도', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="삼면도">1</span><button type="button" onclick="changeAddonQty('삼면도', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="작업과정 비공개" onclick="toggleAddonOption(this, '작업과정 비공개', 40000)"><span class="addon-label">작업과정 비공개 +40,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('작업과정 비공개', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="작업과정 비공개">1</span><button type="button" onclick="changeAddonQty('작업과정 비공개', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="작업물 비공개 1개월" onclick="toggleAddonOption(this, '작업물 비공개 1개월', 20000)"><span class="addon-label">작업물 비공개 (1개월) +20,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('작업물 비공개 1개월', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="작업물 비공개 1개월">1</span><button type="button" onclick="changeAddonQty('작업물 비공개 1개월', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="동물 귀+꼬리" data-price="60000" onclick="toggleAddonOption(this, '동물 귀+꼬리', 60000)"><span class="addon-label">동물 귀+꼬리 +60,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('동물 귀+꼬리', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="동물 귀+꼬리">1</span><button type="button" onclick="changeAddonQty('동물 귀+꼬리', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item inquiry-item" data-addon-name="기타 별도문의" onclick="toggleAddonOption(this, '기타 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('기타 별도문의')">✕</button></div>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div class="option-col">
+            <details class="price-box">
+              <summary class="price-head"><span class="ripple-target">✨ 팔 / 포즈</span><span class="summary-caret-sm">▾</span></summary>
+              <div class="price-box-content">
+                <div class="price-list">
+                  <div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)"><span class="addon-label">추가 팔 파츠 +20,000</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('추가 팔 파츠', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="추가 팔 파츠">1</span><button type="button" onclick="changeAddonQty('추가 팔 파츠', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="추가 소매 파츠" onclick="toggleAddonOption(this, '추가 소매 파츠', 10000)"><span class="addon-label">추가 소매 파츠 +10,000</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('추가 소매 파츠', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="추가 소매 파츠">1</span><button type="button" onclick="changeAddonQty('추가 소매 파츠', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item inquiry-item" data-addon-name="팔포즈 별도문의" onclick="toggleAddonOption(this, '팔포즈 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('팔포즈 별도문의')">✕</button></div>
+                </div>
+              </div>
+            </details>
+            <details class="price-box">
+              <summary class="price-head"><span class="price-head-label">✨ 의상 / 헤어</span><span class="summary-caret-sm">▾</span></summary>
+              <div class="price-box-content">
+                <div class="price-list">
+                  <div class="price-item addon-item" data-addon-name="신의상" onclick="toggleAddonOption(this, '신의상', 100000)"><span class="addon-label">신의상 +100,000원~</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('신의상', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="신의상">1</span><button type="button" onclick="changeAddonQty('신의상', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="겉옷" onclick="toggleAddonOption(this, '겉옷', 80000)"><span class="addon-label">겉옷 (on/off) +80,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('겉옷', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="겉옷">1</span><button type="button" onclick="changeAddonQty('겉옷', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="후드 모자" onclick="toggleAddonOption(this, '후드 모자', 40000)"><span class="addon-label">후드 모자 +40,000원</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('후드 모자', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="후드 모자">1</span><button type="button" onclick="changeAddonQty('후드 모자', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item" data-addon-name="헤어 바리에이션" onclick="toggleAddonOption(this, '헤어 바리에이션', 50000)"><span class="addon-label">헤어 바리에이션 +50,000원~</span><span class="qty-controls" onclick="event.stopPropagation()"><button type="button" onclick="changeAddonQty('헤어 바리에이션', -1);event.stopPropagation();">−</button><span class="qty-value" data-qty-for="헤어 바리에이션">1</span><button type="button" onclick="changeAddonQty('헤어 바리에이션', 1);event.stopPropagation();">+</button></span></div>
+                  <div class="price-item addon-item inquiry-item" data-addon-name="의상헤어 별도문의" onclick="toggleAddonOption(this, '의상헤어 별도문의', 0)"><span class="addon-label">⯎ 별도 문의 ⯎</span><button type="button" class="inquiry-delete-btn" onclick="removeInquiryOption('의상헤어 별도문의')">✕</button></div>
+                </div>
+              </div>
+            </details>
+          </div>
         </div>
       </div>
     </div>
@@ -1801,7 +1821,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }catch(e){ console.error(e); }
 
   try{
-    setupAccordionAnimation(); // ✅ 아코디언 애니메이션 호출
+    setupAccordionAnimation();
   }catch(e){ console.error(e); }
 
   try{
