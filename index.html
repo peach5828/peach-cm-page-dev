@@ -45,7 +45,6 @@
   --text:#55474d;
   --line:#f1d8e0;
   --shadow:0 10px 25px rgba(235, 131, 159, 0.16);
-  --container-max:1040px;
 }
 
 *{box-sizing:border-box;}
@@ -62,7 +61,13 @@ body{
   overflow-wrap:break-word;
 }
 
-.container{max-width:var(--container-max);margin:auto;padding:32px 28px 48px;}
+/* ✅ 전체 너비 확장 (max-width 제거, 비율 패딩 적용) */
+.container{
+  width:100%;
+  max-width:none;
+  margin:auto;
+  padding:32px 5% 48px;
+}
 
 /* 히어로 */
 .hero{
@@ -204,7 +209,13 @@ details.price-box:not([open]) > summary{margin-bottom:0;}
 .price-subnote{font-size:12px;color:#9e8d94;margin-top:6px;margin-bottom:2px;line-height:1.6;font-family:'IsYun',sans-serif;}
 details.price-box[open] .summary-caret-sm{transform:rotate(180deg);}
 details.price-box .price-list{margin-top:2px;}
-.price-box-content{overflow:hidden;}
+
+/* ✅ 아코디언 애니메이션 복구 (transition 추가) */
+.price-box-content{
+  overflow:hidden;
+  transition:max-height .32s cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-reduced-motion: reduce){.price-box-content{transition:none;}}
 
 /* 뷰어 */
 .info-text{font-size:13px;color:#9e8d94;margin-bottom:8px;text-align:center;line-height:1.65;font-family:'IsYun',sans-serif;}
@@ -292,6 +303,28 @@ details.price-box .price-list{margin-top:2px;}
 @media (prefers-reduced-motion: reduce){.qty-value.qty-bump{animation:none;}}
 .inquiry-delete-btn{display:none;width:28px;height:28px;border-radius:999px;border:1px solid rgba(255,255,255,0.45);background:rgba(255,255,255,0.22);color:inherit;font-weight:700;cursor:pointer;line-height:1;flex-shrink:0;}
 .addon-item.inquiry-item.active .inquiry-delete-btn{display:flex;align-items:center;justify-content:center;}
+
+/* ✅ 신청서 장바구니(mini-chip)에서 삭제 버튼 표시 */
+.mini-chip.active .inquiry-delete-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:var(--pink-soft);
+  color:var(--pink-deep);
+  font-weight:700;
+  cursor:pointer;
+  line-height:1;
+  flex-shrink:0;
+  margin-left:8px;
+}
+.mini-chip.active .inquiry-delete-btn:hover{
+  background:var(--pink);
+  color:white;
+}
 
 /* 별도 문의 수량 조절 버튼 숨김 */
 .inquiry-item .qty-controls{display:none !important;}
@@ -450,7 +483,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 
 /* 반응형 */
 @media (max-width:640px){
-  .container{padding:14px 12px 28px;}
+  .container{padding:14px 4% 28px;}
   .hero{padding:34px 20px 32px;border-radius:26px;}
   .hero-badge{font-size:11px;padding:8px 14px;margin-bottom:18px;}
   .hero-avatar{width:124px;height:124px;border-width:3px;}
@@ -832,7 +865,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 let selectedBaseOption = null;
 let selectedAddonOptions = [];
 let isCommercialUsage = false;
-let armPoseRippleActive = false; // 팔/포즈 리플 활성화 상태
+let armPoseRippleActive = false;
 
 // ▶ 이미지 프리로드
 function preloadImages(list){
@@ -1205,7 +1238,6 @@ function renderMiniAddon(){
     const label = isInquiry ? option.name.replace(' 별도문의', '') : option.name;
 
     if(isInquiry){
-      // 별도 문의 항목은 삭제 버튼만 표시
       return `
         <div class="mini-chip active">
           <div class="mini-chip-name">${escapeHtml(label)}</div>
@@ -1294,11 +1326,8 @@ function syncSummaryHeight(){
   const copyBtn = document.querySelector('.copy-btn-large');
   if(!addonBox || !summaryBox || !copyBtn) return;
 
-  // 추가옵션 장바구니 박스 높이
   const addonHeight = addonBox.offsetHeight;
-  // 복사 버튼 높이 + 여백 16px
   const totalHeight = addonHeight - copyBtn.offsetHeight - 16;
-  // 선택내역 박스 높이를 추가옵션에 맞춤
   summaryBox.style.height = Math.max(totalHeight, 200) + 'px';
 }
 
@@ -1307,7 +1336,7 @@ function updateFormQuadrant(){
   renderMiniAddon();
   renderMiniCollab();
   renderMiniUsage();
-  syncSummaryHeight(); // 높이 연동
+  syncSummaryHeight();
 }
 
 // ▶ 스크롤 리빌
@@ -1336,7 +1365,7 @@ function initScrollReveal(){
   }, 2500);
 }
 
-// ▶ 팔/포즈 리플 활성화 함수 (소품 선택 시 alert와 함께 호출)
+// ▶ 팔/포즈 리플 활성화 함수
 function activateArmPoseRipple(){
   if(armPoseRippleActive) return;
   armPoseRippleActive = true;
@@ -1346,12 +1375,89 @@ function activateArmPoseRipple(){
     const summary = details.querySelector('summary');
     if(summary && summary.textContent.includes('팔 / 포즈')){
       details.classList.add('details-arm-pose');
-      // 클릭 시 비활성화
       summary.addEventListener('click', () => {
         armPoseRippleActive = false;
         details.classList.remove('details-arm-pose');
       }, { once:true });
     }
+  });
+}
+
+// ▶ 아코디언 애니메이션 (빈공간 없이 동작)
+function setupAccordionAnimation(){
+  const detailsList = document.querySelectorAll('details.price-box');
+  if(!detailsList.length) return;
+
+  detailsList.forEach(details => {
+    const summary = details.querySelector('summary');
+    const content = details.querySelector('.price-box-content');
+    if(!summary || !content) return;
+
+    const state = {
+      endListener: null,
+      timeoutId: null
+    };
+
+    // ⛔ 타이머는 지우지 않음 (아래 타이머가 확실히 실행되도록)
+    const clearPending = () => {
+      if(state.endListener){
+        content.removeEventListener('transitionend', state.endListener);
+        state.endListener = null;
+      }
+    };
+
+    summary.addEventListener('click', (event) => {
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      event.preventDefault();
+
+      clearPending();
+
+      content.style.transition = 'none';
+      void content.offsetHeight;
+      content.style.transition = '';
+
+      if(details.open){
+        const startHeight = content.scrollHeight;
+        content.style.maxHeight = startHeight + 'px';
+        void content.offsetHeight;
+        content.style.maxHeight = '0px';
+
+        state.endListener = (e) => {
+          if(e.propertyName !== 'max-height') return;
+          clearPending();
+          details.open = false;
+          content.style.maxHeight = '';
+        };
+        content.addEventListener('transitionend', state.endListener);
+
+        state.timeoutId = setTimeout(() => {
+          clearPending();
+          details.open = false;
+          content.style.maxHeight = '';
+          state.timeoutId = null;
+        }, 400);
+      } else {
+        details.open = true;
+        content.style.maxHeight = '0px';
+        void content.offsetHeight;
+        const targetHeight = content.scrollHeight;
+        content.style.maxHeight = targetHeight + 'px';
+
+        state.endListener = (e) => {
+          if(e.propertyName !== 'max-height') return;
+          clearPending();
+          content.style.maxHeight = 'none';
+        };
+        content.addEventListener('transitionend', state.endListener);
+
+        state.timeoutId = setTimeout(() => {
+          clearPending();
+          content.style.maxHeight = 'none';
+          state.timeoutId = null;
+        }, 400);
+      }
+    });
   });
 }
 
@@ -1478,7 +1584,7 @@ function updateSampleThumbBorder(){
   });
 }
 
-// ▶ 표정 샘플 (콜백 없이 즉시 업데이트)
+// ▶ 표정 샘플
 let faceCurrent = 0;
 const faceImages = [
   'Cheriko_expressions.png',
@@ -1497,7 +1603,7 @@ function showFace(index){
   faceCurrent = index;
   const img = document.getElementById('faceGallery');
   const desc = document.getElementById('faceDesc');
-  desc.innerHTML = faceDescriptions[faceCurrent]; // 즉시 업데이트
+  desc.innerHTML = faceDescriptions[faceCurrent];
   fadeSwap(img, faceImages[faceCurrent], () => {
     updateFaceDots();
   });
@@ -1553,13 +1659,12 @@ function updateStyleDots(){
 // ▶ UI 업데이트
 function updateUI(){
   if(enforceAddonRules()){
-    // dependent add-ons removed; proceed with refreshed state
   }
   updateSelectionSummary();
   updateFormQuadrant();
   updateFormText();
   updateCopyButtonHint();
-  syncSummaryHeight(); // 높이 연동
+  syncSummaryHeight();
 }
 
 function updateCopyButtonHint(){
@@ -1596,7 +1701,7 @@ function toggleAddonOption(el, name, price){
 
   if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
     alert("팔 / 포즈 옵션을 먼저 선택해 주세요!");
-    activateArmPoseRipple(); // 리플 활성화
+    activateArmPoseRipple();
     return;
   }
 
@@ -1693,6 +1798,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if(document.getElementById('faceGallery')) showFace(0);
     if(document.getElementById('styleGallery')) showStyle(0);
     if(document.getElementById('collabGrid')) renderCollabPage();
+  }catch(e){ console.error(e); }
+
+  try{
+    setupAccordionAnimation(); // ✅ 아코디언 애니메이션 호출
   }catch(e){ console.error(e); }
 
   try{
