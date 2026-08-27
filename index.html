@@ -24,6 +24,20 @@
     font-display: swap;
 }
 
+/* ✅ 추가된 폰트 */
+@font-face {
+    font-family: 'RomanticGumi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiRomanceTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'IsYun';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
 :root{
   --pink:#eb839f;
   --pink-deep:#d86c89;
@@ -167,6 +181,7 @@ body{
   margin:0 0 22px;
   line-height:1.25;
   letter-spacing:-0.02em;
+  font-family:'RomanticGumi',sans-serif; /* ✅ 폰트 적용 */
 }
 
 .hero-desc{
@@ -183,8 +198,8 @@ body{
 
 .hero-main-copy.small,
 .small {
-  font-size: 0.75em;  /* 기존 글자 크기(0.85em)보다 약 1.5배 더 작게 조절 */
-  opacity: 0.5;       /* 투명도를 50%로 설정 (0이 투명, 1이 불투명) */
+  font-size: 0.75em;
+  opacity: 0.5;
   display:block;
   margin-top:18px;
 }
@@ -239,6 +254,7 @@ summary{
   font-size:18px;
   cursor:pointer;
   list-style:none;
+  font-family:'RomanticGumi',sans-serif; /* ✅ 제목 폰트 */
 }
 
 summary::-webkit-details-marker{display:none;}
@@ -247,6 +263,7 @@ summary::-webkit-details-marker{display:none;}
   margin-top:6px;
   font-size:12px;
   color:#9a848c;
+  font-family:'IsYun',sans-serif; /* ✅ 작은 글씨 폰트 */
 }
 
 .sample-intro{
@@ -258,6 +275,7 @@ summary::-webkit-details-marker{display:none;}
   font-size:14px;
   line-height:1.9;
   color:#7e6972;
+  font-family:'IsYun',sans-serif;
 }
 
 .price-card-open .title{
@@ -283,8 +301,8 @@ summary::-webkit-details-marker{display:none;}
 /* 페이퍼로지체 버그 해결용 빈 하트 */
 .empty-slot {
   font-weight: 700;
-  color: transparent; /* 하트 안쪽 색상을 투명하게 비웁니다 */
-  -webkit-text-stroke: 1px var(--pink-deep); /* 하트 테두리에만 핑크색 선을 긋습니다 */
+  color: transparent;
+  -webkit-text-stroke: 1px var(--pink-deep);
 }
 
 .closed{
@@ -312,6 +330,7 @@ summary::-webkit-details-marker{display:none;}
   padding:14px;
   font-size:13px;
   line-height:1.85;
+  font-family:'IsYun',sans-serif;
 }
 
 .slot-notice strong{
@@ -329,6 +348,7 @@ summary::-webkit-details-marker{display:none;}
   font-size:11px;
   color:#baa7ae;
   line-height:1.6;
+  font-family:'IsYun',sans-serif;
 }
 
 /* ============================================================
@@ -412,11 +432,13 @@ summary::-webkit-details-marker{display:none;}
   font-size:13px;
   font-weight:700;
   margin-bottom:6px;
+  font-family:'IsYun',sans-serif;
 }
 .basic-included-text{
   color:#8b7c81;
   font-size:13px;
   line-height:1.85;
+  font-family:'IsYun',sans-serif;
 }
 
 .option-box{
@@ -445,6 +467,7 @@ details:not([open]) > *:not(summary){
   padding:10px 12px;
   font-size:12px;
   line-height:1.7;
+  font-family:'IsYun',sans-serif;
 }
 
 .option-stack{
@@ -499,6 +522,7 @@ details.price-box:not([open]) > summary{
   margin-top:6px;
   margin-bottom:2px;
   line-height:1.6;
+  font-family:'IsYun',sans-serif;
 }
 
 details.price-box[open] .summary-caret-sm{
@@ -509,9 +533,7 @@ details.price-box .price-list{
   margin-top:2px;
 }
 
-/* 아코디언(표정/팔·포즈/소품/의상·헤어/기타) 펼침·접힘 시 부드러운 높이 전환.
-   실제 여닫기는 JS(setupAccordionAnimation)가 max-height를 계산해 담당하고,
-   여기서는 트랜지션 정의와 애니메이션 도중의 시각적 상태만 잡아준다. */
+/* 아코디언(표정/팔·포즈/소품/의상·헤어/기타) 펼침·접힘 시 부드러운 높이 전환. */
 .price-box-content{
   overflow:hidden;
   transition:max-height .32s cubic-bezier(.22,1,.36,1);
@@ -520,8 +542,6 @@ details.price-box .price-list{
 @media (prefers-reduced-motion: reduce){
   .price-box-content{ transition:none; }
 }
-
-/* 하위 카테고리(표정/팔·포즈/소품/의상·헤어/기타) 개별 여닫기 */
 
 /* ============================================================
    실제 커미션 샘플 / 표정 샘플 / 그림체 참고 (뷰어)
@@ -533,6 +553,7 @@ details.price-box .price-list{
   margin-bottom:8px;
   text-align:center;
   line-height:1.65;
+  font-family:'IsYun',sans-serif;
 }
 
 .viewer{
@@ -655,6 +676,7 @@ details.price-box .price-list{
   padding:5px 7px;
   line-height:1.3;
   word-break:keep-all;
+  font-family:'IsYun',sans-serif;
 }
 
 .style-viewer{
@@ -749,6 +771,7 @@ details.price-box .price-list{
   font-size:13px;
   color:#8b7c81;
   line-height:1.7;
+  font-family:'IsYun',sans-serif;
 }
 
 .highlight{
@@ -824,13 +847,25 @@ details.price-box .price-list{
   border-radius:16px;
   padding:14px 46px 14px 14px;
   min-height:128px;
-  transition:background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  transition:background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+/* 협업 카드 호버 효과 */
+.collab-card:hover{
+  border-color:var(--pink);
+  box-shadow:0 8px 20px rgba(235,131,159,0.2);
+  transform:translateY(-2px);
 }
 
 .collab-card.selected{
   background:linear-gradient(160deg, var(--pink) 0%, var(--pink-deep) 100%);
   border-color:var(--pink-deep);
   box-shadow:0 8px 18px rgba(235,131,159,0.28);
+}
+
+.collab-card.selected:hover{
+  border-color:var(--pink-deep);
+  box-shadow:0 10px 24px rgba(235,131,159,0.35);
 }
 
 .collab-text-group{
@@ -1063,6 +1098,7 @@ details.price-box .price-list{
   color:var(--pink);
   letter-spacing:-0.03em;
   margin-bottom:14px;
+  font-family:'RomanticGumi',sans-serif;
 }
 .selection-summary-list{
   display:flex;
@@ -1098,10 +1134,12 @@ details.price-box .price-list{
   font-size:15px;
   font-weight:700;
   color:#665059;
+  font-family:'IsYun',sans-serif;
 }
 .selection-summary-item .sub{
   font-size:12px;
   color:#947482;
+  font-family:'IsYun',sans-serif;
 }
 .selection-summary-item .right{
   display:flex;
@@ -1122,6 +1160,7 @@ details.price-box .price-list{
   font-size:13px;
   line-height:1.7;
   background:#fffdfe;
+  font-family:'IsYun',sans-serif;
 }
 
 .selection-summary-divider{
@@ -1336,6 +1375,7 @@ textarea{
   font-size:13.5px;
   word-break:keep-all;
   flex-shrink:0;
+  font-family:'IsYun',sans-serif;
 }
 
 /* 버츄얼 패키지·협업 작가·사용 범위 박스는 내부 스크롤 없이,
@@ -1355,6 +1395,7 @@ textarea{
   font-size:12px;
   line-height:1.6;
   background:#fffdfe;
+  font-family:'IsYun',sans-serif;
 }
 
 .mini-chip{
@@ -1370,6 +1411,7 @@ textarea{
   line-height:1.45;
   cursor:default;
   transition:border-color .18s, background .18s, opacity .18s;
+  font-family:'IsYun',sans-serif;
 }
 
 /* 클릭 가능한 선택형 칩 (패키지·사용범위) */
@@ -1477,6 +1519,7 @@ textarea{
   align-items:baseline;
   flex-wrap:wrap;
   gap:6px;
+  font-family:'RomanticGumi',sans-serif;
 }
 
 .wf-flow-row{
@@ -1525,6 +1568,15 @@ textarea{
   flex-shrink:0;
   opacity:0;
   transform:scale(0.8);
+  transition: background-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+/* ✅ 워크플로우 알약 호버 효과 */
+.wf-pill:hover{
+  background:var(--pink);
+  color:white;
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 6px 12px rgba(235,131,159,0.3);
 }
 
 /* 부모 워크플로우 카드가 화면에 들어오면, 알약들이 화살표를 따라 순서대로 통통 등장 */
@@ -1591,6 +1643,7 @@ textarea{
   font-weight:400;
   color:#b08898;
   margin-left:2px;
+  font-family:'IsYun',sans-serif;
 }
 
 /* ===== 안내사항 3열 카드 그리드 (모든 화면 폭에서 3열 고정) ===== */
@@ -1643,6 +1696,7 @@ textarea{
   padding-bottom:7px;
   border-bottom:1px dashed var(--line);
   word-break:keep-all;
+  font-family:'IsYun',sans-serif;
 }
 
 .notice-card-body{
@@ -1659,6 +1713,7 @@ textarea{
   line-height:1.65;
   color:var(--text);
   min-width:0;
+  font-family:'IsYun',sans-serif;
 }
 
 .ni-icon{
@@ -1745,6 +1800,7 @@ textarea{
   font-weight:700;
   color:var(--pink);
   line-height:1.1;
+  font-family:'RomanticGumi',sans-serif;
 }
 
 .usage-card-badge{
@@ -1758,6 +1814,7 @@ textarea{
   padding:3px 10px;
   line-height:1.4;
   white-space:nowrap;
+  font-family:'IsYun',sans-serif;
 }
 
 .usage-card.selected .usage-card-badge{
@@ -1815,6 +1872,7 @@ textarea{
   padding:6px 6px;
   border-radius:10px;
   transition:background .18s ease;
+  font-family:'IsYun',sans-serif;
 }
 
 .usage-list-item:hover{
@@ -1846,6 +1904,7 @@ textarea{
   line-height:1.65;
   font-style:italic;
   padding:0 4px;
+  font-family:'IsYun',sans-serif;
 }
 
 .usage-corp-notice{
@@ -1857,65 +1916,47 @@ textarea{
   background:linear-gradient(180deg,#fffafd 0%,#fff4f8 100%);
   border:1px dashed #f0c8d8;
   border-radius:14px;
+  font-family:'IsYun',sans-serif;
 }
 
 /* ============================================================
-   토스트 알림 (팔/포즈 안내 등)
+   팔 / 포즈 리플 효과 (글자 주변 원형)
    ============================================================ */
 
-.toast-container{
-  position:fixed;
-  bottom:24px;
+.ripple-target{
+  position:relative;
+  display:inline-block;
+  z-index:1;
+}
+
+.ripple-target::before{
+  content:"";
+  position:absolute;
+  top:50%;
   left:50%;
-  transform:translateX(-50%);
-  z-index:1000;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  align-items:center;
-  pointer-events:none;
-}
-
-.toast-message{
-  background:rgba(235,131,159,0.95);
-  color:white;
-  padding:12px 20px;
-  border-radius:999px;
-  font-size:14px;
-  font-weight:700;
-  box-shadow:0 6px 20px rgba(235,131,159,0.35);
+  width:100%;
+  height:100%;
+  transform:translate(-50%,-50%) scale(0);
+  border-radius:50%;
+  background:rgba(235,131,159,0.3);
+  z-index:-1;
   opacity:0;
-  transform:translateY(20px);
-  transition:opacity .3s ease, transform .3s ease;
   pointer-events:none;
-  max-width:90vw;
-  text-align:center;
-  white-space:nowrap;
 }
 
-.toast-message.show{
-  opacity:1;
-  transform:translateY(0);
+.ripple-target.ripple-active::before{
+  animation:rippleExpand .8s ease-out forwards;
 }
 
-/* ============================================================
-   팔/포즈 아코디언 리플 효과 (미클릭 시 반복)
-   ============================================================ */
-
-@keyframes ripplePulse{
+@keyframes rippleExpand{
   0%{
-    box-shadow:0 0 0 0 rgba(235,131,159,0.6);
-  }
-  70%{
-    box-shadow:0 0 0 12px rgba(235,131,159,0);
+    transform:translate(-50%,-50%) scale(0);
+    opacity:0.6;
   }
   100%{
-    box-shadow:0 0 0 0 rgba(235,131,159,0);
+    transform:translate(-50%,-50%) scale(3);
+    opacity:0;
   }
-}
-
-.ripple-on-summary{
-  animation:ripplePulse 1.8s ease-out infinite;
 }
 
 /* ============================================================
@@ -1939,7 +1980,6 @@ textarea{
   .circle-nav{width:34px;height:34px;font-size:16px;}
   .style-viewer{max-width:100%;}
 
-  /* 비상업용/상업용: 세로로 쌓지 않고 2열 유지, 내용은 압축 */
   .usage-card{padding:13px 10px 11px;}
   .usage-card-header{margin-bottom:9px;gap:6px;}
   .usage-card-title{font-size:16px;}
@@ -1951,13 +1991,11 @@ textarea{
   .usage-list-item .usage-icon{font-size:12px;}
   .usage-fine-print{font-size:10px;padding:0 2px;}
 
-  /* 협업 작가: 2열(2x2) 유지, 카드/버튼은 압축 */
   .collab-card{padding:11px 38px 11px 11px;min-height:112px;}
   .collab-text-group{font-size:12px;gap:4px;}
   .collab-check-btn{width:26px;height:26px;top:10px;right:10px;}
   .collab-check-icon{font-size:13px;}
 
-  /* 안내사항: 좁은 화면에서 3열은 글자가 한 글자씩 끊겨 1열로 전환 */
   .notice-grid{grid-template-columns:1fr;gap:10px;}
   .notice-card{padding:15px;}
   .notice-card-head{font-size:14px;margin-bottom:9px;padding-bottom:8px;}
@@ -1965,7 +2003,6 @@ textarea{
   .notice-item{font-size:13px;line-height:1.75;gap:6px;}
   .ni-icon{font-size:13px;}
 
-  /* 신청서 하단 미니 박스: 모바일에서는 1행 2열(버츄얼패키지/사용범위)도 세로로 쌓는다 */
   .form-mini-row-half{grid-template-columns:1fr;}
   .form-mini-col-tall{height:320px;}
   .form-mini-head{font-size:14.5px;}
@@ -1977,7 +2014,6 @@ textarea{
   .selection-summary-item .name{font-size:14px;}
   .selection-summary-item .sub{font-size:12.5px;}
 
-  /* 추가 옵션 수량 +/- 버튼: 터치하기 편하도록 확대 */
   .qty-controls button{width:32px;height:32px;font-size:15px;}
 }
 
@@ -2159,7 +2195,7 @@ textarea{
           </details>
 
           <details class="price-box">
-            <summary class="price-head">✨ 팔 / 포즈<span class="summary-caret-sm">▾</span></summary>
+            <summary class="price-head"><span class="ripple-target">✨ 팔 / 포즈</span><span class="summary-caret-sm">▾</span></summary>
             <div class="price-box-content">
 <div class="price-list">
               <div class="price-item addon-item" data-addon-name="추가 팔 파츠" onclick="toggleAddonOption(this, '추가 팔 파츠', 20000)">
@@ -2645,9 +2681,6 @@ textarea{
   </div>
 
 </div>
-
-<!-- 토스트 컨테이너 -->
-<div class="toast-container" id="toastContainer"></div>
 
 <script>
 function preloadImages(list){
@@ -3154,37 +3187,6 @@ function initScrollReveal(){
 }
 
 /* ============================================================
-   토스트 알림 기능
-   ============================================================ */
-
-let toastTimer = null;
-
-function showToast(message, duration = 2600){
-  const container = document.getElementById('toastContainer');
-  if(!container) return;
-
-  // 기존 토스트가 있으면 제거 (연속 표시 방지)
-  container.innerHTML = '';
-  if(toastTimer) clearTimeout(toastTimer);
-
-  const toast = document.createElement('div');
-  toast.className = 'toast-message';
-  toast.textContent = message;
-  container.appendChild(toast);
-
-  // 다음 프레임에 show 클래스 추가 → transition 시작
-  requestAnimationFrame(() => {
-    toast.classList.add('show');
-  });
-
-  // 자동으로 사라짐
-  toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 350);
-  }, duration);
-}
-
-/* ============================================================
    추가옵션 하위 카테고리(표정/팔·포즈/소품/의상·헤어/기타) 아코디언
    — 네이티브 details의 즉시 전환 대신, max-height를 계산해 부드럽게 여닫는다.
    ============================================================ */
@@ -3276,12 +3278,10 @@ function setupAccordionAnimation(){
 }
 
 /* ============================================================
-   팔/포즈 아코디언 리플 효과 (첫 클릭 전까지 반복)
+   팔/포즈 리플 효과 함수 (선택 실패 시에만 트리거)
    ============================================================ */
 
-let isArmPoseOpened = false;
-
-function initArmPoseRipple(){
+function triggerRippleOnArmPose(){
   const armPoseDetails = document.querySelector('details.price-box');
   // 두 번째 details가 팔/포즈? 확인해보자: HTML 구조에서 팔/포즈는 두 번째 details.
   // 정확히 찾기 위해 summary 텍스트 포함 여부로 체크.
@@ -3299,17 +3299,18 @@ function initArmPoseRipple(){
   const summary = target.querySelector('summary');
   if(!summary) return;
 
-  // 아직 열린 적이 없으면 리플 효과 클래스 부여
-  if(!isArmPoseOpened){
-    summary.classList.add('ripple-on-summary');
-  }
+  const rippleSpan = summary.querySelector('.ripple-target');
+  if(!rippleSpan) return;
 
-  summary.addEventListener('click', () => {
-    if(!isArmPoseOpened){
-      isArmPoseOpened = true;
-      summary.classList.remove('ripple-on-summary');
-    }
-  });
+  // 이미 클래스가 있으면 재시작을 위해 제거 후 다시 추가
+  rippleSpan.classList.remove('ripple-active');
+  void rippleSpan.offsetWidth; // reflow to restart animation
+  rippleSpan.classList.add('ripple-active');
+
+  // 0.8초 후 클래스 제거 (애니메이션 종료)
+  setTimeout(() => {
+    rippleSpan.classList.remove('ripple-active');
+  }, 900);
 }
 
 /* ============================================================
@@ -3567,8 +3568,10 @@ function toggleAddonOption(el, name, price){
   }
 
   if(requiresFoldedArm(name) && !hasFoldedArmSelected()){
-    // alert 대신 토스트로 안내
-    showToast('팔 / 포즈 옵션을 먼저 선택해 주세요!');
+    // 일반 팝업으로 안내 (아트머그에서 토스트가 동작하지 않으므로)
+    alert("팔 / 포즈 옵션을 먼저 선택해 주세요!");
+    // 팔/포즈 리플 효과 트리거
+    triggerRippleOnArmPose();
     return;
   }
 
@@ -3662,7 +3665,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   try{
     setupAccordionAnimation();
-    initArmPoseRipple();
   }catch(e){ console.error(e); }
 
   try{
