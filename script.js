@@ -22,8 +22,8 @@ let selectedBaseOption = null;
 let selectedAddonOptions = [];
 let isCommercialUsage = false;
 
-function selectUsage(type){
-  isCommercialUsage = (type === 'com');
+function selectUsage(입력){
+  isCommercialUsage = (입력 === 'com');
   const cardNon = document.getElementById('usageCardNon');
   const cardCom = document.getElementById('usageCardCom');
   if(isCommercialUsage){
@@ -934,7 +934,6 @@ function copyText() {
 /* ============================================================
    초기화 실행 (DOMContentLoaded)
    ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
 
