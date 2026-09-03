@@ -1577,14 +1577,14 @@ function fadeSwap(imgEl, newSrc, callback){
 // ▶ 갤러리 (최신작이 맨 앞에 오도록 reverse 처리)
 let current = 0;
 const images = [
+  'images/ralralra_sample_collage.png',   // ✅ 최신작을 맨 앞으로
   'images/Cheriko_sample_collage.png',
   'images/93_sample_collage.png',
   'images/sina_sample_collage.png',
   'images/rararu_sample_collage.png',
   'images/koya_sample_collage.png',
   'images/raruka_sample_collage.png',
-  'images/B_sample_collage.png',
-  'images/ralralra_sample_collage.png'   // ✅ 최신작을 배열 맨 뒤에 추가
+  'images/B_sample_collage.png'
 ];
 
 // 샘플 이름 매핑
@@ -1608,15 +1608,13 @@ function renderSampleThumbs(){
   const grid = document.getElementById('sampleThumbGrid');
   if(!grid) return;
   
-  const reversedImages = images.slice().reverse();
-  
-  grid.innerHTML = reversedImages.map((imgSrc, i) => {
-    const originalIndex = images.length - 1 - i;
+  // 배열이 이미 최신순이므로 그대로 사용
+  grid.innerHTML = images.map((imgSrc, i) => {
     const label = getSampleLabel(imgSrc);
     
     return `
       <div class="thumb-item">
-        <img src="${imgSrc}" alt="${label}" loading="lazy" decoding="async" onclick="selectSample(${originalIndex})">
+        <img src="${imgSrc}" alt="${label}" loading="lazy" decoding="async" onclick="selectSample(${i})">
         <div class="thumb-label">${label}</div>
       </div>
     `;
@@ -1637,9 +1635,7 @@ function selectSample(index){
 function updateSampleThumbBorder(){
   const thumbs = document.querySelectorAll('#sampleThumbGrid img');
   thumbs.forEach((thumb, index) => {
-    // reverse된 배열에서의 인덱스 계산
-    const originalIndex = images.length - 1 - index;
-    thumb.style.border = originalIndex === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
+    thumb.style.border = index === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
   });
 }
 
