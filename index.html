@@ -189,7 +189,11 @@ summary::-webkit-details-marker{display:none;}
 .price-item{cursor:pointer;padding:7px 9px;border-radius:10px;transition:background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;user-select:none;}
 .price-item:hover{transform:translateY(-1px);background:#ffe3ec;}
 .price-item.active{background:var(--pink);color:#fff;font-weight:700;animation:pricePop .4s cubic-bezier(.22,1,.36,1);}
-@keyframes pricePop{0%{ transform: scale(0.97) translateY(0); }50%{ transform: scale(1.02) translateY(0); }100%{ transform: scale(1) translateY(0); }}
+@keyframes pricePop{
+  0%{ transform: scale(0.97) translateY(0); }
+  50%{ transform: scale(1.02) translateY(0); }
+  100%{ transform: scale(1) translateY(0); }
+}
 @media (prefers-reduced-motion: reduce){.price-item.active{animation:none;}}
 .basic-included{margin-top:12px;padding:14px;border-radius:14px;background:#fffdfd;border:1px solid #f4e8ec;}
 .basic-included-title{color:#b899a4;font-size:13px;font-weight:700;margin-bottom:6px;font-family:'IsYun',sans-serif;}
@@ -199,13 +203,13 @@ summary::-webkit-details-marker{display:none;}
 details:not([open]) > *:not(summary){display:none;}
 .option-guide{margin-top:10px;background:#fff;border:1px dashed var(--line);color:#8b7c81;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.7;font-family:'IsYun',sans-serif;}
 
-/* ✅ 수정: CSS Grid + 독립 열 */
+/* ✅ CSS Grid + 독립 열 */
 .option-stack{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
   margin-top:10px;
-  align-items:start; /* 각 열 높이 독립 */
+  align-items:start;
 }
 .option-col{
   display:flex;
@@ -226,7 +230,7 @@ details.price-box:not([open]) > summary{margin-bottom:0;}
 details.price-box[open] .summary-caret-sm{transform:rotate(180deg);}
 details.price-box .price-list{margin-top:2px;}
 
-/* ✅ 아코디언 애니메이션 복구 (transition 추가) */
+/* ✅ 아코디언 애니메이션 */
 .price-box-content{
   overflow:hidden;
   transition:max-height .32s cubic-bezier(.22,1,.36,1);
@@ -543,9 +547,6 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
   .selection-summary-item .sub{font-size:12.5px;}
   .qty-controls button{width:32px;height:32px;font-size:15px;}
 }
-.no-anim{
-  animation: none !important;
-}
 </style>
 <noscript><style>.reveal{opacity:1!important;transform:none!important;} .crossfade-img{opacity:1!important;visibility:visible!important;}</style></noscript>
 </head>
@@ -555,7 +556,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
   <div class="hero">
     <div class="hero-badge">Live2D Model Illustration Commission</div>
     <div class="hero-avatar-wrap">
-      <img class="hero-avatar" src="peach5828 icon 400x400.jpg" alt="작가 프로필 아이콘" loading="eager" decoding="async">
+      <img class="hero-avatar" src="images/peach5828 icon 400x400.jpg" alt="작가 프로필 아이콘" loading="eager" decoding="async">
     </div>
     <h1 class="hero-title">Live2D 버츄얼 일러스트 커미션</h1>
 <p class="hero-desc hero-main-copy">
@@ -655,7 +656,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
           </div>
         </div>
       </div>
-<div class="option-box">
+      <div class="option-box">
         <div class="option-box-title">추가옵션</div>
         <div class="option-guide">옵션 구성이 어려운 경우 선택 전 문의 주세요!! 상세히 안내 드립니다.</div>
         <div class="option-stack">
@@ -736,18 +737,10 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
     <div style="margin-top:10px;">
       <div class="info-text">뒤로 갈수록 예전 작업물입니다.</div>
       <div class="viewer">
-        <img id="galleryImg" class="crossfade-img" src="Cheriko_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
+        <img id="galleryImg" class="crossfade-img" src="images/ralralra_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g class="heart-loader-beat"><path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/><path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/></g></svg>
       </div>
-      <div class="thumb-grid" id="sampleThumbGrid">
-        <div class="thumb-item"><img src="Cheriko_sample_collage.png" alt="체리코" loading="eager" decoding="async" onclick="selectSample(0)"><div class="thumb-label">체리코</div></div>
-        <div class="thumb-item"><img src="93_sample_collage.png" alt="93" loading="lazy" decoding="async" onclick="selectSample(1)"><div class="thumb-label">93</div></div>
-        <div class="thumb-item"><img src="sina_sample_collage.png" alt="시나" loading="lazy" decoding="async" onclick="selectSample(2)"><div class="thumb-label">시나</div></div>
-        <div class="thumb-item"><img src="rararu_sample_collage.png" alt="라라루" loading="lazy" decoding="async" onclick="selectSample(3)"><div class="thumb-label">라라루</div></div>
-        <div class="thumb-item"><img src="koya_sample_collage.png" alt="네무키 코야" loading="lazy" decoding="async" onclick="selectSample(4)"><div class="thumb-label">네무키 코야</div></div>
-        <div class="thumb-item"><img src="raruka_sample_collage.png" alt="라루카" loading="lazy" decoding="async" onclick="selectSample(5)"><div class="thumb-label">라루카</div></div>
-        <div class="thumb-item"><img src="B_sample_collage.png" alt="양 수인" loading="lazy" decoding="async" onclick="selectSample(6)"><div class="thumb-label">양 수인</div></div>
-      </div>
+      <div class="thumb-grid" id="sampleThumbGrid"></div>
     </div>
   </div>
     
@@ -767,7 +760,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
     <div class="title">💖 표정 샘플</div>
     <div style="margin-top:10px;">
       <div class="style-viewer">
-        <img id="faceGallery" class="crossfade-img" src="Cheriko_expressions.png" alt="표정 샘플" loading="eager" decoding="async">
+        <img id="faceGallery" class="crossfade-img" src="images/Cheriko_expressions.png" alt="표정 샘플" loading="eager" decoding="async">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g class="heart-loader-beat"><path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/><path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/></g></svg>
         <button type="button" class="circle-nav left" onclick="prevFace()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextFace()">❯</button>
@@ -793,7 +786,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
     <div style="margin-top:10px;">
       <div class="info-text">좌우 버튼으로 그림체 참고 이미지를 넘길 수 있습니다.</div>
       <div class="style-viewer">
-        <img id="styleGallery" class="crossfade-img" src="style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='style_1.png';}">
+        <img id="styleGallery" class="crossfade-img" src="images/style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='images/style_1.png';}">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g class="heart-loader-beat"><path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/><path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/></g></svg>
         <button type="button" class="circle-nav left" onclick="prevStyle()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextStyle()">❯</button>
@@ -1303,7 +1296,6 @@ function renderMiniCollab(){
 
   const artist = collabArtists.find(a => a.name === selectedCollabArtist);
   const desc = artist && artist.desc ? ` (${artist.desc})` : '';
-  // 애니메이션 방지를 위해 'no-anim' 클래스 추가
   el.innerHTML = `<div class="mini-chip active selectable no-anim" onclick="miniDeselectCollab()" title="눌러서 선택 취소"><div class="mini-chip-name">${escapeHtml(selectedCollabArtist)}${escapeHtml(desc)}</div></div>`;
 }
 
@@ -1357,7 +1349,7 @@ function syncSummaryHeight(){
   const addonHeight = addonBox.offsetHeight;
   const totalHeight = addonHeight - copyBtn.offsetHeight - 16;
   summaryBox.style.minHeight = Math.max(totalHeight, 200) + 'px';
-  summaryBox.style.height = 'auto'; // 높이를 강제로 고정하지 않고 min-height로 변경
+  summaryBox.style.height = 'auto';
 }
 
 function updateFormQuadrant(){
@@ -1427,7 +1419,6 @@ function setupAccordionAnimation(){
       timeoutId: null
     };
 
-    // ⛔ 타이머는 지우지 않음 (아래 타이머가 확실히 실행되도록)
     const clearPending = () => {
       if(state.endListener){
         content.removeEventListener('transitionend', state.endListener);
@@ -1583,17 +1574,54 @@ function fadeSwap(imgEl, newSrc, callback){
   changeGalleryImage(imgEl, newSrc, callback);
 }
 
-// ▶ 갤러리
+// ▶ 갤러리 (최신작이 맨 앞에 오도록 reverse 처리)
 let current = 0;
 const images = [
-  'Cheriko_sample_collage.png',
-  '93_sample_collage.png',
-  'sina_sample_collage.png',
-  'rararu_sample_collage.png',
-  'koya_sample_collage.png',
-  'raruka_sample_collage.png',
-  'B_sample_collage.png'
+  'images/Cheriko_sample_collage.png',
+  'images/93_sample_collage.png',
+  'images/sina_sample_collage.png',
+  'images/rararu_sample_collage.png',
+  'images/koya_sample_collage.png',
+  'images/raruka_sample_collage.png',
+  'images/B_sample_collage.png',
+  'images/ralralra_sample_collage.png'   // ✅ 최신작을 배열 맨 뒤에 추가
 ];
+
+// 샘플 이름 매핑
+const sampleLabels = {
+  'Cheriko_sample_collage.png': '체리코',
+  '93_sample_collage.png': '93',
+  'sina_sample_collage.png': '시나',
+  'rararu_sample_collage.png': '라라루',
+  'koya_sample_collage.png': '네무키 코야',
+  'raruka_sample_collage.png': '라루카',
+  'B_sample_collage.png': '양 수인',
+  'ralralra_sample_collage.png': '랄랄라'
+};
+
+function getSampleLabel(src){
+  return sampleLabels[src.split('/').pop()] || '샘플';
+}
+
+// 썸네일 렌더링 (최신작이 맨 앞에 오도록 reverse)
+function renderSampleThumbs(){
+  const grid = document.getElementById('sampleThumbGrid');
+  if(!grid) return;
+  
+  const reversedImages = images.slice().reverse();
+  
+  grid.innerHTML = reversedImages.map((imgSrc, i) => {
+    const originalIndex = images.length - 1 - i;
+    const label = getSampleLabel(imgSrc);
+    
+    return `
+      <div class="thumb-item">
+        <img src="${imgSrc}" alt="${label}" loading="lazy" decoding="async" onclick="selectSample(${originalIndex})">
+        <div class="thumb-label">${label}</div>
+      </div>
+    `;
+  }).join('');
+}
 
 function showGallery(index){
   current = index;
@@ -1609,17 +1637,19 @@ function selectSample(index){
 function updateSampleThumbBorder(){
   const thumbs = document.querySelectorAll('#sampleThumbGrid img');
   thumbs.forEach((thumb, index) => {
-    thumb.style.border = index === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
+    // reverse된 배열에서의 인덱스 계산
+    const originalIndex = images.length - 1 - index;
+    thumb.style.border = originalIndex === current ? '2px solid var(--pink-deep)' : '2px solid transparent';
   });
 }
 
 // ▶ 표정 샘플
 let faceCurrent = 0;
 const faceImages = [
-  'Cheriko_expressions.png',
-  'raruka_face_types.png',
-  'koya_face_9types.png',
-  'sia_face_types.png'
+  'images/Cheriko_expressions.png',
+  'images/raruka_face_types.png',
+  'images/koya_face_9types.png',
+  'images/sia_face_types.png'
 ];
 const faceDescriptions = [
   '체리코님 표정 샘플',
@@ -1657,10 +1687,10 @@ function updateFaceDots(){
 // ▶ 그림체
 let styleCurrent = 0;
 const styleImages = [
-  'style_01.png',
-  'style_02.png',
-  'style_03.png',
-  'style_04.png'
+  'images/style_01.png',
+  'images/style_02.png',
+  'images/style_03.png',
+  'images/style_04.png'
 ];
 
 function showStyle(index){
@@ -1823,6 +1853,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
 
   try{
+    renderSampleThumbs();  // ✅ 썸네일 동적 렌더링
     if(document.getElementById('galleryImg')) showGallery(0);
     if(document.getElementById('faceGallery')) showFace(0);
     if(document.getElementById('styleGallery')) showStyle(0);
