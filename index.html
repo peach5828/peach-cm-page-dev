@@ -333,17 +333,7 @@ details:not([open]) > *:not(summary){display:none;}
 @media (max-width:899px){
   .option-stack{grid-template-columns:1fr;}
 }
-
 details.price-box > summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;}
-details.price-box:not([open]) > summary{margin-bottom:0;}
-.summary-caret-sm{
-  font-size: 28px;
-  color:var(--pink-deep);
-  flex-shrink:0;
-  transition:transform .2s ease;
-  padding: 8px 12px;
-  line-height: 1;
-}
 .price-head-label{flex:1;min-width:0;}
 .price-subnote{font-size:13px;color:#9e8d94;margin-bottom:var(--gap-text);line-height:1.6;font-family:'IsYun',sans-serif;}
 details.price-box[open] .summary-caret-sm{transform:rotate(180deg);}
