@@ -1872,7 +1872,18 @@ function updateStyleDots(){
     dotsEl.innerText = styleImages.map((_, i) => i === styleCurrent ? '●' : '○').join(' ');
   }
 }
+function sendHeightToParent() {
+  try {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: height }, '*');
+  } catch (e) {
+    // 부모가 없을 경우 무시
+  }
+}
 
+// 페이지 로딩과 리사이즈에도 반응하도록 이벤트 연결
+window.addEventListener('load', sendHeightToParent);
+window.addEventListener('resize', sendHeightToParent);
 // ▶ UI 업데이트
 function updateUI(){
   if(enforceAddonRules()){
@@ -1882,6 +1893,7 @@ function updateUI(){
   updateFormText();
   updateCopyButtonHint();
   syncSummaryHeight();
+  sendHeightToParent();
 }
 
 function updateCopyButtonHint(){
