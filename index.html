@@ -508,7 +508,21 @@ details.price-box .price-list{margin-top:0;}
 .selection-summary-row strong{font-size:15px;font-weight:700;color:#5c4b53;}
 .selection-summary-row.total span,.selection-summary-row.total strong{font-size:20px;font-weight:700;color:var(--pink-deep);}
 .copy-btn{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Paperozi',sans-serif;}
-.copy-btn-large{width:100%;margin-top:var(--gap-text);height:64px;border-radius:20px;background:linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%);color:white;border:2px solid rgba(255,255,255,0.22);box-shadow:0 10px 22px rgba(235, 131, 159, 0.20);font-size:19px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.copy-btn-large{
+  width:100%;
+  margin-top: 16px; /* ✅ 여백 추가 (기존 auto → 16px) */
+  height:64px;
+  border-radius:20px;
+  background:linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%);
+  color:white;
+  border:2px solid rgba(255,255,255,0.22);
+  box-shadow:0 10px 22px rgba(235, 131, 159, 0.20);
+  font-size:19px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
 .copy-btn-large:hover{filter:brightness(1.04);}
 @keyframes copyBtnBreathe{0%,100%{box-shadow:0 10px 22px rgba(235, 131, 159, 0.20), 0 0 0 0 rgba(235,131,159,0.40);}50%{box-shadow:0 10px 22px rgba(235, 131, 159, 0.20), 0 0 0 10px rgba(235,131,159,0);}}
 .copy-btn-large.breathe{animation:copyBtnBreathe 2.6s ease-in-out infinite;}
@@ -552,7 +566,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
 .form-quad-right{display:flex;flex-direction:column;height:100%;}
 .selection-summary{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;}
 .selection-summary-list{flex:1;}
-.copy-btn-large{flex-shrink:0;margin-top:auto;}
+.copy-btn-large{flex-shrink:0;margin-top:16px;} /* ✅ 여기 추가 (선택사항: 위에서 이미 정의했지만 보험) */
 
 @media (min-width:900px){.form-quad-bottom{grid-template-columns:1.05fr 1fr;}}
 
@@ -908,7 +922,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
     <div style="margin-top:10px;">
       <div class="info-text">뒤로 갈수록 예전 작업물입니다.</div>
       <div class="viewer">
-        <img id="galleryImg" class="crossfade-img" src="images/ralralra_sample_collage.png" alt="실제 커미션 샘플" loading="eager" decoding="async">
+        <img id="galleryImg" class="crossfade-img" src="images/ralralra_sample_collage.jpg" alt="실제 커미션 샘플" loading="eager" decoding="async">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g class="heart-loader-beat"><path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/><path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/></g></svg>
       </div>
       <div class="thumb-grid" id="sampleThumbGrid"></div>
@@ -931,7 +945,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
     <div class="title">💖 표정 샘플</div>
     <div style="margin-top:10px;">
       <div class="style-viewer">
-        <img id="faceGallery" class="crossfade-img" src="images/Cheriko_expressions.png" alt="표정 샘플" loading="eager" decoding="async">
+        <img id="faceGallery" class="crossfade-img" src="images/Cheriko_expressions.jpg" alt="표정 샘플" loading="eager" decoding="async">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g class="heart-loader-beat"><path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/><path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/></g></svg>
         <button type="button" class="circle-nav left" onclick="prevFace()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextFace()">❯</button>
@@ -957,7 +971,7 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
     <div style="margin-top:10px;">
       <div class="info-text">좌우 버튼으로 그림체 참고 이미지를 넘길 수 있습니다.</div>
       <div class="style-viewer">
-        <img id="styleGallery" class="crossfade-img" src="images/style_01.png" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='images/style_1.png';}">
+        <img id="styleGallery" class="crossfade-img" src="images/style_01.jpg" alt="그림체 참고" loading="eager" decoding="async" onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='images/style_1.jpg';}">
         <svg class="heart-loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g class="heart-loader-beat"><path class="heart-loader-track" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/><path class="heart-loader-trace" d="M50 82 C27 62,8 45,8 27 C8 10,24 6,37 14 C44 18,48 24,50 30 C52 24,56 18,63 14 C76 6,92 10,92 27 C92 45,73 62,50 82 Z"/></g></svg>
         <button type="button" class="circle-nav left" onclick="prevStyle()">❮</button>
         <button type="button" class="circle-nav right" onclick="nextStyle()">❯</button>
@@ -1510,7 +1524,7 @@ function miniSelectUsage(type){
   selectUsage(type);
 }
 
-// ▶ JS 높이 연동 함수
+// ✅ 수정된 syncSummaryHeight 함수 (장바구니와 선택 내역 하단 정렬 유지)
 function syncSummaryHeight(){
   const addonBox = document.querySelector('.form-mini-col-tall');
   const summaryBox = document.querySelector('.selection-summary');
@@ -1518,7 +1532,8 @@ function syncSummaryHeight(){
   if(!addonBox || !summaryBox || !copyBtn) return;
 
   const addonHeight = addonBox.offsetHeight;
-  const totalHeight = addonHeight - copyBtn.offsetHeight - 16;
+  // copyBtn의 margin-top 16px를 고려하여 계산 조정
+  const totalHeight = addonHeight - copyBtn.offsetHeight;
   summaryBox.style.minHeight = Math.max(totalHeight, 200) + 'px';
   summaryBox.style.height = 'auto';
 }
@@ -1748,26 +1763,26 @@ function fadeSwap(imgEl, newSrc, callback){
 // ▶ 갤러리 (최신작이 맨 앞에 오도록 reverse 처리)
 let current = 0;
 const images = [
-  'images/ralralra_sample_collage.png',   // ✅ 최신작을 맨 앞에
-  'images/Cheriko_sample_collage.png',
-  'images/93_sample_collage.png',
-  'images/sina_sample_collage.png',
-  'images/rararu_sample_collage.png',
-  'images/koya_sample_collage.png',
-  'images/raruka_sample_collage.png',
-  'images/B_sample_collage.png'
+  'images/ralralra_sample_collage.jpg',
+  'images/Cheriko_sample_collage.jpg',
+  'images/93_sample_collage.jpg',
+  'images/sina_sample_collage.jpg',
+  'images/rararu_sample_collage.jpg',
+  'images/koya_sample_collage.jpg',
+  'images/raruka_sample_collage.jpg',
+  'images/B_sample_collage.jpg'
 ];
 
 // 샘플 이름 매핑
 const sampleLabels = {
-  'Cheriko_sample_collage.png': '체리코',
-  '93_sample_collage.png': '93',
-  'sina_sample_collage.png': '시나',
-  'rararu_sample_collage.png': '라라루',
-  'koya_sample_collage.png': '네무키 코야',
-  'raruka_sample_collage.png': '라루카',
-  'B_sample_collage.png': '양 수인',
-  'ralralra_sample_collage.png': '랄랄라'
+  'Cheriko_sample_collage.jpg': '체리코',
+  '93_sample_collage.jpg': '93',
+  'sina_sample_collage.jpg': '시나',
+  'rararu_sample_collage.jpg': '라라루',
+  'koya_sample_collage.jpg': '네무키 코야',
+  'raruka_sample_collage.jpg': '라루카',
+  'B_sample_collage.jpg': '양 수인',
+  'ralralra_sample_collage.jpg': '랄랄라'
 };
 
 function getSampleLabel(src){
@@ -1812,10 +1827,10 @@ function updateSampleThumbBorder(){
 // ▶ 표정 샘플
 let faceCurrent = 0;
 const faceImages = [
-  'images/Cheriko_expressions.png',
-  'images/raruka_face_types.png',
-  'images/koya_face_9types.png',
-  'images/sia_face_types.png'
+  'images/Cheriko_expressions.jpg',
+  'images/raruka_face_types.jpg',
+  'images/koya_face_9types.jpg',
+  'images/sia_face_types.jpg'
 ];
 const faceDescriptions = [
   '체리코님 표정 샘플',
@@ -1853,10 +1868,10 @@ function updateFaceDots(){
 // ▶ 그림체
 let styleCurrent = 0;
 const styleImages = [
-  'images/style_01.png',
-  'images/style_02.png',
-  'images/style_03.png',
-  'images/style_04.png'
+  'images/style_01.jpg',
+  'images/style_02.jpg',
+  'images/style_03.jpg',
+  'images/style_04.jpg'
 ];
 
 function showStyle(index){
