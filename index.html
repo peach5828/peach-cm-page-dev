@@ -271,6 +271,8 @@ summary::-webkit-details-marker{display:none;}
 .price-head{color:var(--pink);font-size:15px;font-weight:400;margin-bottom:var(--gap-text);font-family:'RomanticGumi',sans-serif;}
 .price-list{font-size:14px;line-height:1.9;}
 .price-item{
+  background: white;
+  border: 1px solid var(--line);
   cursor:pointer;
   padding:12px 14px;
   border-radius:10px;
@@ -339,7 +341,9 @@ details.price-box > summary{
   align-items:center;
   justify-content:space-between;
   gap:8px;
-  padding: 6px 8px;  /* ✅ 상하 패딩을 12px → 6px로 줄임 */
+  padding: 6px 8px;
+  background: white;
+  border-radius: 8px;
 }
 details.price-box:not([open]) > summary{margin-bottom:0;}
 .summary-caret-sm{
