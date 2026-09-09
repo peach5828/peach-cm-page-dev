@@ -43,20 +43,11 @@
 
 /* ✅ 간격 변수 정의 */
 :root {
-  /* 섹션 간 간격 (기존 ~21px -> 48px) */
   --gap-section: 48px;
-
-  /* 카드/아이템 간 간격 (기존 ~21px -> 24px) */
   --gap-grid: 24px;
-
-  /* 카드 내부 패딩 (새로 추가: 넉넉한 내부 여백) */
   --padding-card: 32px 40px;
-
-  /* 글자/요소 간격 (기존 ~8px -> 12px~16px) */
   --gap-text: 12px;
   --gap-text-large: 16px;
-
-  /* 기본 줄간격 설정 */
   --line-height-base: 1.6;
 }
 
@@ -71,26 +62,35 @@
 }
 
 *{box-sizing:border-box;}
+
+/* ✅ 높이 자동 조절 (아트머그 이중 스크롤 방지) */
+html, body {
+  height: auto !important;
+  overflow-y: visible !important;
+  margin: 0;
+  padding: 0;
+}
+
 html{scroll-behavior:smooth;}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
 
 body{
-  margin:0;
   font-family:'Paperozi',sans-serif;
   background:white;
   color:var(--text);
   overflow-x:hidden;
   word-break:keep-all;
   overflow-wrap:break-word;
-  line-height: var(--line-height-base); /* 기본 줄간격 */
+  line-height: var(--line-height-base);
 }
 
-/* ✅ 전체 컨테이너 (max-width 제거, 비율 패딩) */
+/* ✅ 전체 컨테이너 (높이 자동) */
 .container{
   width:100%;
   max-width:none;
   margin:auto;
-  padding:40px 5% 64px; /* 상하 여유 확대 */
+  padding:40px 5% 64px;
+  height: auto !important; /* 고정 높이 해제 */
 }
 
 /* 히어로 */
@@ -98,8 +98,8 @@ body{
   background:linear-gradient(180deg, #ffffff 0%, #fff8fb 100%);
   border:1px solid var(--line);
   border-radius:32px;
-  padding:72px 48px 80px; /* 내부 여백 확대 */
-  margin-bottom: var(--gap-section); /* 48px */
+  padding:72px 48px 80px;
+  margin-bottom: var(--gap-section);
   box-shadow:var(--shadow);
   position:relative;
   overflow:hidden;
@@ -168,7 +168,7 @@ body{
   font-size:32px;
   font-weight:400;
   color:#eb839f;
-  margin:0 0 var(--gap-text-large); /* 16px */
+  margin:0 0 var(--gap-text-large);
   line-height:1.25;
   letter-spacing:-0.02em;
   font-family:'RomanticGumi',sans-serif;
@@ -188,8 +188,8 @@ body{
 .card{
   background:white;
   border-radius:24px;
-  padding:var(--padding-card); /* 32px 40px */
-  margin-bottom: var(--gap-section); /* 48px */
+  padding:var(--padding-card);
+  margin-bottom: var(--gap-section);
   box-shadow:var(--shadow);
   border:1px solid var(--line);
 }
@@ -200,18 +200,18 @@ body{
   cursor:pointer;
   list-style:none;
   font-family:'RomanticGumi',sans-serif;
-  margin-bottom: var(--gap-text-large); /* 16px */
+  margin-bottom: var(--gap-text-large);
 }
 summary::-webkit-details-marker{display:none;}
 .section-sub{
-  margin-bottom: var(--gap-text-large); /* 16px */
+  margin-bottom: var(--gap-text-large);
   font-size:13.5px;
   color:#9a848c;
   font-family:'IsYun',sans-serif;
   line-height: var(--line-height-base);
 }
 .sample-intro{
-  margin-bottom: var(--gap-text); /* 12px */
+  margin-bottom: var(--gap-text);
   background:linear-gradient(180deg, #fffafd 0%, #fff4f8 100%);
   border:1px solid var(--line);
   border-radius:16px;
@@ -238,7 +238,7 @@ summary::-webkit-details-marker{display:none;}
 .slot-status-glow{animation:slotStatusGlow 2.8s ease-in-out infinite;}
 @media (prefers-reduced-motion: reduce){.slot-status-glow{animation:none;}}
 .slot-notice{
-  margin-top: var(--gap-text); /* 12px */
+  margin-top: var(--gap-text);
   background:linear-gradient(180deg, #fffafd 0%, #fff3f7 100%);
   border:1px dashed var(--pink);
   border-radius:16px;
@@ -250,7 +250,7 @@ summary::-webkit-details-marker{display:none;}
 .slot-notice strong{color:var(--pink);font-size:14px;}
 .slot-notice .start-em{color:var(--pink);font-weight:700;}
 .slot-note-soft{
-  margin-top: var(--gap-text); /* 12px */
+  margin-top: var(--gap-text);
   font-size:12.5px;
   color:#baa7ae;
   line-height:1.6;
@@ -270,7 +270,7 @@ summary::-webkit-details-marker{display:none;}
   border-radius:10px;
   transition:background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
   user-select:none;
-  margin-bottom: var(--gap-text); /* 12px */
+  margin-bottom: var(--gap-text);
 }
 .price-item:hover{transform:translateY(-1px);background:#ffe3ec;}
 .price-item.active{background:var(--pink);color:#fff;font-weight:700;animation:pricePop .4s cubic-bezier(.22,1,.36,1);}
@@ -726,8 +726,8 @@ textarea{width:100%;min-height:390px;max-height:500px;padding:16px;border-radius
   말랑하고 부드러운 그림체로 자연스러운 구동을 고려해 꼼꼼하게 작업합니다.
 </p>
 <p class="hero-main-copy small">
-※ 리깅은 포함되어 있지 않습니다.<br>
-※ 가격 및 규정은 주기적으로 업데이트 됩니다. 단, 기존 의뢰는 '예약 신청일' 기준 가격과 규정을 적용하며, 예약 확정 시 기록 보관용 PDF를 보내드립니다.
+  ※ 리깅은 포함되어 있지 않습니다.<br>
+  ※ 가격 및 규정은 주기적으로 업데이트 됩니다. 단, 기존 의뢰는 '예약 신청일' 기준 가격과 규정을 적용하며, 예약 확정 시 기록 보관용 PDF를 보내드립니다.
 </p>
   </div>
 
