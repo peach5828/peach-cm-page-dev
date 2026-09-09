@@ -262,10 +262,10 @@ summary::-webkit-details-marker{display:none;}
 /* ✅ 가격표 - 중첩 구조 제거 (1중으로 통일) */
 .price-grid{display:grid;grid-template-columns:1fr;gap:var(--gap-grid);margin-top:var(--gap-text);}
 .price-box{
-  background: white !important;
+  background: var(--pink-soft);
   border:1px solid var(--line);
   border-radius:18px;
-  padding: 16px !important;
+  padding: 16px;
 }
 .price-group .price-box + .price-box{margin-top:var(--gap-text);}
 .price-head{color:var(--pink);font-size:15px;font-weight:400;margin-bottom:var(--gap-text);font-family:'RomanticGumi',sans-serif;}
@@ -296,10 +296,10 @@ summary::-webkit-details-marker{display:none;}
 .basic-included-title{color:#b899a4;font-size:13px;font-weight:700;margin-bottom:var(--gap-text);font-family:'IsYun',sans-serif;}
 .basic-included-text{color:#8b7c81;font-size:13px;line-height:var(--line-height-base);font-family:'IsYun',sans-serif;}
 .option-box{
-  background: white !important;
+  background: var(--pink-bg);
   border:1px solid var(--line);
   border-radius:16px;
-  padding: 16px !important;
+  padding: 24px;
 }
 .option-box-title{font-size:16px;font-weight:400;color:var(--pink);font-family:'RomanticGumi',sans-serif;margin-bottom:var(--gap-text);}
 details:not([open]) > *:not(summary){display:none;}
@@ -339,7 +339,7 @@ details.price-box > summary{
   align-items:center;
   justify-content:space-between;
   gap:8px;
-  padding: 12px 8px; /* ✅ 히트박스 확대 */
+  padding: 6px 8px;  /* ✅ 상하 패딩을 12px → 6px로 줄임 */
 }
 details.price-box:not([open]) > summary{margin-bottom:0;}
 .summary-caret-sm{
